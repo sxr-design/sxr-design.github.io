@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23232A3D'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23F4F6FD' font-family='serif'%3E%E8%95%8A%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&display=swap">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script>
@@ -20,13 +20,14 @@
     theme: {
       extend: {
         colors: {
-          paper: '#F4F6FD',
-          ink: '#232A3D',
-          muted: '#7C85A3',
-          accent: '#6C8DF5',
+          paper: '#F5F6FA',
+          card: '#FFFFFF',
+          ink: '#1E2430',
+          inkdeep: '#14181F',
+          muted: '#6E7690',
+          accent: '#4A6DE5',
           accentsoft: '#E8EEFC',
-          lav: '#B09CFA',
-          line: '#E2E7F5'
+          line: '#E4E8F2'
         },
         fontFamily: {
           serif: ['"Noto Serif SC"', 'Songti SC', 'SimSun', 'serif'],
@@ -38,442 +39,366 @@
 </script>
 <style>
   html { scroll-behavior: smooth; }
-  body { background-color: #F4F6FD; color: #232A3D; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; overflow-x: hidden; }
-  ::selection { background: #6C8DF5; color: #fff; }
+  body { background-color: #F5F6FA; color: #1E2430; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; overflow-x: hidden; }
+  ::selection { background: #4A6DE5; color: #fff; }
 
   ::-webkit-scrollbar { width: 10px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #C7CEE4; border-radius: 8px; border: 2px solid #F4F6FD; }
-  ::-webkit-scrollbar-thumb:hover { background: #6C8DF5; }
+  ::-webkit-scrollbar-thumb { background: #C6CDE0; border-radius: 8px; border: 2px solid #F5F6FA; }
+  ::-webkit-scrollbar-thumb:hover { background: #4A6DE5; }
 
-  :focus-visible { outline: 2px solid #6C8DF5; outline-offset: 2px; border-radius: 4px; }
+  :focus-visible { outline: 2px solid #4A6DE5; outline-offset: 2px; border-radius: 4px; }
 
-  /* ── 渐变光晕（蓝 + 中性灰，呼应黑白照片） ── */
-  .orb { position: absolute; border-radius: 9999px; filter: blur(90px); pointer-events: none; }
-  .orb-blue   { background: rgba(108,141,245,.30); }
-  .orb-slate  { background: rgba(100,116,139,.26); }
-  .orb-ash    { background: rgba(203,213,225,.38); }
-
-  /* ── 玻璃拟态 ── */
-  .glass {
-    background: rgba(255,255,255,.55);
-    -webkit-backdrop-filter: blur(18px) saturate(1.4);
-    backdrop-filter: blur(18px) saturate(1.4);
-    border: 1px solid rgba(255,255,255,.65);
-    box-shadow: 0 20px 60px rgba(35,42,61,.08), inset 0 1px 0 rgba(255,255,255,.7);
+  /* ── 编辑杂志风：细线、kicker、序号 ── */
+  .kicker {
+    font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
+    color: #6E7690; font-weight: 500;
   }
-  .glass-strong {
-    background: rgba(255,255,255,.72);
-    -webkit-backdrop-filter: blur(22px) saturate(1.5);
-    backdrop-filter: blur(22px) saturate(1.5);
-    border: 1px solid rgba(255,255,255,.7);
-    box-shadow: 0 24px 70px rgba(35,42,61,.10), inset 0 1px 0 rgba(255,255,255,.8);
-  }
+  .kicker .no { color: #4A6DE5; font-weight: 700; margin-right: .6em; }
+  .rule { height: 1px; background: #E4E8F2; }
 
-  /* ── 入场动画 ── */
-  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+  /* ── 入场动画（错峰） ── */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-d1 { transition-delay: .08s; }
-  .reveal-d2 { transition-delay: .16s; }
-  .reveal-d3 { transition-delay: .24s; }
-
-  /* ── 导航 ── */
-  .nav-link { position: relative; transition: color .25s ease; }
-  .nav-link::after {
-    content: ""; position: absolute; left: 50%; bottom: -5px; width: 0; height: 2px; border-radius: 2px;
-    background: linear-gradient(90deg, #6C8DF5, #3B4A6B); transform: translateX(-50%); transition: width .3s ease;
-  }
-  .nav-link:hover, .nav-link.active { color: #6C8DF5; }
-  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-
-  /* ── 荧光笔高亮 ── */
-  .hl {
-    background: linear-gradient(transparent 62%, rgba(108,141,245,.32) 62%);
-    padding: 0 2px; border-radius: 2px;
-  }
-
-  /* ── 渐变文字（蓝→墨，去粉紫） ── */
-  .grad-text {
-    background: linear-gradient(115deg, #4A6DE5 15%, #3B4A6B 90%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-
-  /* ── Hero 照片 ── */
-  .hero-photo-frame { position: relative; }
-  .hero-photo-frame::before {
-    content: ""; position: absolute; inset: -14px; border-radius: 32px; z-index: -1;
-    background: linear-gradient(135deg, rgba(108,141,245,.42), rgba(71,85,105,.4), rgba(35,42,61,.38));
-    filter: blur(26px); opacity: .75;
-  }
-  .hero-photo { transition: transform .8s cubic-bezier(.22,1,.36,1); }
-  .hero-photo-frame:hover .hero-photo { transform: scale(1.025); }
-
-  /* ── 章节标题 ── */
-  .num-badge {
-    font-family: "Noto Serif SC", "Songti SC", serif;
-    letter-spacing: .08em;
-    background: linear-gradient(120deg, #4A6DE5, #3B4A6B);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  .sec-line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(108,141,245,.4), transparent); }
-
-  /* ── 统计条 ── */
-  .stat-num {
-    background: linear-gradient(120deg, #4A6DE5, #232A3D);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-
-  /* ── 作品卡 ── */
-  .work-slot { transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s ease; }
-  .work-slot:hover { transform: translateY(-7px); box-shadow: 0 28px 60px rgba(76,96,180,.16); }
-  .work-slot:hover .work-cover { transform: scale(1.05); }
-  .work-cover { transition: transform .7s cubic-bezier(.22,1,.36,1); }
-  .cover-wrap { position: relative; }
-  .cover-wrap::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, transparent 55%, rgba(35,42,61,.32));
-    opacity: 0; transition: opacity .45s ease;
-  }
-  .work-slot:hover .cover-wrap::after { opacity: 1; }
-  .work-slot .arrow { transition: transform .3s ease, color .3s ease; }
-  .work-slot:hover .arrow { transform: translateX(5px); color: #6C8DF5; }
-
-  /* ── 标签 ── */
-  .skill-tag { transition: all .25s ease; }
-  .skill-tag:hover { background: #6C8DF5; color: #fff; border-color: #6C8DF5; transform: translateY(-2px); }
-
-  .divider-dot { width: 4px; height: 4px; border-radius: 9999px; background: #C9BFB0; }
-
-  /* ── 按钮 ── */
-  .btn-glow { box-shadow: 0 10px 30px rgba(35,42,61,.28); transition: transform .25s ease, box-shadow .25s ease; }
-  .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(35,42,61,.34); }
-  .copy-btn { cursor: pointer; }
-  .copy-btn.copied { color: #059669 !important; border-color: rgba(5,150,105,.4) !important; }
+  .reveal.visible .stagger > * { opacity: 0; transform: translateY(14px); animation: rise .7s cubic-bezier(.22,1,.36,1) forwards; }
+  .reveal.visible .stagger > *:nth-child(1) { animation-delay: .05s; }
+  .reveal.visible .stagger > *:nth-child(2) { animation-delay: .13s; }
+  .reveal.visible .stagger > *:nth-child(3) { animation-delay: .21s; }
+  .reveal.visible .stagger > *:nth-child(4) { animation-delay: .29s; }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
 
   /* ── 悬浮导航 ── */
   #site-header { transition: padding .35s cubic-bezier(.22,1,.36,1); }
   #nav-bar { transition: all .35s cubic-bezier(.22,1,.36,1); border-radius: 0; }
   #site-header.floating { padding-top: 12px; }
   #site-header.floating #nav-bar {
-    border-radius: 999px; border: 1px solid rgba(255,255,255,.7);
-    box-shadow: 0 18px 50px rgba(35,42,61,.14), inset 0 1px 0 rgba(255,255,255,.8);
+    border-radius: 999px; border: 1px solid rgba(255,255,255,.75);
+    box-shadow: 0 18px 50px rgba(30,36,48,.13), inset 0 1px 0 rgba(255,255,255,.85);
+  }
+  .nav-glass {
+    background: rgba(255,255,255,.72);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    backdrop-filter: blur(20px) saturate(1.5);
+    border-bottom: 1px solid rgba(228,232,242,.8);
+  }
+  .nav-link { position: relative; transition: color .25s ease; }
+  .nav-link::after {
+    content: ""; position: absolute; left: 50%; bottom: -5px; width: 0; height: 2px; border-radius: 2px;
+    background: #4A6DE5; transform: translateX(-50%); transition: width .3s ease;
+  }
+  .nav-link:hover, .nav-link.active { color: #4A6DE5; }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+  /* ── 照片 ── */
+  .hero-photo-frame { position: relative; }
+  .hero-photo-frame::before {
+    content: ""; position: absolute; inset: 10px -10px -10px 10px; border-radius: 26px; z-index: -1;
+    border: 1.5px solid rgba(74,109,229,.35);
+  }
+  .hero-photo { transition: transform .8s cubic-bezier(.22,1,.36,1); }
+  .hero-photo-frame:hover .hero-photo { transform: scale(1.02); }
+
+  /* ── 按钮 ── */
+  .btn-ink { transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease; box-shadow: 0 10px 26px rgba(30,36,48,.22); }
+  .btn-ink:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(30,36,48,.28); background: #4A6DE5; }
+  .btn-ghost { transition: all .25s ease; }
+  .btn-ghost:hover { color: #4A6DE5; border-color: #4A6DE5 !important; }
+  .copy-btn { cursor: pointer; }
+  .copy-btn.copied { color: #059669 !important; border-color: rgba(5,150,105,.4) !important; }
+
+  /* ── 作品卡 ── */
+  .work-card { transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s ease; }
+  .work-card:hover { transform: translateY(-6px); box-shadow: 0 26px 55px rgba(30,36,48,.11); }
+  .work-card:hover .work-cover { transform: scale(1.045); }
+  .work-cover { transition: transform .7s cubic-bezier(.22,1,.36,1); }
+  .work-card .go { transition: transform .3s ease, color .3s ease; }
+  .work-card:hover .go { transform: translateX(5px); color: #4A6DE5; }
+  .tag { font-size: 10.5px; letter-spacing: .14em; color: #6E7690; text-transform: uppercase; }
+
+  /* ── 实习数据锚点 ── */
+  .metric {
+    font-family: "Noto Serif SC", serif; font-weight: 900;
+    color: #4A6DE5; font-size: 1.35em; line-height: 1; padding: 0 .1em;
   }
 
-  .pulse-dot { position: relative; }
-  .pulse-dot::after {
-    content: ""; position: absolute; inset: -4px; border-radius: 9999px;
-    border: 2px solid rgba(52,211,153,.5); animation: pulseRing 2s ease-out infinite;
+  /* ── 深色联系区 ── */
+  .dark-zone { background: #14181F; color: #F5F6FA; }
+  .dark-zone .rule { background: rgba(255,255,255,.12); }
+  .dark-copy { transition: all .25s ease; border: 1px solid rgba(255,255,255,.22); color: #F5F6FA; }
+  .dark-copy:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+  .dark-copy.copied { color: #34D399 !important; border-color: rgba(52,211,153,.5) !important; }
+
+  .grad-serif {
+    background: linear-gradient(115deg, #8FA8F5, #E8EEFC);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  @keyframes pulseRing { 0% { transform: scale(.6); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
+
+  .skill-txt { transition: color .2s ease; cursor: default; }
+  .skill-txt:hover { color: #4A6DE5; }
 
   @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
-    .pulse-dot::after { animation: none; }
+    .reveal, .reveal.visible .stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
+    html { scroll-behavior: auto; }
   }
 </style>
 </head>
 <body class="antialiased">
 
-<!-- 背景光晕 -->
-<div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
-  <div class="orb orb-blue   w-[520px] h-[520px] -top-40 -left-40"></div>
-  <div class="orb orb-slate w-[460px] h-[460px] top-[38%] -right-52"></div>
-  <div class="orb orb-ash   w-[420px] h-[420px] -bottom-40 left-[22%]"></div>
-</div>
-
-<!-- 顶部导航（下滑后悬浮为玻璃胶囊） -->
+<!-- ═══ 导航 ═══ -->
 <header id="site-header" class="sticky top-0 z-50">
   <div class="max-w-6xl mx-auto px-4">
-    <div id="nav-bar" class="glass-strong border-0 border-b border-white/50 px-6 h-16 flex items-center justify-between">
-    <a href="#top" class="flex items-center gap-2.5">
-      <span class="w-8 h-8 rounded-full bg-ink text-paper flex items-center justify-center font-serif text-sm shadow-md">蕊</span>
-      <span class="font-serif text-lg font-bold tracking-wide">宋鑫蕊</span>
-      <span class="text-muted text-xs hidden sm:inline tracking-widest">/ UI DESIGNER</span>
-    </a>
-    <nav class="hidden md:flex items-center gap-8 text-sm text-ink/80">
-      <a class="nav-link" href="#works">作品集</a>
-      <a class="nav-link" href="#experience">实习经历</a>
-      <a class="nav-link" href="#about">关于我</a>
-      <a class="nav-link" href="#contact">联系我</a>
-    </nav>
-    <a href="#contact" class="btn-glow h-9 px-5 rounded-full bg-ink text-paper text-sm flex items-center gap-2 hover:bg-accent transition-colors">
-      <i class="fas fa-paper-plane text-xs"></i><span>求职沟通</span>
-    </a>
+    <div id="nav-bar" class="nav-glass px-6 h-16 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-2.5">
+        <span class="w-8 h-8 rounded-full bg-ink text-paper flex items-center justify-center font-serif text-sm">蕊</span>
+        <span class="font-serif text-lg font-bold tracking-wide">宋鑫蕊</span>
+        <span class="text-muted text-[10px] tracking-[.2em] hidden sm:inline mt-0.5">UI / UX DESIGNER</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-ink/75">
+        <a class="nav-link" href="#works">作品集</a>
+        <a class="nav-link" href="#experience">实习经历</a>
+        <a class="nav-link" href="#about">关于我</a>
+        <a class="nav-link" href="#contact">联系我</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="#contact" class="btn-ink h-9 px-5 rounded-full bg-ink text-paper text-sm hidden sm:flex items-center gap-2">
+          <i class="fas fa-paper-plane text-xs"></i><span>求职沟通</span>
+        </a>
+        <button id="menu-btn" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full text-ink/80" aria-label="菜单">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="md:hidden hidden mt-2 rounded-2xl nav-glass border border-white/70 shadow-xl overflow-hidden">
+      <a href="#works" class="mobile-link block px-6 py-3.5 text-sm border-b border-line/60">作品集</a>
+      <a href="#experience" class="mobile-link block px-6 py-3.5 text-sm border-b border-line/60">实习经历</a>
+      <a href="#about" class="mobile-link block px-6 py-3.5 text-sm border-b border-line/60">关于我</a>
+      <a href="#contact" class="mobile-link block px-6 py-3.5 text-sm">联系我</a>
     </div>
   </div>
 </header>
 
 <main id="top" class="max-w-6xl mx-auto px-6">
 
-  <!-- ══════════ Hero ══════════ -->
-  <section class="relative pt-14 pb-16 md:pt-20 md:pb-20">
-    <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_.95fr] gap-12 items-center">
+  <!-- ══════════ Hero（杂志封面式） ══════════ -->
+  <section class="pt-16 pb-14 md:pt-24 md:pb-20">
+    <div class="grid grid-cols-1 lg:grid-cols-[1.08fr_.92fr] gap-14 items-center">
+      <div class="reveal">
+        <p class="kicker mb-7">PORTFOLIO · 2027 届 · UI/UX</p>
+        <h1 class="font-serif font-black leading-[1.28] text-[34px] md:text-[44px]">
+          一名相信「AI × 设计」<br>力量的<span class="text-accent">复合型设计师</span>。
+        </h1>
+        <p class="mt-6 text-muted leading-loose text-[15px] max-w-md">
+          宋鑫蕊，西安明德理工学院产品设计（UI 方向），专业成绩年级前 3%。把 AI 深度嵌入设计工作流——产出既有速度，也有品质。
+        </p>
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a href="#works" class="btn-ink h-11 px-7 rounded-full bg-ink text-paper text-sm font-medium flex items-center gap-2">
+            <span>查看作品</span><i class="fas fa-arrow-down text-xs"></i>
+          </a>
+          <a href="#contact" class="btn-ghost h-11 px-6 rounded-full border border-line text-sm flex items-center gap-2">
+            <span>联系我</span><i class="fas fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+        <p class="mt-9 text-xs text-muted tracking-wide leading-relaxed">
+          前 3% 专业成绩　·　实习团队效率 +25%　·　40+ AI 辅助产出　·　香港青年设计师奖
+        </p>
+      </div>
 
       <div class="reveal">
-        <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-xs text-accent font-medium tracking-wide mb-6">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
-          2027 届 · 正在寻找 UI / UX 实习与校招机会
-        </div>
-
-        <h1 class="font-serif font-black leading-[1.15] text-5xl md:text-6xl">
-          宋鑫蕊
-          <span class="block mt-3 text-2xl md:text-[28px] font-bold text-ink/85">一名相信 <span class="hl grad-text font-black">「AI × 设计」</span> 力量的<br class="hidden md:block">复合型设计师</span>
-        </h1>
-
-        <p class="mt-6 text-ink/70 leading-relaxed text-[15px] max-w-lg">
-          西安明德理工学院 · 产品设计（UI 方向）· 专业成绩年级前 3%。擅长把 AI 深度嵌入设计工作流，以扎实的 Figma / PS / AI 功底为基座——产出既有速度，也有品质。
-        </p>
-
-        <div class="mt-8 flex flex-wrap items-center gap-3">
-          <a href="#works" class="btn-glow h-11 px-6 rounded-full bg-ink text-white flex items-center gap-2 text-sm font-medium hover:bg-accent transition-colors">
-            <i class="fas fa-layer-group text-xs"></i><span>查看作品</span>
-          </a>
-          <button type="button" data-copy="131 8608 7587" class="copy-btn h-11 px-6 rounded-full glass-strong flex items-center gap-2 text-sm font-medium hover:text-accent transition-colors">
-            <i class="fas fa-phone text-xs"></i><span>131 8608 7587</span>
-          </button>
-          <button type="button" data-copy="s-xxx-rrr@qq.com" class="copy-btn h-11 px-6 rounded-full glass-strong flex items-center gap-2 text-sm hover:text-accent transition-colors">
-            <i class="fas fa-envelope text-xs"></i><span>s-xxx-rrr@qq.com</span>
-          </button>
-        </div>
-
-        <div class="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted">
-          <span class="flex items-center gap-1.5"><i class="fas fa-location-dot text-accent"></i>意向 西安 / 北京 / 杭州 · 可远程</span>
-          <span class="flex items-center gap-1.5"><i class="fas fa-award text-accent"></i>香港青年设计师奖 · 三等奖</span>
-          <a href="https://github.com/sxr-design" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:text-accent transition-colors"><i class="fab fa-github text-sm text-ink/70"></i><span class="font-medium text-ink/70">GitHub</span></a>
-        </div>
-      </div>
-
-      <div class="reveal reveal-d1">
-        <div class="hero-photo-frame rounded-[28px]">
-          <div class="rounded-[28px] overflow-hidden border border-white/60 shadow-[0_30px_80px_rgba(35,42,61,.15)]">
-            <img src="photo.jpg" alt="宋鑫蕊个人照片" class="hero-photo w-full aspect-[3/2] object-cover object-[50%_38%]" />
-          </div>
-          <div class="absolute -bottom-5 left-6 glass-strong rounded-2xl px-5 py-3.5 flex items-center gap-3 shadow-lg">
-            <span class="w-9 h-9 rounded-xl bg-accentsoft text-accent flex items-center justify-center"><i class="fas fa-wand-magic-sparkles"></i></span>
-            <div>
-              <div class="text-sm font-bold leading-tight">AIGC 辅助设计实践者</div>
-              <div class="text-muted text-xs mt-0.5">双千计划 · 人工智能辅助设计开发</div>
-            </div>
+        <div class="hero-photo-frame">
+          <div class="rounded-[26px] overflow-hidden shadow-[0_24px_60px_rgba(30,36,48,.14)]">
+            <img src="photo.jpg" alt="宋鑫蕊个人照片" fetchpriority="high" class="hero-photo w-full aspect-[3/2] object-cover object-[50%_38%]" />
           </div>
         </div>
-      </div>
-
-    </div>
-
-    <!-- 统计条 -->
-    <div class="reveal reveal-d2 glass rounded-3xl mt-16 px-8 py-7 grid grid-cols-2 md:grid-cols-4 gap-6">
-      <div>
-        <div class="stat-num font-serif text-3xl font-bold">前 3%</div>
-        <div class="text-muted text-xs mt-1">专业成绩年级排名</div>
-      </div>
-      <div>
-        <div class="stat-num font-serif text-3xl font-bold">+25%</div>
-        <div class="text-muted text-xs mt-1">实习期间团队效率提升</div>
-      </div>
-      <div>
-        <div class="stat-num font-serif text-3xl font-bold">40+</div>
-        <div class="text-muted text-xs mt-1">AI 辅助视觉产出</div>
-      </div>
-      <div>
-        <div class="stat-num font-serif text-3xl font-bold">1 项</div>
-        <div class="text-muted text-xs mt-1">香港青年设计师奖</div>
       </div>
     </div>
   </section>
+
+  <div class="rule"></div>
 
   <!-- ══════════ 01 作品集 ══════════ -->
-  <section id="works" class="reveal py-12">
-    <div class="flex items-center gap-3 mb-8">
-      <span class="num-badge text-sm font-bold">01</span>
-      <h2 class="font-serif text-2xl font-bold">作品集</h2>
-      <div class="sec-line"></div>
-      <span class="text-muted text-xs hidden sm:inline">点击进入完整演示</span>
+  <section id="works" class="reveal py-16 md:py-20">
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <p class="kicker mb-3"><span class="no">01</span>SELECTED WORKS</p>
+        <h2 class="font-serif text-3xl font-black">作品集</h2>
+      </div>
+      <span class="text-muted text-xs hidden sm:inline pb-1">点击进入完整演示</span>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 stagger">
 
-      <!-- CS2 -->
-      <a href="./works/cs2-site/index.html" target="_blank" class="work-slot glass rounded-3xl overflow-hidden block">
-        <div class="cover-wrap h-56 overflow-hidden">
-          <img src="work2-cover.png" alt="CS2游戏道具学习站作品封面" class="work-cover w-full h-full object-cover" />
+      <!-- 预留大卡：App 界面设计（进行中） -->
+      <div class="work-card lg:col-span-7 rounded-3xl overflow-hidden border border-dashed border-[#B9C7F2] bg-gradient-to-br from-[#E9EFFC] via-[#F3F0FB] to-[#E4EBFA] relative cursor-default">
+        <div class="h-64 md:h-80 flex flex-col items-center justify-center gap-3 text-[#3E5CA9]">
+          <i class="fas fa-mobile-screen-button text-4xl opacity-50"></i>
+          <span class="font-serif text-xl font-bold tracking-wide">APP UI 设计</span>
+          <span class="text-[11px] tracking-[.2em] px-3 py-1 rounded-full bg-white/60 border border-white/80">设计进行中 · 即将上线</span>
         </div>
-        <div class="p-5 flex items-center justify-between">
+        <div class="p-6 flex items-center justify-between bg-white/50 backdrop-blur-sm">
           <div>
-            <div class="font-bold">CS2 游戏道具学习站</div>
-            <div class="text-muted text-xs mt-1">Utility Lab · 交互地图点位教学</div>
+            <div class="tag mb-1.5">APP UI · 主作品 · 2026</div>
+            <div class="font-serif text-xl font-bold">App 界面设计</div>
+            <div class="text-muted text-xs mt-1">Figma 高保真项目，整理中，敬请期待</div>
           </div>
-          <i class="fas fa-arrow-right arrow text-muted text-sm"></i>
+          <i class="fas fa-clock text-muted"></i>
         </div>
-      </a>
+      </div>
 
-      <!-- 电商报告 -->
-      <a href="./works/ecommerce-report/index.html" target="_blank" class="work-slot glass rounded-3xl overflow-hidden block">
-        <div class="cover-wrap h-56 overflow-hidden">
+      <!-- 附加卡：电商报告 -->
+      <a href="./works/ecommerce-report/index.html" target="_blank" class="work-card lg:col-span-5 bg-card rounded-3xl overflow-hidden border border-line block">
+        <div class="h-64 md:h-80 overflow-hidden">
           <img src="work3-cover.png" alt="电商竞品研究报告作品封面" class="work-cover w-full h-full object-cover" />
         </div>
-        <div class="p-5 flex items-center justify-between">
+        <div class="p-6 flex items-center justify-between">
           <div>
-            <div class="font-bold">电商竞品研究报告</div>
-            <div class="text-muted text-xs mt-1">七大平台，一个存量战场 · 交互式数据报告</div>
+            <div class="tag mb-1.5">数据研究 · 交互报告 · 2026</div>
+            <div class="font-serif text-xl font-bold">电商竞品研究报告</div>
+            <div class="text-muted text-xs mt-1">七大平台，一个存量战场</div>
           </div>
-          <i class="fas fa-arrow-right arrow text-muted text-sm"></i>
+          <i class="fas fa-arrow-right go text-muted text-sm shrink-0 ml-4"></i>
         </div>
       </a>
 
-      <!-- 手作工坊 -->
-      <a href="./works/shouzuogongfang/index.html" target="_blank" class="work-slot glass rounded-3xl overflow-hidden block">
-        <div class="cover-wrap h-56 overflow-hidden">
+      <!-- 同级小卡：CS2 -->
+      <a href="./works/cs2-site/index.html" target="_blank" class="work-card lg:col-span-6 bg-card rounded-3xl overflow-hidden border border-line block">
+        <div class="h-52 md:h-60 overflow-hidden">
+          <img src="work2-cover.png" alt="CS2游戏道具学习站作品封面" class="work-cover w-full h-full object-cover" />
+        </div>
+        <div class="p-6 flex items-center justify-between">
+          <div>
+            <div class="tag mb-1.5">工具产品 · 交互教学 · 2026</div>
+            <div class="font-serif text-xl font-bold">CS2 游戏道具学习站</div>
+            <div class="text-muted text-xs mt-1">Utility Lab · 交互地图点位教学</div>
+          </div>
+          <i class="fas fa-arrow-right go text-muted text-sm shrink-0 ml-4"></i>
+        </div>
+      </a>
+
+      <!-- 同级小卡：手作工坊 -->
+      <a href="./works/shouzuogongfang/index.html" target="_blank" class="work-card lg:col-span-6 bg-card rounded-3xl overflow-hidden border border-line block">
+        <div class="h-52 md:h-60 overflow-hidden">
           <img src="work4-cover.png" alt="手作工坊作品封面" class="work-cover w-full h-full object-cover" />
         </div>
-        <div class="p-5 flex items-center justify-between">
+        <div class="p-6 flex items-center justify-between">
           <div>
-            <div class="font-bold">手作工坊</div>
-            <div class="text-muted text-xs mt-1">拼豆体验店经营系统 · 全栈演示</div>
+            <div class="tag mb-1.5">B端系统 · 全栈演示 · 2026</div>
+            <div class="font-serif text-xl font-bold">手作工坊</div>
+            <div class="text-muted text-xs mt-1">拼豆体验店经营系统</div>
           </div>
-          <i class="fas fa-arrow-right arrow text-muted text-sm"></i>
+          <i class="fas fa-arrow-right go text-muted text-sm shrink-0 ml-4"></i>
         </div>
       </a>
 
-      <!-- 作品位 4：进行中 -->
-      <div class="work-slot rounded-3xl overflow-hidden block cursor-default border border-dashed border-[#BCCBF5] bg-white/35 backdrop-blur-sm">
-        <div class="h-56 overflow-hidden bg-gradient-to-br from-[#DCE5FB]/80 to-[#C9B8F5]/70 flex items-center justify-center">
-          <div class="w-full h-full flex flex-col items-center justify-center gap-2.5 text-[#3E5CA9]">
-            <i class="fas fa-mobile-screen-button text-3xl opacity-60"></i>
-            <span class="text-xs tracking-widest opacity-80">APP UI 设计</span>
-            <span class="text-[10px] tracking-wider px-2.5 py-1 rounded-full bg-white/60 border border-white/80">设计进行中 · 即将上线</span>
-          </div>
-        </div>
-        <div class="p-5 flex items-center justify-between">
-          <div>
-            <div class="font-bold">App 界面设计</div>
-            <div class="text-muted text-xs mt-1">Figma 高保真项目 · 整理中，敬请期待</div>
-          </div>
-          <i class="fas fa-clock text-muted text-sm"></i>
-        </div>
-      </div>
-
     </div>
   </section>
+
+  <div class="rule"></div>
 
   <!-- ══════════ 02 实习经历 ══════════ -->
-  <section id="experience" class="reveal py-12">
-    <div class="flex items-center gap-3 mb-8">
-      <span class="num-badge text-sm font-bold">02</span>
-      <h2 class="font-serif text-2xl font-bold">实习经历</h2>
-      <div class="sec-line"></div>
-    </div>
+  <section id="experience" class="reveal py-16 md:py-20">
+    <p class="kicker mb-3"><span class="no">02</span>EXPERIENCE</p>
+    <h2 class="font-serif text-3xl font-black mb-10">实习经历</h2>
 
-    <div class="glass rounded-3xl p-7 md:p-8">
-      <div class="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h3 class="font-bold text-lg">西安爱克斯未来文化科技有限公司</h3>
-          <p class="text-accent text-sm font-medium mt-0.5">UI 设计实习生（XR 方向）</p>
+    <div class="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-10">
+      <div>
+        <h3 class="font-bold text-lg leading-snug">西安爱克斯未来文化科技有限公司</h3>
+        <p class="text-accent text-sm font-medium mt-1.5">UI 设计实习生（XR 方向）</p>
+        <p class="text-muted text-sm mt-3">2026.07 — 2026.10</p>
+        <div class="flex flex-wrap gap-2 mt-5">
+          <span class="border border-line rounded-full px-3 py-1 text-xs text-muted">Figma</span>
+          <span class="border border-line rounded-full px-3 py-1 text-xs text-muted">XR 界面</span>
+          <span class="border border-line rounded-full px-3 py-1 text-xs text-muted">AIGC 工作流</span>
         </div>
-        <span class="text-muted text-sm glass rounded-full px-4 py-1">2026.07 — 2026.10</span>
       </div>
-      <ul class="mt-5 flex flex-col gap-3 text-sm text-ink/80 leading-relaxed">
-        <li class="flex gap-3">
-          <span class="mt-2 divider-dot shrink-0"></span>
-          <span>深度参与 <strong>XR 产品界面设计</strong>，完成需求梳理、竞品分析到高保真原型交付全流程，输出界面方案 30+ 页。</span>
+
+      <ul class="flex flex-col gap-7 text-[15px] text-ink/85 leading-relaxed">
+        <li class="flex gap-4">
+          <span class="text-accent font-serif font-black mt-0.5 shrink-0">—</span>
+          <span>深度参与 <strong>XR 产品界面设计</strong>，完成需求梳理、竞品分析到高保真原型交付全流程，累计输出界面方案 <span class="metric">30+</span> 页，覆盖主流程与核心交互状态。</span>
         </li>
-        <li class="flex gap-3">
-          <span class="mt-2 divider-dot shrink-0"></span>
-          <span>运用 <strong>Kimi、ChatGPT</strong> 搭建团队共享知识库与标准化文档模板，带动团队效率提升约 <strong>25%</strong>，获主管书面好评。</span>
+        <li class="flex gap-4">
+          <span class="text-accent font-serif font-black mt-0.5 shrink-0">—</span>
+          <span>运用 Kimi、ChatGPT 搭建团队共享知识库与标准化文档模板，带动团队整体效率提升 <span class="metric">+25%</span>，获主管书面好评。</span>
         </li>
-        <li class="flex gap-3">
-          <span class="mt-2 divider-dot shrink-0"></span>
-          <span>使用 <strong>Figma + AI 插件</strong> 批量生成漫剧分镜与宣传海报 40+ 张，视觉产出周期缩短约一半；沉淀的模板被采纳为团队日常规范。</span>
+        <li class="flex gap-4">
+          <span class="text-accent font-serif font-black mt-0.5 shrink-0">—</span>
+          <span>使用 Figma + AI 插件批量生成漫剧分镜与宣传海报 <span class="metric">40+</span> 张，视觉产出周期缩短约一半；沉淀的模板被采纳为团队日常设计规范。</span>
         </li>
       </ul>
-      <div class="flex flex-wrap gap-2 mt-6">
-        <span class="bg-white/60 border border-white/70 rounded-full px-3 py-1 text-xs text-muted">Figma</span>
-        <span class="bg-white/60 border border-white/70 rounded-full px-3 py-1 text-xs text-muted">XR 界面</span>
-        <span class="bg-white/60 border border-white/70 rounded-full px-3 py-1 text-xs text-muted">AIGC 工作流</span>
-        <span class="bg-white/60 border border-white/70 rounded-full px-3 py-1 text-xs text-muted">海报 / 漫剧视觉</span>
-      </div>
     </div>
   </section>
 
-  <!-- ══════════ 03 关于我（合并 技能+获奖） ══════════ -->
-  <section id="about" class="reveal py-12">
-    <div class="flex items-center gap-3 mb-8">
-      <span class="num-badge text-sm font-bold">03</span>
-      <h2 class="font-serif text-2xl font-bold">关于我</h2>
-      <div class="sec-line"></div>
-    </div>
+  <div class="rule"></div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="glass rounded-3xl p-7">
-        <div class="text-xs text-muted tracking-widest mb-4">核心工具</div>
-        <div class="flex flex-wrap gap-2">
-          <span class="skill-tag border border-line rounded-full px-3 py-1.5 text-xs bg-white/60">Figma ★ 最擅长</span>
-          <span class="skill-tag border border-line rounded-full px-3 py-1.5 text-xs bg-white/60">即时设计</span>
-          <span class="skill-tag border border-line rounded-full px-3 py-1.5 text-xs bg-white/60">Photoshop</span>
-          <span class="skill-tag border border-line rounded-full px-3 py-1.5 text-xs bg-white/60">Illustrator</span>
-          <span class="skill-tag border border-line rounded-full px-3 py-1.5 text-xs bg-white/60">SAI2</span>
-          <span class="skill-tag border border-line rounded-full px-3 py-1.5 text-xs bg-white/60">Rhino 犀牛</span>
-          <span class="skill-tag border border-line rounded-full px-3 py-1.5 text-xs bg-white/60">Creo</span>
-          <span class="skill-tag border border-accentsoft rounded-full px-3 py-1.5 text-xs bg-accentsoft/80 text-accent">Stable Diffusion</span>
-          <span class="skill-tag border border-accentsoft rounded-full px-3 py-1.5 text-xs bg-accentsoft/80 text-accent">ComfyUI</span>
-          <span class="skill-tag border border-accentsoft rounded-full px-3 py-1.5 text-xs bg-accentsoft/80 text-accent">Kimi / ChatGPT</span>
-        </div>
+  <!-- ══════════ 03 关于我 ══════════ -->
+  <section id="about" class="reveal py-16 md:py-20">
+    <p class="kicker mb-3"><span class="no">03</span>ABOUT</p>
+    <h2 class="font-serif text-3xl font-black mb-10">关于我</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div>
+        <p class="kicker mb-5 !text-[10px]">核心工具</p>
+        <p class="text-[15px] leading-[2.2] text-ink/85">
+          <span class="skill-txt font-bold text-accent">Figma ★</span>　<span class="skill-txt">即时设计</span>　<span class="skill-txt">Photoshop</span>　<span class="skill-txt">Illustrator</span>　<span class="skill-txt">SAI2</span>　<span class="skill-txt">Rhino 犀牛</span>　<span class="skill-txt">Creo</span><br>
+          <span class="skill-txt text-muted">Stable Diffusion</span>　<span class="skill-txt text-muted">ComfyUI</span>　<span class="skill-txt text-muted">Kimi / ChatGPT</span>
+        </p>
       </div>
-
-      <div class="glass rounded-3xl p-7">
-        <div class="text-xs text-muted tracking-widest mb-4">获奖与证书</div>
-        <div class="flex flex-col gap-4">
-          <div class="flex items-center gap-3">
-            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accentsoft to-slate-200 text-accent flex items-center justify-center shrink-0"><i class="fas fa-award text-sm"></i></span>
-            <div class="text-sm font-bold leading-tight">香港青年设计师奖 · 三等奖</div>
+      <div>
+        <p class="kicker mb-5 !text-[10px]">获奖与证书</p>
+        <div class="flex flex-col">
+          <div class="flex items-baseline justify-between gap-4 py-3 border-b border-line">
+            <span class="font-bold text-[15px]">香港青年设计师奖 · 三等奖</span>
+            <span class="tag shrink-0">设计竞赛</span>
           </div>
-          <div class="flex items-center gap-3">
-            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accentsoft to-slate-200 text-accent flex items-center justify-center shrink-0"><i class="fas fa-certificate text-sm"></i></span>
-            <div class="text-sm font-bold leading-tight">教育部「双千计划」人工智能辅助设计开发 · 年级前 3%</div>
+          <div class="flex items-baseline justify-between gap-4 py-3 border-b border-line">
+            <span class="font-bold text-[15px]">教育部「双千计划」人工智能辅助设计开发</span>
+            <span class="tag shrink-0">年级前 3%</span>
           </div>
-          <div class="flex items-center gap-3">
-            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accentsoft to-slate-200 text-accent flex items-center justify-center shrink-0"><i class="fas fa-laptop-code text-sm"></i></span>
-            <div class="text-sm font-bold leading-tight">全国计算机等级考试二级</div>
+          <div class="flex items-baseline justify-between gap-4 py-3">
+            <span class="font-bold text-[15px]">全国计算机等级考试二级</span>
+            <span class="tag shrink-0">技能证书</span>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════ 联系我 ══════════ -->
-  <section id="contact" class="reveal relative py-20">
-    <div class="orb orb-slate w-[380px] h-[380px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 !opacity-60" aria-hidden="true"></div>
-    <div class="relative flex flex-col items-center text-center gap-6">
-      <div class="w-12 h-1 rounded-full bg-gradient-to-r from-accent to-lav"></div>
-      <h2 class="font-serif text-3xl md:text-4xl font-black leading-snug">期待与你的团队一起，<br>让产品<span class="grad-text">更好看、更好用</span>。</h2>
-      <p class="text-muted text-sm">UI / UX 设计方向 · 西安 / 北京 / 杭州 · 也可远程协作</p>
-      <div class="flex flex-wrap justify-center gap-3 mt-2">
-        <button type="button" data-copy="131 8608 7587" class="copy-btn btn-glow h-12 px-7 rounded-full bg-ink text-white flex items-center gap-2 text-sm font-medium">
-          <i class="fas fa-phone text-xs"></i><span>131 8608 7587</span>
-        </button>
-        <button type="button" data-copy="s-xxx-rrr@qq.com" class="copy-btn h-12 px-7 rounded-full glass-strong flex items-center gap-2 text-sm hover:text-accent transition-colors">
-          <i class="fas fa-envelope text-xs"></i><span>s-xxx-rrr@qq.com</span>
-        </button>
-        <a href="https://github.com/sxr-design" target="_blank" rel="noopener" class="h-12 px-7 rounded-full glass-strong flex items-center gap-2 text-sm hover:text-accent transition-colors">
-          <i class="fab fa-github"></i><span>GitHub</span>
-        </a>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer class="border-t border-white/60 py-8">
-  <div class="max-w-6xl mx-auto px-6 flex flex-wrap items-center justify-between gap-3 text-xs text-muted">
-    <span>© 2026 宋鑫蕊 · UI DESIGNER</span>
-    <span class="flex items-center gap-4">
-      <a href="https://github.com/sxr-design" target="_blank" rel="noopener" class="hover:text-accent transition-colors flex items-center gap-1.5"><i class="fab fa-github"></i>GitHub</a>
+<!-- ══════════ 04 联系我（深色区块） ══════════ -->
+<section id="contact" class="dark-zone reveal">
+  <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+    <div class="flex flex-col items-center text-center">
+      <p class="kicker !text-white/40 mb-6"><span class="no !text-[#8FA8F5]">04</span>CONTACT</p>
+      <h2 class="font-serif text-3xl md:text-[42px] font-black leading-[1.4]">
+        期待与你的团队一起，<br>让产品<span class="grad-serif">更好看、更好用</span>。
+      </h2>
+      <p class="text-white/45 text-sm mt-6">UI / UX 设计方向 · 西安 / 北京 / 杭州 · 也可远程协作</p>
+
+      <div class="flex flex-wrap justify-center gap-3.5 mt-10">
+        <button type="button" data-copy="131 8608 7587" class="copy-btn dark-copy h-12 px-7 rounded-full flex items-center gap-2.5 text-sm">
+          <i class="fas fa-phone text-xs"></i><span>131 8608 7587</span>
+        </button>
+        <button type="button" data-copy="s-xxx-rrr@qq.com" class="copy-btn dark-copy h-12 px-7 rounded-full flex items-center gap-2.5 text-sm">
+          <i class="fas fa-envelope text-xs"></i><span>s-xxx-rrr@qq.com</span>
+        </button>
+        <a href="https://github.com/sxr-design" target="_blank" rel="noopener" class="dark-copy h-12 px-7 rounded-full flex items-center gap-2.5 text-sm">
+          <i class="fab fa-github"></i><span>GitHub</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="rule mt-20 mb-6"></div>
+    <div class="flex flex-wrap items-center justify-between gap-3 text-xs text-white/35">
+      <span>© 2026 宋鑫蕊 · UI DESIGNER</span>
       <span>Designed & Built with Figma-friendly workflow</span>
-    </span>
+    </div>
   </div>
-</footer>
+</section>
 
 <script>
-  // 滚动显现动画
+  // 入场动画
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -499,7 +424,7 @@
     onScroll();
   })();
 
-  // 下滑后导航悬浮为玻璃胶囊
+  // 下滑后导航悬浮为胶囊
   (function () {
     var header = document.getElementById('site-header');
     function onScroll() { header.classList.toggle('floating', window.scrollY > 24); }
@@ -507,7 +432,23 @@
     onScroll();
   })();
 
-  // 电话 / 邮箱：点击复制，不跳转
+  // 移动端菜单
+  (function () {
+    var btn = document.getElementById('menu-btn');
+    var menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', function () {
+      menu.classList.toggle('hidden');
+      btn.querySelector('i').className = menu.classList.contains('hidden') ? 'fas fa-bars' : 'fas fa-xmark';
+    });
+    menu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        menu.classList.add('hidden');
+        btn.querySelector('i').className = 'fas fa-bars';
+      });
+    });
+  })();
+
+  // 复制交互
   document.querySelectorAll('[data-copy]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var text = btn.getAttribute('data-copy');
@@ -515,12 +456,12 @@
       var icon = btn.querySelector('i');
       var oldText = span.textContent, oldIcon = icon.className;
       function done() {
-        span.textContent = '已复制到剪贴板';
+        span.textContent = '已复制';
         icon.className = 'fas fa-check text-xs';
         btn.classList.add('copied');
         setTimeout(function () {
           span.textContent = oldText; icon.className = oldIcon; btn.classList.remove('copied');
-        }, 1600);
+        }, 1500);
       }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(done).catch(done);
