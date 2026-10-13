@@ -8,7 +8,7 @@
 <meta property="og:title" content="宋鑫蕊 · UI设计师 | 个人作品集">
 <meta property="og:description" content="产品设计 2027 届 · UI/UX 方向 · AI × 设计复合实践者 · 点击查看看板级作品集">
 <meta property="og:type" content="website">
-<meta property="og:image" content="photo.jpg">
+<meta property="og:image" content="https://sxr-design.github.io/photo.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23232A3D'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23F4F6FD' font-family='serif'%3E%E8%95%8A%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,8 +24,8 @@
           card: '#FFFFFF',
           ink: '#1E2430',
           inkdeep: '#14181F',
-          muted: '#6E7690',
-          accent: '#4A6DE5',
+          muted: '#646C85',
+          accent: '#3F5FD6',
           accentsoft: '#E8EEFC',
           line: '#E4E8F2'
         },
@@ -40,21 +40,21 @@
 <style>
   html { scroll-behavior: smooth; }
   body { background-color: #F5F6FA; color: #1E2430; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; overflow-x: hidden; }
-  ::selection { background: #4A6DE5; color: #fff; }
+  ::selection { background: #3F5FD6; color: #fff; }
 
   ::-webkit-scrollbar { width: 10px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: #C6CDE0; border-radius: 8px; border: 2px solid #F5F6FA; }
-  ::-webkit-scrollbar-thumb:hover { background: #4A6DE5; }
+  ::-webkit-scrollbar-thumb:hover { background: #3F5FD6; }
 
-  :focus-visible { outline: 2px solid #4A6DE5; outline-offset: 2px; border-radius: 4px; }
+  :focus-visible { outline: 2px solid #3F5FD6; outline-offset: 2px; border-radius: 4px; }
 
   /* ── 编辑杂志风：细线、kicker、序号 ── */
   .kicker {
     font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
-    color: #6E7690; font-weight: 500;
+    color: #646C85; font-weight: 500;
   }
-  .kicker .no { color: #4A6DE5; font-weight: 700; margin-right: .6em; }
+  .kicker .no { color: #3F5FD6; font-weight: 700; margin-right: .6em; }
   .rule { height: 1px; background: #E4E8F2; }
 
   /* ── 入场动画（错峰） ── */
@@ -84,9 +84,9 @@
   .nav-link { position: relative; transition: color .25s ease; }
   .nav-link::after {
     content: ""; position: absolute; left: 50%; bottom: -5px; width: 0; height: 2px; border-radius: 2px;
-    background: #4A6DE5; transform: translateX(-50%); transition: width .3s ease;
+    background: #3F5FD6; transform: translateX(-50%); transition: width .3s ease;
   }
-  .nav-link:hover, .nav-link.active { color: #4A6DE5; }
+  .nav-link:hover, .nav-link.active { color: #3F5FD6; }
   .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
   /* ── 照片 ── */
@@ -100,25 +100,21 @@
 
   /* ── 按钮 ── */
   .btn-ink { transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease; box-shadow: 0 10px 26px rgba(30,36,48,.22); }
-  .btn-ink:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(30,36,48,.28); background: #4A6DE5; }
+  .btn-ink:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(30,36,48,.28); background: #3F5FD6; }
   .btn-ghost { transition: all .25s ease; }
-  .btn-ghost:hover { color: #4A6DE5; border-color: #4A6DE5 !important; }
+  .btn-ghost:hover { color: #3F5FD6; border-color: #3F5FD6 !important; }
   .copy-btn { cursor: pointer; }
   .copy-btn.copied { color: #059669 !important; border-color: rgba(5,150,105,.4) !important; }
 
-  /* ── 作品卡 ── */
-  .work-card { transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s ease; }
-  .work-card:hover { transform: translateY(-6px); box-shadow: 0 26px 55px rgba(30,36,48,.11); }
-  .work-card:hover .work-cover { transform: scale(1.045); }
-  .work-cover { transition: transform .7s cubic-bezier(.22,1,.36,1); }
-  .work-card .go { transition: transform .3s ease, color .3s ease; }
-  .work-card:hover .go { transform: translateX(5px); color: #4A6DE5; }
-  .tag { font-size: 10.5px; letter-spacing: .14em; color: #6E7690; text-transform: uppercase; }
+  /* ── 作品占位卡（无 hover 位移，避免假可供性） ── */
+  .work-ph { transition: border-color .3s ease; }
+  .work-ph .go { transition: transform .3s ease, color .3s ease; }
+  .tag { font-size: 11px; letter-spacing: .14em; color: #646C85; text-transform: uppercase; }
 
   /* ── 实习数据锚点 ── */
   .metric {
     font-family: "Noto Serif SC", serif; font-weight: 900;
-    color: #4A6DE5; font-size: 1.35em; line-height: 1; padding: 0 .1em;
+    color: #3F5FD6; font-size: 1.35em; line-height: 1; padding: 0 .1em;
   }
 
   /* ── 深色联系区 ── */
@@ -128,13 +124,16 @@
   .dark-copy:hover { border-color: #fff; background: rgba(255,255,255,.08); }
   .dark-copy.copied { color: #34D399 !important; border-color: rgba(52,211,153,.5) !important; }
 
-  .grad-serif {
-    background: linear-gradient(115deg, #8FA8F5, #E8EEFC);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
+  /* 跳转到主内容 */
+  .skip-link {
+    position: absolute; left: 16px; top: -60px; z-index: 100;
+    background: #1E2430; color: #fff; padding: 10px 18px; border-radius: 999px;
+    font-size: 13px; text-decoration: none; transition: top .2s ease;
   }
+  .skip-link:focus { top: 12px; }
 
   .skill-txt { transition: color .2s ease; cursor: default; }
-  .skill-txt:hover { color: #4A6DE5; }
+  .skill-txt:hover { color: #3F5FD6; }
 
   @media (prefers-reduced-motion: reduce) {
     .reveal, .reveal.visible .stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
@@ -143,6 +142,7 @@
 </style>
 </head>
 <body class="antialiased">
+<a href="#top" class="skip-link">跳到主要内容</a>
 
 <!-- ═══ 导航 ═══ -->
 <header id="site-header" class="sticky top-0 z-50">
@@ -157,13 +157,12 @@
         <a class="nav-link" href="#works">作品集</a>
         <a class="nav-link" href="#experience">实习经历</a>
         <a class="nav-link" href="#about">关于我</a>
-        <a class="nav-link" href="#contact">联系我</a>
       </nav>
       <div class="flex items-center gap-2">
-        <a href="#contact" class="btn-ink h-9 px-5 rounded-full bg-ink text-paper text-sm hidden sm:flex items-center gap-2">
-          <i class="fas fa-paper-plane text-xs"></i><span>求职沟通</span>
-        </a>
-        <button id="menu-btn" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full text-ink/80" aria-label="菜单">
+        <button type="button" data-copy="s-xxx-rrr@qq.com" class="copy-btn btn-ink h-9 px-4 sm:px-5 rounded-full bg-ink text-paper text-sm flex items-center gap-2">
+          <i class="fas fa-envelope text-xs"></i><span>复制邮箱</span>
+        </button>
+        <button id="menu-btn" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full text-ink/80" aria-label="菜单" aria-expanded="false" aria-controls="mobile-menu">
           <i class="fas fa-bars"></i>
         </button>
       </div>
@@ -199,7 +198,11 @@
             <span>联系我</span><i class="fas fa-arrow-right text-xs"></i>
           </a>
         </div>
-        <p class="mt-9 text-xs text-muted tracking-wide leading-relaxed">
+        <p class="mt-8 pt-5 border-t border-line font-mono text-[11px] tracking-[.14em] text-muted leading-relaxed">
+          FIGMA × KIMI × COMFYUI × STABLE DIFFUSION<br class="sm:hidden">
+          <span class="text-ink/70">→ 40+ 视觉产出 · 周期减半 · 模板沉淀为团队规范</span>
+        </p>
+        <p class="mt-6 text-xs text-muted tracking-wide leading-relaxed">
           前 3% 专业成绩　·　实习团队效率 +25%　·　40+ AI 辅助产出　·　香港青年设计师奖
         </p>
       </div>
@@ -223,76 +226,92 @@
         <p class="kicker mb-3"><span class="no">01</span>SELECTED WORKS</p>
         <h2 class="font-serif text-3xl font-black">作品集</h2>
       </div>
-      <span class="text-muted text-xs hidden sm:inline pb-1">作品整理中 · 即将陆续上线</span>
+      <span class="text-muted text-xs pb-1">作品整理中 · 即将陆续上线</span>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 stagger">
 
-      <!-- 预留大卡：App 界面设计（进行中） -->
-      <div class="work-card lg:col-span-7 rounded-3xl overflow-hidden border border-dashed border-[#B9C7F2] bg-gradient-to-br from-[#E9EFFC] via-[#F3F0FB] to-[#E4EBFA] relative cursor-default">
+      <!-- 预留大卡：App 界面设计 -->
+      <div class="work-ph lg:col-span-7 rounded-3xl overflow-hidden border border-dashed border-[#B9C7F2] bg-gradient-to-br from-[#E9EFFC] via-[#F3F0FB] to-[#E4EBFA]">
         <div class="h-64 md:h-80 flex flex-col items-center justify-center gap-3 text-[#3E5CA9]">
-          <i class="fas fa-mobile-screen-button text-4xl opacity-50"></i>
+          <i class="fas fa-mobile-screen-button text-4xl opacity-50" aria-hidden="true"></i>
           <span class="font-serif text-xl font-bold tracking-wide">APP UI 设计</span>
           <span class="text-[11px] tracking-[.2em] px-3 py-1 rounded-full bg-white/60 border border-white/80">预留位 · 即将上线</span>
         </div>
-        <div class="p-6 flex items-center justify-between bg-white/50 backdrop-blur-sm">
-          <div>
-            <div class="tag mb-1.5">APP UI · 主作品 · 2026</div>
-            <div class="font-serif text-xl font-bold">App 界面设计</div>
-            <div class="text-muted text-xs mt-1">Figma 高保真项目，整理中，敬请期待</div>
+        <div class="p-6 bg-white/50 backdrop-blur-sm">
+          <div class="tag mb-1.5">APP UI · 主作品 · 2026</div>
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <div class="font-serif text-xl font-bold">App 界面设计</div>
+              <div class="text-muted text-xs mt-1">Figma 高保真项目，整理中，敬请期待</div>
+            </div>
+            <button type="button" data-copy="s-xxx-rrr@qq.com" class="copy-btn shrink-0 h-9 px-4 rounded-full border border-[#B9C7F2] bg-white/70 text-xs text-[#3E5CA9] flex items-center gap-2 hover:bg-white transition-colors">
+              <i class="fas fa-envelope text-[10px]" aria-hidden="true"></i><span>索取完整案例</span>
+            </button>
           </div>
-          <i class="fas fa-clock text-muted"></i>
         </div>
       </div>
 
-      <!-- 预留卡：电商报告 -->
-      <div class="work-card lg:col-span-5 rounded-3xl overflow-hidden border border-dashed border-[#B9C7F2] bg-gradient-to-br from-[#F3F0FB] via-[#E9EFFC] to-[#E4EBFA] cursor-default">
-        <div class="h-64 md:h-80 flex flex-col items-center justify-center gap-3 text-[#3E5CA9]">
-          <i class="fas fa-chart-line text-4xl opacity-50"></i>
+      <!-- 预留卡：电商报告（纸面暖调 · 数据研究） -->
+      <div class="work-ph lg:col-span-5 rounded-3xl overflow-hidden border border-dashed border-[#D9C9A8] bg-gradient-to-br from-[#FBF5E8] via-[#F7F0E0] to-[#F3EAD6]">
+        <div class="h-64 md:h-80 flex flex-col items-center justify-center gap-3 text-[#8A6D2F]">
+          <i class="fas fa-chart-line text-4xl opacity-50" aria-hidden="true"></i>
           <span class="font-serif text-xl font-bold tracking-wide">数据研究报告</span>
           <span class="text-[11px] tracking-[.2em] px-3 py-1 rounded-full bg-white/60 border border-white/80">预留位 · 即将上线</span>
         </div>
-        <div class="p-6 flex items-center justify-between bg-white/50 backdrop-blur-sm">
-          <div>
-            <div class="tag mb-1.5">数据研究 · 交互报告 · 2026</div>
-            <div class="font-serif text-xl font-bold">电商竞品研究报告</div>
-            <div class="text-muted text-xs mt-1">七大平台，一个存量战场</div>
+        <div class="p-6 bg-white/50 backdrop-blur-sm">
+          <div class="tag mb-1.5" style="color:#8A6D2F">数据研究 · 交互报告 · 2026</div>
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <div class="font-serif text-xl font-bold">电商竞品研究报告</div>
+              <div class="text-xs mt-1" style="color:#7A6A42">七大平台，一个存量战场</div>
+            </div>
+            <button type="button" data-copy="s-xxx-rrr@qq.com" class="copy-btn shrink-0 h-9 px-4 rounded-full border border-[#D9C9A8] bg-white/70 text-xs text-[#8A6D2F] flex items-center gap-2 hover:bg-white transition-colors">
+              <i class="fas fa-envelope text-[10px]" aria-hidden="true"></i><span>索取完整案例</span>
+            </button>
           </div>
-          <i class="fas fa-clock text-muted"></i>
         </div>
       </div>
 
-      <!-- 预留卡：CS2 -->
-      <div class="work-card lg:col-span-6 rounded-3xl overflow-hidden border border-dashed border-[#B9C7F2] bg-gradient-to-br from-[#E9EFFC] to-[#F3F0FB] cursor-default">
-        <div class="h-52 md:h-60 flex flex-col items-center justify-center gap-3 text-[#3E5CA9]">
-          <i class="fas fa-crosshairs text-4xl opacity-50"></i>
-          <span class="font-serif text-xl font-bold tracking-wide">工具产品</span>
-          <span class="text-[11px] tracking-[.2em] px-3 py-1 rounded-full bg-white/60 border border-white/80">预留位 · 即将上线</span>
+      <!-- 预留卡：CS2（暗色电竞调 · 工具产品） -->
+      <div class="work-ph lg:col-span-6 rounded-3xl overflow-hidden border border-dashed border-[#3A4356] bg-gradient-to-br from-[#171B24] via-[#1D2330] to-[#171B24]">
+        <div class="h-52 md:h-60 flex flex-col items-center justify-center gap-3 text-[#F5B82E]">
+          <i class="fas fa-crosshairs text-4xl opacity-60" aria-hidden="true"></i>
+          <span class="font-serif text-xl font-bold tracking-wide text-white/90">工具产品</span>
+          <span class="text-[11px] tracking-[.2em] px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white/70">预留位 · 即将上线</span>
         </div>
-        <div class="p-6 flex items-center justify-between bg-white/50 backdrop-blur-sm">
-          <div>
-            <div class="tag mb-1.5">工具产品 · 交互教学 · 2026</div>
-            <div class="font-serif text-xl font-bold">CS2 游戏道具学习站</div>
-            <div class="text-muted text-xs mt-1">Utility Lab · 交互地图点位教学</div>
+        <div class="p-6 bg-black/30">
+          <div class="tag mb-1.5" style="color:#B8C0D0">工具产品 · 交互教学 · 2026</div>
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <div class="font-serif text-xl font-bold text-white/90">CS2 游戏道具学习站</div>
+              <div class="text-xs mt-1 text-white/50">Utility Lab · 交互地图点位教学</div>
+            </div>
+            <button type="button" data-copy="s-xxx-rrr@qq.com" class="copy-btn shrink-0 h-9 px-4 rounded-full border border-[#3A4356] bg-white/10 text-xs text-[#F5B82E] flex items-center gap-2 hover:bg-white/20 transition-colors">
+              <i class="fas fa-envelope text-[10px]" aria-hidden="true"></i><span>索取完整案例</span>
+            </button>
           </div>
-          <i class="fas fa-clock text-muted"></i>
         </div>
       </div>
 
-      <!-- 预留卡：手作工坊 -->
-      <div class="work-card lg:col-span-6 rounded-3xl overflow-hidden border border-dashed border-[#B9C7F2] bg-gradient-to-br from-[#F3F0FB] to-[#E4EBFA] cursor-default">
-        <div class="h-52 md:h-60 flex flex-col items-center justify-center gap-3 text-[#3E5CA9]">
-          <i class="fas fa-store text-4xl opacity-50"></i>
+      <!-- 预留卡：手作工坊（手作绿调 · B端系统） -->
+      <div class="work-ph lg:col-span-6 rounded-3xl overflow-hidden border border-dashed border-[#B7DCC3] bg-gradient-to-br from-[#EFF8F1] to-[#E4F1E8]">
+        <div class="h-52 md:h-60 flex flex-col items-center justify-center gap-3 text-[#2E7D4F]">
+          <i class="fas fa-store text-4xl opacity-50" aria-hidden="true"></i>
           <span class="font-serif text-xl font-bold tracking-wide">B端经营系统</span>
           <span class="text-[11px] tracking-[.2em] px-3 py-1 rounded-full bg-white/60 border border-white/80">预留位 · 即将上线</span>
         </div>
-        <div class="p-6 flex items-center justify-between bg-white/50 backdrop-blur-sm">
-          <div>
-            <div class="tag mb-1.5">B端系统 · 全栈演示 · 2026</div>
-            <div class="font-serif text-xl font-bold">手作工坊</div>
-            <div class="text-muted text-xs mt-1">拼豆体验店经营系统</div>
+        <div class="p-6 bg-white/50 backdrop-blur-sm">
+          <div class="tag mb-1.5" style="color:#3F7A58">B端系统 · 全栈演示 · 2026</div>
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <div class="font-serif text-xl font-bold">手作工坊</div>
+              <div class="text-xs mt-1" style="color:#4E7A60">拼豆体验店经营系统</div>
+            </div>
+            <button type="button" data-copy="s-xxx-rrr@qq.com" class="copy-btn shrink-0 h-9 px-4 rounded-full border border-[#B7DCC3] bg-white/70 text-xs text-[#2E7D4F] flex items-center gap-2 hover:bg-white transition-colors">
+              <i class="fas fa-envelope text-[10px]" aria-hidden="true"></i><span>索取完整案例</span>
+            </button>
           </div>
-          <i class="fas fa-clock text-muted"></i>
         </div>
       </div>
 
@@ -340,7 +359,8 @@
   <!-- ══════════ 03 关于我 ══════════ -->
   <section id="about" class="reveal py-16 md:py-20">
     <p class="kicker mb-3"><span class="no">03</span>ABOUT</p>
-    <h2 class="font-serif text-3xl font-black mb-10">关于我</h2>
+    <h2 class="font-serif text-3xl font-black mb-6">关于我</h2>
+    <p class="font-serif text-lg md:text-xl leading-relaxed text-ink/80 mb-10 max-w-2xl">在一个 AI 生成万物的年代，我更在意 AI 到不了的那 5%——亲手打磨的部分。</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
       <div>
@@ -359,7 +379,7 @@
           </div>
           <div class="flex items-baseline justify-between gap-4 py-3 border-b border-line">
             <span class="font-bold text-[15px]">教育部「双千计划」人工智能辅助设计开发</span>
-            <span class="tag shrink-0">年级前 3%</span>
+            <span class="tag shrink-0">结业评定前 3%</span>
           </div>
           <div class="flex items-baseline justify-between gap-4 py-3">
             <span class="font-bold text-[15px]">全国计算机等级考试二级</span>
@@ -378,9 +398,9 @@
     <div class="flex flex-col items-center text-center">
       <p class="kicker !text-white/40 mb-6"><span class="no !text-[#8FA8F5]">04</span>CONTACT</p>
       <h2 class="font-serif text-3xl md:text-[42px] font-black leading-[1.4]">
-        期待与你的团队一起，<br>让产品<span class="grad-serif">更好看、更好用</span>。
+        期待与你的团队一起，<br>让产品<span class="text-[#8FA8F5]">更好看、更好用</span>。
       </h2>
-      <p class="text-white/45 text-sm mt-6">UI / UX 设计方向 · 西安 / 北京 / 杭州 · 也可远程协作</p>
+      <p class="text-white/55 text-sm mt-6">UI / UX 设计方向 · 西安 / 北京 / 杭州 · 也可远程协作</p>
 
       <div class="flex flex-wrap justify-center gap-3.5 mt-10">
         <button type="button" data-copy="131 8608 7587" class="copy-btn dark-copy h-12 px-7 rounded-full flex items-center gap-2.5 text-sm">
@@ -396,7 +416,7 @@
     </div>
 
     <div class="rule mt-20 mb-6"></div>
-    <div class="flex flex-wrap items-center justify-between gap-3 text-xs text-white/35">
+    <div class="flex flex-wrap items-center justify-between gap-3 text-xs text-white/50">
       <span>© 2026 宋鑫蕊 · UI DESIGNER</span>
       <span>Designed & Built with Figma-friendly workflow</span>
     </div>
@@ -444,11 +464,14 @@
     var menu = document.getElementById('mobile-menu');
     btn.addEventListener('click', function () {
       menu.classList.toggle('hidden');
-      btn.querySelector('i').className = menu.classList.contains('hidden') ? 'fas fa-bars' : 'fas fa-xmark';
+      var open = !menu.classList.contains('hidden');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.querySelector('i').className = open ? 'fas fa-xmark' : 'fas fa-bars';
     });
     menu.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () {
         menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
         btn.querySelector('i').className = 'fas fa-bars';
       });
     });
