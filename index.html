@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>宋鑫蕊 · UI设计师 | 个人作品集</title>
-<meta name="description" content="宋鑫蕊 - 产品设计专业 UI 设计方向，2027 届毕业生，AIGC 辅助设计实践者。">
+<meta name="description" content="宋鑫蕊 - 产品设计专业 产品交互设计方向，2027 届毕业生，AIGC 辅助设计实践者。">
 <meta property="og:title" content="宋鑫蕊 · UI设计师 | 个人作品集">
-<meta property="og:description" content="产品设计 2027 届 · UI/UX 方向 · AI × 设计复合实践者 · 点击查看看板级作品集">
+<meta property="og:description" content="产品设计 2027 届 · 产品交互设计方向 · AI × 设计复合实践者 · 点击查看看板级作品集">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://sxr-design.github.io/photo.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23232A3D'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23F4F6FD' font-family='serif'%3E%E8%95%8A%3C/text%3E%3C/svg%3E">
@@ -98,6 +98,12 @@
   .hero-photo { transition: transform .8s cubic-bezier(.22,1,.36,1); }
   .hero-photo-frame:hover .hero-photo { transform: scale(1.02); }
 
+  /* ── 3D 吊牌（照片位组件化） ── */
+  .lanyard { position: relative; width: 100%; height: 100%; overflow: hidden; }
+  .lanyard-canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: grab; }
+  .lanyard-canvas:active { cursor: grabbing; }
+  .lanyard-hint { text-align: center; font-size: 11px; letter-spacing: .22em; color: #646C85; margin-top: 10px; user-select: none; -webkit-user-select: none; }
+
   /* ── 按钮 ── */
   .btn-ink { transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease; box-shadow: 0 10px 26px rgba(30,36,48,.22); }
   .btn-ink:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(30,36,48,.28); background: #3F5FD6; }
@@ -181,7 +187,7 @@
 <main id="top" class="max-w-6xl mx-auto px-6">
 
   <!-- ══════════ Hero（杂志封面式） ══════════ -->
-  <section class="pt-16 pb-14 md:pt-24 md:pb-20">
+  <section id="hero" class="relative pt-16 pb-14 md:pt-24 md:pb-20">
     <div class="grid grid-cols-1 lg:grid-cols-[1.08fr_.92fr] gap-14 items-center">
       <div class="reveal">
         <p class="kicker mb-7">PORTFOLIO · 2027 届 · UI/UX</p>
@@ -189,7 +195,7 @@
           UI/UX 设计师 ·<br><span class="text-accent">AI 工作流深度用户</span>
         </h1>
         <p class="mt-6 text-muted leading-loose text-[15px] max-w-md">
-          宋鑫蕊，西安明德理工学院产品设计（UI 方向），专业成绩年级前 1%。日常用 AI 辅助完成从竞品分析到高保真交付的全流程。
+          宋鑫蕊，西安明德理工学院产品设计（产品交互设计方向），专业成绩年级前 1%。日常用 AI 辅助完成从竞品分析到高保真交付的全流程。
         </p>
         <div class="mt-9 flex flex-wrap items-center gap-4">
           <a href="#works" class="btn-ink h-11 px-7 rounded-full bg-ink text-paper text-sm font-medium flex items-center gap-2">
@@ -199,13 +205,10 @@
             <span>联系我</span><i class="fas fa-arrow-right text-xs"></i>
           </a>
         </div>
-        <p class="mt-8 pt-5 border-t border-line text-xs text-muted tracking-wide leading-relaxed">
-          40+ 视觉物料　·　产出周期缩短约 50%　·　3 套模板沉淀为团队规范
-        </p>
-
         <div class="mt-8">
           <p class="tag mb-3">获奖与认证</p>
           <div class="flex flex-col text-[13px] text-ink/75">
+            <span class="py-2 border-b border-line/70">绚丽年华第十八届全国高校摄影 · 一等奖</span>
             <span class="py-2 border-b border-line/70">全国计算机等级考试二级（MS Office）</span>
             <span class="py-2 border-b border-line/70">香港青年设计师奖 · 三等奖</span>
             <span class="py-2">教育部「双千计划」人工智能辅助设计开发 · 结业评定前 3%</span>
@@ -213,14 +216,17 @@
         </div>
       </div>
 
-      <div class="reveal">
-        <div class="hero-photo-frame max-w-[420px] mx-auto lg:ml-auto">
-          <div class="rounded-[26px] overflow-hidden shadow-[0_24px_60px_rgba(30,36,48,.14)]">
-            <img src="photo.jpg" alt="宋鑫蕊个人照片" fetchpriority="high" class="hero-photo w-full aspect-[2/3] object-cover" />
-          </div>
+      <div class="hidden lg:block" aria-hidden="true"></div>
+    </div>
+    <div id="lanyard-mount" class="lanyard max-w-[420px] mx-auto mt-2 h-[480px] lg:mt-0 lg:max-w-6xl lg:h-auto lg:absolute lg:inset-y-0 lg:inset-x-0 lg:mx-auto lg:z-10 lg:pointer-events-none" role="img" aria-label="宋鑫蕊的 3D 吊牌：正面为个人照片，可在首屏自由拖动，点击翻转查看背面"></div>
+    <div id="lanyard-fallback" class="hidden max-w-[420px] mx-auto lg:max-w-6xl lg:w-full lg:px-6">
+      <div class="hero-photo-frame max-w-[420px] lg:ml-auto">
+        <div class="rounded-[26px] overflow-hidden shadow-[0_24px_60px_rgba(30,36,48,.14)]">
+          <img src="photo.jpg" alt="宋鑫蕊个人照片" fetchpriority="high" class="hero-photo w-full aspect-[2/3] object-cover" />
         </div>
       </div>
     </div>
+    <p id="lanyard-hint" class="lanyard-hint lg:absolute lg:top-[660px] lg:left-[71%] lg:mt-0 lg:-translate-x-1/2 lg:whitespace-nowrap">拖动吊牌 · 点击翻转</p>
   </section>
 
   <div class="rule"></div>
@@ -397,7 +403,7 @@
       <h2 class="font-serif text-3xl md:text-[42px] font-black leading-[1.4]">
         期待与你的团队一起，<br>让产品<span class="text-[#8FA8F5]">更好看、更好用</span>。
       </h2>
-      <p class="text-white/55 text-sm mt-6">UI / UX 设计方向 · 西安 / 北京 / 杭州 · 也可远程协作</p>
+      <p class="text-white/55 text-sm mt-6">产品交互设计方向 · 西安 / 北京 / 杭州 · 也可远程协作</p>
 
       <div class="flex flex-wrap justify-center gap-3.5 mt-10">
         <button type="button" data-copy="131 8608 7587" class="copy-btn btn-solid h-12 px-7 rounded-full bg-accent text-white flex items-center gap-2.5 text-sm font-medium shadow-[0_10px_28px_rgba(63,95,214,.4)] hover:-translate-y-0.5 transition-all">
@@ -493,6 +499,216 @@
       }
     });
   });
+</script>
+
+<script src="./lanyard.js" defer></script>
+<script>
+// ── 3D 吊牌挂载：WebGL 不可用或 file:// 直开时回退静态照片 ──
+window.addEventListener('DOMContentLoaded', function () {
+  var mountEl = document.getElementById('lanyard-mount');
+  if (!mountEl) return;
+
+  function showFallback() {
+    mountEl.classList.add('hidden');
+    var hint = document.getElementById('lanyard-hint');
+    if (hint) hint.classList.add('hidden');
+    var fb = document.getElementById('lanyard-fallback');
+    if (fb) fb.classList.remove('hidden');
+  }
+
+  function roundRectPath(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  // 等宽字距绘制（canvas 无原生 letter-spacing 的兜底）
+  function drawTracked(ctx, text, x, y, spacing) {
+    var cx = x;
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i];
+      ctx.fillText(ch, cx, y);
+      cx += ctx.measureText(ch).width + spacing;
+    }
+  }
+
+  // 卡背：按站内设计系统绘制的深色信息面（1024×1440，与卡面同比例）
+  function drawBackFace() {
+    var W = 1024, H = 1440;
+    var cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    var ctx = cv.getContext('2d');
+    var PAPER = '#F5F6FA', ACCENT = '#8FA8F5', MUTED = 'rgba(245,246,250,.5)';
+    var SANS = '"PingFang SC", "Microsoft YaHei", sans-serif';
+    var SERIF = '"Noto Serif SC", "Songti SC", serif';
+
+    ctx.fillStyle = '#14181F';
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.strokeStyle = 'rgba(245,246,250,.14)';
+    ctx.lineWidth = 2;
+    roundRectPath(ctx, 44, 44, W - 88, H - 88, 26);
+    ctx.stroke();
+
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = MUTED;
+    ctx.font = '500 27px ' + SANS;
+    drawTracked(ctx, 'PORTFOLIO · 2027 届 · UI/UX', 92, 152, 9);
+
+    ctx.fillStyle = ACCENT;
+    ctx.fillRect(92, 198, 64, 8);
+
+    ctx.fillStyle = PAPER;
+    ctx.font = '900 158px ' + SERIF;
+    ctx.fillText('宋鑫蕊', 88, 424);
+
+    ctx.fillStyle = MUTED;
+    ctx.font = '500 29px ' + SANS;
+    drawTracked(ctx, 'SONG XINRUI', 92, 490, 13);
+
+    ctx.fillStyle = ACCENT;
+    ctx.font = '600 46px ' + SERIF;
+    ctx.fillText('UI / UX 设计师 · 产品设计', 92, 600);
+
+    ctx.strokeStyle = 'rgba(245,246,250,.16)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(92, 668); ctx.lineTo(W - 92, 668);
+    ctx.stroke();
+
+    var rows = [
+      ['邮箱', 's-xxx-rrr@qq.com'],
+      ['电话', '131 8608 7587'],
+      ['站点', 'sxr-design.github.io'],
+      ['微信', 'Sxxxrrr111']
+    ];
+    var y = 792;
+    rows.forEach(function (row) {
+      ctx.fillStyle = ACCENT;
+      ctx.font = '500 27px ' + SANS;
+      drawTracked(ctx, row[0], 92, y, 10);
+      ctx.fillStyle = 'rgba(245,246,250,.9)';
+      ctx.font = '400 41px ' + SANS;
+      ctx.fillText(row[1], 250, y);
+      y += 104;
+    });
+
+    ctx.strokeStyle = 'rgba(245,246,250,.16)';
+    ctx.beginPath();
+    ctx.moveTo(92, 1292); ctx.lineTo(W - 92, 1292);
+    ctx.stroke();
+
+    ctx.fillStyle = 'rgba(245,246,250,.38)';
+    ctx.font = '500 24px ' + SANS;
+    drawTracked(ctx, '© 2026 SONG XINRUI', 92, 1352, 6);
+    var right = '拖动 · 翻转';
+    ctx.fillStyle = 'rgba(143,168,245,.75)';
+    var rw = 0;
+    for (var i = 0; i < right.length; i++) rw += ctx.measureText(right[i]).width + 6;
+    drawTracked(ctx, right, W - 92 - rw + 6, 1352, 6);
+
+    return cv.toDataURL('image/png');
+  }
+
+  function fontsReady() {
+    if (!document.fonts || !document.fonts.load) return Promise.resolve();
+    return Promise.race([
+      Promise.all([
+        document.fonts.load('900 160px "Noto Serif SC"'),
+        document.fonts.load('600 46px "Noto Serif SC"')
+      ]).catch(function () {}),
+      new Promise(function (r) { setTimeout(r, 1800); })
+    ]);
+  }
+
+  if (location.protocol === 'file:') { showFallback(); return; }
+
+  var reduced = false;
+  try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+  var glTest = document.createElement('canvas');
+  if (!window.LanyardBadge || !(glTest.getContext('webgl2') || glTest.getContext('webgl'))) {
+    showFallback();
+    return;
+  }
+
+  // 桌面端吊牌铺满整个 Hero（pointer-events:none + 指针桥接）：
+  // 卡片可在首屏内自由拖甩，文字/按钮仍可正常交互
+  var heroEl = document.getElementById('hero');
+  var mqlLg = window.matchMedia('(min-width: 1024px)');
+  var INTERACTIVE_SEL = 'a,button,input,textarea,select,label,[data-copy]';
+  var bridging = false;
+
+  function forwardPointer(canvas, type, e) {
+    canvas.dispatchEvent(new PointerEvent(type, {
+      pointerId: e.pointerId, pointerType: e.pointerType, isPrimary: e.isPrimary,
+      clientX: e.clientX, clientY: e.clientY, button: e.button, buttons: e.buttons,
+      bubbles: true, cancelable: true, composed: true
+    }));
+  }
+
+  function bridgeEnd(e) {
+    if (!bridging) return;
+    if (bridging !== 'captured') {
+      var c = mountEl.querySelector('canvas');
+      if (c) forwardPointer(c, e.type === 'pointercancel' ? 'pointercancel' : 'pointerup', e);
+    }
+    bridging = false;
+  }
+
+  if (heroEl) {
+    heroEl.addEventListener('pointerdown', function (e) {
+      if (!mqlLg.matches || !e.isPrimary || (e.button || 0) > 0) return;
+      if (e.target.closest(INTERACTIVE_SEL)) return;
+      var c = mountEl.querySelector('canvas');
+      if (!c) return;
+      e.preventDefault();
+      bridging = true;
+      forwardPointer(c, 'pointerdown', e);
+      if (c.hasPointerCapture && c.hasPointerCapture(e.pointerId)) bridging = 'captured';
+    });
+    heroEl.addEventListener('pointermove', function (e) {
+      if (!bridging || bridging === 'captured') return;
+      var c = mountEl.querySelector('canvas');
+      if (c) forwardPointer(c, 'pointermove', e);
+    });
+    window.addEventListener('pointerup', bridgeEnd);
+    window.addEventListener('pointercancel', bridgeEnd);
+  }
+
+  fontsReady().then(function () {
+    try {
+      var backURL = drawBackFace();
+      var buildProps = function (isLg) {
+        return {
+          frontImage: 'photo.jpg',
+          backImage: backURL,
+          imageFit: 'cover',
+          cardColor: '#FFFFFF',
+          finish: 'glossy',
+          size: 0.6,
+          anchor: isLg ? 'right' : 'center',
+          strapLength: 0.5,
+          strapColor: '#1E2430',
+          metal: 'silver',
+          breeze: reduced ? 0 : 0.5,
+          intro: !reduced,
+          interactive: true
+        };
+      };
+      var api = window.LanyardBadge.mount(mountEl, buildProps(mqlLg.matches));
+      if (mqlLg.addEventListener) {
+        mqlLg.addEventListener('change', function () { api.update(buildProps(mqlLg.matches)); });
+      }
+    } catch (err) {
+      showFallback();
+    }
+  });
+});
 </script>
 </body>
 </html>
