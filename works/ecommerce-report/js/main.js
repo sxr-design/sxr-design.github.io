@@ -14,8 +14,10 @@
     "sec-appendix": "§8 附录", "sec-sources": "来源"
   };
   const segs = sections.map((sec, i) => {
-    const el = document.createElement("div");
+    const el = document.createElement("button");
+    el.type = "button";
     el.className = "seg";
+    el.setAttribute("aria-label", "跳转到 " + (SEC_LABEL[sec.id] || sec.id));
     const lab = document.createElement("span");
     lab.className = "seg-label";
     lab.textContent = SEC_LABEL[sec.id] || sec.id;
@@ -48,15 +50,14 @@
       ticking = false;
       const past = scrollY > cover.offsetHeight * 0.72;
       rail.classList.toggle("on", past);
-      document.getElementById("dash-rail").classList.toggle("on", past);
+      const bh = document.querySelector(".back-home");
+      if (bh) bh.classList.toggle("bh-hide", past);
       // 当前章节
       const y = scrollY + innerHeight * 0.4;
       let cur = segs[0];
       segs.forEach(s => { if (s.sec.offsetTop <= y) cur = s; });
       segs.forEach(s => s.el.classList.toggle("active", s === cur));
       railYear.textContent = (SEC_LABEL[cur.sec.id] || "§0").split(" ")[0];
-      const win = cur.sec.dataset.win;
-      if (window.DASH && win) DASH.setWin(win);
     });
   }
   addEventListener("scroll", onScroll, { passive: true });
@@ -109,7 +110,6 @@
     });
   }
 
-  /* ── 右栏启动 ── */
-  if (window.DASH) DASH.start();
+  /* ── 启动 ── */
   onScroll();
 })();

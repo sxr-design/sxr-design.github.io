@@ -25,16 +25,6 @@
 /* 附录编号连续性 */
 .appendix-list { counter-reset: app; }
 
-/* 封面按钮在浅色画布上的可读性（左栏白色渐变洗由画布绘制） */
-.cover-mode button { backdrop-filter: none; }
-
-/* 右栏仪表盘内的提示 */
-#dash-rail .dash-tip {
-  position: absolute; right: 12px; bottom: 10px;
-  font-family: var(--mono); font-size: 9px; color: var(--ink-lo);
-  letter-spacing: .14em; text-transform: uppercase; pointer-events: none;
-}
-
 /* reduced-motion：所有 CSS 动画直接到终态 */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

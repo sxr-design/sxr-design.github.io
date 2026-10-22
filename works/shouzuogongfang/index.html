@@ -10,7 +10,10 @@
 
   body {
     font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
-    background: linear-gradient(160deg, #052e16 0%, #14532d 45%, #16a34a 100%);
+    /* 拼豆插画作整页背景，叠深绿纱罩保证可读性 */
+    background:
+      linear-gradient(160deg, rgba(5,46,22,.90) 0%, rgba(20,83,45,.84) 45%, rgba(22,101,52,.80) 100%),
+      url("hero-craft.jpg") center / cover no-repeat;
     min-height: 100vh;
     color: #1f2937;
     position: relative;
@@ -47,19 +50,6 @@
   /* ============ 顶部品牌区（深绿底白字） ============ */
   .brand { text-align: center; margin-bottom: 34px; }
 
-  .brand-logo {
-    width: 64px; height: 64px;
-    margin: 0 auto 16px;
-    background: rgba(255, 255, 255, .14);
-    border: 1.5px solid rgba(255, 255, 255, .35);
-    border-radius: 20px;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
-    backdrop-filter: blur(4px);
-  }
-
-  .brand-logo svg { width: 34px; height: 34px; }
-
   .brand-title {
     font-size: 32px; font-weight: 800;
     letter-spacing: 4px;
@@ -70,17 +60,6 @@
   .brand-subtitle {
     font-size: 14px; color: rgba(255,255,255,.85);
     margin-top: 8px; letter-spacing: 1px;
-  }
-
-  .demo-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    margin-top: 14px;
-    padding: 5px 14px;
-    font-size: 12px; color: #dcfce7;
-    background-color: rgba(255, 255, 255, .12);
-    border: 1px solid rgba(255, 255, 255, .25);
-    border-radius: 999px;
-    backdrop-filter: blur(4px);
   }
 
   /* ============ 登录卡片（白色浮动） ============ */
@@ -138,7 +117,7 @@
     padding: 13px;
     font-size: 15px; font-weight: 600;
     color: #fff;
-    background: linear-gradient(135deg, #22c55e, #15803d);
+    background: linear-gradient(135deg, #15803d, #14532d);
     border: none; border-radius: 12px;
     cursor: pointer;
     transition: opacity .15s, transform .1s;
@@ -211,12 +190,6 @@
   .page   { animation: iosEnter .7s cubic-bezier(.22,1,.36,1) both; }
   .brand  { animation: iosEnter .6s .08s cubic-bezier(.22,1,.36,1) both; }
   .card   { animation: iosEnter .7s .18s cubic-bezier(.22,1,.36,1) both; }
-  .hero-img {
-    width:100%; border-radius:20px;
-    box-shadow: 0 16px 40px rgba(0,0,0,.22);
-    animation: iosEnter .8s .12s cubic-bezier(.22,1,.36,1) both;
-    margin-bottom: 22px;
-  }
 
   .bead { animation: iosFloat 5s ease-in-out infinite; }
   .bead-1 { animation-delay: 0s; }
@@ -252,6 +225,28 @@
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(22,163,74,.12), 0 0 0 4px rgba(22,163,74,.18);
   }
+
+  /* ============ 桌面端布局：左品牌 + 右登录卡 ============ */
+  @media (min-width: 900px) {
+    .page {
+      max-width: 1020px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 64px;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .pane-intro .brand { text-align: left; margin-bottom: 0; }
+    .pane-intro .brand-title { font-size: 40px; }
+    .pane-auth .card { padding: 36px 32px; }
+    .pane-auth .footer-note { text-align: left; }
+  }
+
+  /* 减少动态偏好：关闭入场与浮动动画 */
+  @media (prefers-reduced-motion: reduce) {
+    .page, .brand, .card, .bead { animation: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -266,29 +261,17 @@
 
   <div class="page">
 
+    <!-- 左栏：品牌区（桌面端并排布局） -->
+    <div class="pane-intro">
     <!-- 顶部品牌区 -->
     <div class="brand">
-      <div class="brand-logo" aria-hidden="true">
-        <!-- 拼豆网格图标 -->
-        <svg viewBox="0 0 24 24" fill="#fff">
-          <circle cx="5"  cy="5"  r="1.8"/><circle cx="12" cy="5"  r="1.8"/><circle cx="19" cy="5"  r="1.8"/>
-          <circle cx="5"  cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/>
-          <circle cx="5"  cy="19" r="1.8"/><circle cx="12" cy="19" r="1.8"/><circle cx="19" cy="19" r="1.8"/>
-        </svg>
-      </div>
       <h1 class="brand-title">手作工坊</h1>
       <p class="brand-subtitle">拼豆体验店经营系统</p>
-      <div class="demo-badge">
-        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-        </svg>
-        演示模式 · 数据为 Seed 模拟，不会写入真实数据库
-      </div>
+    </div>
     </div>
 
-    <!-- 手作工坊插画 -->
-    <img src="hero-craft.jpg" alt="手作工坊拼豆体验" class="hero-img" loading="eager">
-
+    <!-- 右栏：登录卡片与说明 -->
+    <div class="pane-auth">
     <!-- 登录卡片 -->
     <div class="card">
       <div class="card-title">欢迎回来</div>
@@ -329,6 +312,7 @@
 
     <!-- 底部说明 -->
     <p class="footer-note">手作工坊·演示店 · 演示账号：owner / owner123，cashier / cashier123</p>
+    </div>
   </div>
 
   <script>
@@ -371,34 +355,14 @@
       inp.addEventListener('focus', function(){ this.style.transform = 'translateY(-2px)'; });
       inp.addEventListener('blur',  function(){ this.style.transform = 'translateY(0)'; });
     });
-    // 页面加载后品牌 logo 轻微弹跳
-    window.addEventListener('load', function(){
-      var logo = document.querySelector('.brand-logo');
-      if(logo) {
-        logo.style.animation = 'none';
-        logo.offsetHeight; // reflow
-        logo.style.animation = 'iosBounce .6s cubic-bezier(.34,1.56,.64,1)';
-      }
-    });
   </script>
   <style>
     @keyframes iosRipple {
       to { transform: scale(2.5); opacity: 0; }
     }
-    @keyframes iosBounce {
-      0%   { transform: scale(0.8); opacity: 0; }
-      60%  { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); }
-    }
   </style>
 <footer style="text-align:center;padding:20px 16px 8px;color:rgba(255,255,255,.6);font-size:12px;line-height:1.8;">
   手作工坊 · 拼豆体验店经营系统 · 交互演示项目 · 页面数据均为模拟
 </footer>
-<style id="back-home-style">
-.back-home{position:fixed;left:18px;bottom:18px;z-index:2147483000;display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:13px;font-weight:500;line-height:1;text-decoration:none;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .18s ease,opacity .18s ease;box-shadow:0 6px 20px rgba(0,0,0,.18)}
-.back-home:hover{transform:translateY(-2px);opacity:.92}
-.back-home svg{width:14px;height:14px}
-@media (max-width:767px){.back-home{display:none}}
-</style><a class="back-home" href="../../index.html" style="background:rgba(255,255,255,.92);color:#15803d;border:1px solid #bbf7d0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>返回作品集</a>
 </body>
 </html>

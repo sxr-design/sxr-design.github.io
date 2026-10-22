@@ -21,7 +21,7 @@ window.U = (() => {
   // accent usages recolor automatically; true negatives (declines/crashes/missing)
   // must use PAL.neg — audited per chart.
   const PAL = {
-    paper: "#ffffff", hi: "#f7f9fc", ink: "#051c2c", inkMd: "#42566a", inkLo: "#8595a6",
+    paper: "#ffffff", hi: "#f7f9fc", ink: "#051c2c", inkMd: "#42566a", inkLo: "#5f7183",
     line: "#dbe2ea", lineLo: "#eef1f6", red: "#2251ff", redHi: "#1233b8",
     blue: "#7a45c9", copper: "#b07a10", green: "#008a6d", gold: "#b07a10",
     neg: "#c22f4e", accent: "#2251ff", navy: "#051c2c",
@@ -101,12 +101,18 @@ window.U = (() => {
   // ── Drill-down data card ──
   const drill = document.getElementById("drill-card");
   let drillOpen = false;
-  function showDrill({ title, value, delta, sub, source, x, y }) {
-    drill.innerHTML = `<button class="d-close">✕</button>
-      <div class="d-title">${title}</div>
-      <div class="d-val">${value}${delta != null ? ` <span class="${delta >= 0 ? "pos" : "neg"}" style="font-size:15px">${fmt.pct(delta)}</span>` : ""}</div>
-      ${sub ? `<div class="d-sub">${sub}</div>` : ""}
-      ${source ? `<div class="d-src">Source · ${source}</div>` : ""}`;
+  let drillTrigger = null;
+  function showDrill(o, pos) {
+    // 调用契约：坐标可放第一参（chartkit）或第二参（main/dashboard），两种都收
+    const d = Object.assign({}, o, pos || {});
+    const x = typeof d.x === "number" ? d.x : window.innerWidth / 2;
+    const y = typeof d.y === "number" ? d.y : window.innerHeight / 2;
+    drillTrigger = document.activeElement;
+    drill.innerHTML = `<button class="d-close" aria-label="关闭钻取卡">✕</button>
+      <div class="d-title">${d.title}</div>
+      <div class="d-val">${d.value}${d.delta != null ? ` <span class="${d.delta >= 0 ? "pos" : "neg"}" style="font-size:15px">${fmt.pct(d.delta)}</span>` : ""}</div>
+      ${d.sub ? `<div class="d-sub">${d.sub}</div>` : ""}
+      ${d.source ? `<div class="d-src">Source · ${d.source}</div>` : ""}`;
     drill.hidden = false; drillOpen = true;
     const r = drill.getBoundingClientRect();
     let left = clamp(x + 14, 8, window.innerWidth - r.width - 8);
@@ -115,7 +121,14 @@ window.U = (() => {
     drill.style.left = left + "px"; drill.style.top = top + "px";
     drill.querySelector(".d-close").onclick = hideDrill;
   }
-  function hideDrill() { drill.hidden = true; drillOpen = false; }
+  function hideDrill() {
+    drill.hidden = true; drillOpen = false;
+    if (drillTrigger && document.contains(drillTrigger)) drillTrigger.focus();
+    drillTrigger = null;
+  }
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && drillOpen) hideDrill();
+  });
   document.addEventListener("click", e => {
     if (drillOpen && !drill.contains(e.target)) {
       // let the triggering element handle it itself

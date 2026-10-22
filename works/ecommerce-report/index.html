@@ -17,16 +17,13 @@
   <div class="rail-track" id="rail-track"></div>
 </nav>
 
-<!-- ═══ 封面 · 快递包裹四态（D态开箱揭幕为默认） ═══ -->
+<!-- ═══ 封面 · 静态编辑风头部 ═══ -->
 <header id="cover">
-  <canvas id="cover-canvas"></canvas>
-  <canvas id="cover-canvas-x" style="display:none"></canvas>
-  <canvas id="cover-canvas-w" style="display:none"></canvas>
   <div class="cover-inner">
     <p class="cover-kicker">中国电商竞品研究 · 数据截至 2026-09-29</p>
     <h1 class="cover-title">七大平台，<br><span class="cover-num">一个存量战场</span></h1>
     <p class="cover-sub">四强并立 · 利润牺牲期 · 2027份额预言</p>
-    <p class="cover-lede">中国电商已进入存量竞争与格局重排的叠加期：渗透率见顶确认“抢存量”基调，格局从“两超多强”改写为“四强并立”，全行业利润在即时零售、AI与商家生态三线投入下同向收缩。本报告以222条来源为底，逐层拆开这只“包裹”——面单、箱体、缓冲层与商品，各对应一层行业论点。</p>
+    <p class="cover-lede">中国电商已进入存量竞争与格局重排的叠加期：渗透率见顶确认“抢存量”基调，格局从“两超多强”改写为“四强并立”，全行业利润在即时零售、AI与商家生态三线投入下同向收缩。本报告以222条带来源为底，每个关键数字均可点击钻取出处。</p>
     <div class="cover-chips">
       <button class="chip" data-goto="#sec-exec">核心发现</button>
       <button class="chip" data-goto="#sec-share">格局重排</button>
@@ -35,13 +32,6 @@
       <button class="chip" data-goto="#sec-outlook">2027展望</button>
     </div>
     <p class="cover-anchor">证据分级：公司一手 &gt; 交叉验证 &gt; 券商转述 &gt; 推算（均标注）· 未上市平台数据为机构或公开报道估算口径 · 不构成投资建议</p>
-    <div class="cover-mode" id="cover-mode" aria-label="封面形态切换">
-      <button data-mode="d" class="on">D · 开箱揭幕</button>
-      <button data-mode="rec">A · 包裹递归</button>
-      <button data-mode="x">B · 分层爆炸图</button>
-      <button data-mode="w">C · 工程线框</button>
-    </div>
-    <div class="scroll-hint"><span></span>SCROLL</div>
   </div>
 </header>
 
@@ -56,11 +46,9 @@
     <p>行业扩张阶段已经结束。2025年全国网上零售额15.97万亿元、同比增长8.6%，但实物商品网上零售额增速放缓至5.2%，占社零比重不升反降至26.1%<button class="src" data-k="K1">◆</button>。即时零售等近场业态正在分流传统电商交易，主站GMV增长的天花板被实质性压低。大促数据进一步确认结构切换：2026年618综合电商销售额仅增0.9%，即时零售渠道却增长112.3%，构成全网几乎全部净增量<button class="src" data-k="K10">◆</button>。</p>
     <p>格局从“两超多强”改写为“四强并立”：高盛预测2025年四季度淘天份额31%、抖音24%、拼多多19%、京东16%，合计约90%（机构估算口径）<button class="src" data-k="K3">◆</button>。四强之外，得物、唯品会、闲鱼“垂类三杰”的存活逻辑不是价格差，而是信任与人群壁垒。2025—2026年全行业进入“主动利润牺牲期”：阿里Non-GAAP净利下滑62%、京东归母净利下滑约53%、拼多多上市以来首次年度利润下滑<button class="src" data-k="K17">◆</button>，投向清晰可辨——即时零售补贴、AI资本开支与商家生态扶持。</p>
   </div>
-  <div class="wide xl"><div id="evidence-chart" class="chart-frame"></div></div>
   <div class="prose">
     <p>展望2026—2027年，基准情景是利润率随补贴战退坡逐步修复、但修复斜率显著分化：高盛预测2027年阿里份额降至28%、抖音升至26%，进入“分庭抗礼”区间<button class="src" data-k="K4">◆</button>。结构性机会在二手循环与Z世代入口——二手电商2025年交易规模8500亿元、同比增长31.8%，是稀缺的30%以上增量市场<button class="src" data-k="K33">◆</button>。竞争力的评估由此应从当期利润率，转向“投入换得的资产”与生态健康度。</p>
   </div>
-  <div class="wide xl"><div id="timeline-chart" class="chart-frame"></div></div>
 </section>
 
 <!-- ═══ §0.5 概念卡 ═══ -->
@@ -257,25 +245,19 @@
     <div id="source-list"></div>
   </div>
   <div class="prose">
-    <p class="colophon">交互式研究版 · 编译 2026-10-04 · 事实源：中国电商平台竞品分析报告（数据截至2026-09-29）· 不构成投资建议</p>
+    <p class="colophon">交互式研究版 · 编译 2026-10-04 · 事实源：中国电商平台竞品分析报告（数据截至2026-09-29）· 不构成投资建议 · <a href="../../index.html">← 返回作品集</a></p>
   </div>
 </footer>
 
 </main>
 
-<aside id="dash-rail" aria-label="随读仪表盘"><canvas id="dash-canvas"></canvas></aside>
 <div id="drill-card" hidden></div>
 
 <script src="vendor/d3.min.js"></script>
 <script src="js/data.js"></script>
 <script src="js/sources.js"></script>
 <script src="js/utils.js"></script>
-<script src="js/cover.js"></script>
-<script src="js/cover-exploded.js"></script>
-<script src="js/cover-wire.js"></script>
 <script src="js/chartkit.js"></script>
-<script src="js/chart-evidence.js"></script>
-<script src="js/chart-timeline.js"></script>
 <script src="js/chart-share.js"></script>
 <script src="js/chart-players.js"></script>
 <script src="js/chart-fin.js"></script>
@@ -283,11 +265,11 @@
 <script src="js/chart-money.js"></script>
 <script src="js/chart-instant.js"></script>
 <script src="js/chart-verdict.js"></script>
-<script src="js/dashboard.js"></script>
 <script src="js/main.js"></script>
 <style id="back-home-style">
 .back-home{position:fixed;left:18px;bottom:18px;z-index:2147483000;display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:13px;font-weight:500;line-height:1;text-decoration:none;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .18s ease,opacity .18s ease;box-shadow:0 6px 20px rgba(0,0,0,.18)}
 .back-home:hover{transform:translateY(-2px);opacity:.92}
+.back-home.bh-hide{opacity:0;pointer-events:none;transform:translateY(8px)}
 .back-home svg{width:14px;height:14px}
 @media (max-width:767px){.back-home{display:none}}
 </style><a class="back-home" href="../../index.html" style="background:rgba(255,255,255,.9);color:#051c2c;border:1px solid #d8d2c4;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>返回作品集</a>

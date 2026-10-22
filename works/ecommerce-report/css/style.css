@@ -9,7 +9,7 @@
   --paper-hi: #f7f9fc;      /* panel */
   --ink: #051c2c;           /* deep navy */
   --ink-md: #42566a;
-  --ink-lo: #8595a6;
+  --ink-lo: #5f7183;         /* WCAG AA on paper: 5.03:1 */
   --line: #dbe2ea;
   --line-lo: #eef1f6;
   --red: #2251ff;           /* LEGACY ACCENT SLOT → electric blue */
@@ -29,7 +29,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  --railw: 460px;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
@@ -63,38 +62,33 @@ a { color: var(--blue); }
 }
 .rail-track { flex: 1; height: 34px; position: relative; }
 .rail-track .seg {
-  position: absolute; top: 15px; height: 2px; background: var(--line);
-  pointer-events: auto; cursor: pointer;
+  position: absolute; top: 5px; height: 24px;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  pointer-events: auto;
 }
-.rail-track .seg.active { background: var(--red); height: 4px; top: 14px; }
+.rail-track .seg::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 11px;
+  height: 2px; background: var(--line); transition: background .2s ease;
+}
+.rail-track .seg.active::before { background: var(--red); height: 4px; top: 10px; }
 .rail-track .seg .seg-label {
   position: absolute; top: -14px; left: 0; font-family: var(--mono);
   font-size: 9px; color: var(--ink-lo); white-space: nowrap; letter-spacing: .04em;
 }
-.rail-track .seg:nth-child(even) .seg-label { top: 8px; }
+.rail-track .seg:nth-child(even) .seg-label { top: 26px; }
 .rail-track .seg.active .seg-label { color: var(--red); font-weight: 700; }
-
-/* ── Cover ── */
-#cover { position: relative; min-height: 100vh; overflow: hidden; }
-#cover-canvas, #cover-canvas-x, #cover-canvas-w { position: absolute; inset: 0; width: 100%; height: 100%; }
-
-/* cover artwork variant switch */
-.cover-mode { margin-top: 22px; display: flex; gap: 8px; align-items: center; }
-.cover-mode::before {
-  content: "COVER"; font-family: var(--mono); font-size: 9px;
-  letter-spacing: .22em; color: var(--ink-lo); margin-right: 4px;
+/* 窄屏：段距被压缩，只亮当前段标签，避免互相叠字 */
+@media (max-width: 760px) {
+  .rail-track .seg .seg-label { display: none; }
+  .rail-track .seg.active .seg-label { display: block; top: -14px; }
+  #era-rail { padding: 10px 14px; gap: 10px; }
 }
-.cover-mode button {
-  font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em;
-  color: var(--ink-md); background: rgba(255,255,255,.7);
-  border: 1px solid var(--line); border-radius: 999px; padding: 4px 13px;
-  cursor: pointer; transition: border-color .15s, color .15s;
-}
-.cover-mode button.on { border-color: var(--red); color: var(--red); }
-.cover-mode button:hover { border-color: var(--ink); color: var(--ink); }
+
+/* ── Cover · static editorial header ── */
+#cover { position: relative; overflow: hidden; }
 .cover-inner {
-  position: relative; z-index: 2; max-width: 1120px;
-  margin: 0 auto; padding: 11vh 24px 60px;
+  max-width: 1120px;
+  margin: 0 auto; padding: 16vh 24px 10vh;
 }
 .cover-kicker {
   font-family: var(--mono); font-size: 11.5px; letter-spacing: .28em;
@@ -124,16 +118,6 @@ a { color: var(--blue); }
 }
 .chip:hover { background: var(--red); border-color: var(--red); color: #fff; }
 .cover-anchor { font-size: 12.5px; color: var(--ink-lo); font-family: var(--mono); letter-spacing: .01em; display: block; max-width: 660px; }
-.scroll-hint {
-  margin-top: 7vh; font-family: var(--mono); font-size: 11px; color: var(--ink-lo);
-  display: flex; flex-direction: column; align-items: flex-start; gap: 8px; letter-spacing: .3em;
-  width: max-content;
-}
-.scroll-hint span { margin-left: 22px; }
-.scroll-hint span {
-  display: block; width: 1px; height: 44px;
-  background: linear-gradient(var(--red), transparent);
-}
 
 /* ── Section band ── */
 .band { padding: 72px 0 64px; border-top: 1px solid var(--line-lo); }
@@ -203,15 +187,6 @@ h3 { font-family: var(--sans); font-size: 21px; font-weight: 700; line-height: 1
   border: 1px dashed var(--neg); border-radius: 4px; padding: 8px 12px; background: rgba(194,47,78,.04);
 }
 
-/* ── Rail cross-reference note (hidden when the rail is hidden) ── */
-.rail-note {
-  font-family: var(--mono); font-size: 11px; color: var(--ink-lo);
-  line-height: 1.7; letter-spacing: .02em;
-  margin: 22px 0 18px; padding-left: 16px; position: relative;
-}
-.rail-note::before { content: "→"; position: absolute; left: 0; color: var(--red); }
-@media (max-width: 1180px) { .rail-note { display: none; } }
-
 /* Chart containers */
 .chart-frame {
   background: transparent; border: 0; box-shadow: none;
@@ -235,12 +210,19 @@ h3 { font-family: var(--sans); font-size: 21px; font-weight: 700; line-height: 1
 .metric-strip .m .v { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--red); font-variant-numeric: tabular-nums; }
 .metric-strip .m .k { font-size: 12px; color: var(--ink-md); margin-top: 3px; line-height: 1.5; }
 
-/* source button ◆ */
+/* source button ◆（视觉保持上标小符，热区扩到 24px+，不撑行距） */
 .src {
+  position: relative;
   border: 0; background: none; color: var(--red); cursor: pointer;
-  font-size: 10px; vertical-align: super; padding: 0 2px; font-family: var(--mono);
+  font-size: 10px; vertical-align: super; padding: 6px 4px; margin: -6px -4px; font-family: var(--mono);
 }
 .src:hover { color: var(--red-hi); }
+@media (pointer: coarse) {
+  .src { padding: 10px 6px; margin: -10px -6px; }
+}
+
+/* 键盘焦点可见性 */
+:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
 /* ── Chronicle sticky layout ── */
 #chronicle { position: relative; border-top: 1px solid var(--line-lo); }
@@ -345,8 +327,8 @@ h3 { font-family: var(--sans); font-size: 21px; font-weight: 700; line-height: 1
   padding: 0 5px; margin-right: 6px; color: var(--ink-md); vertical-align: 1px;
 }
 .src-cat.kimi { border-color: var(--red); color: var(--red); }
-.src-cat.broker { border-color: var(--copper); color: var(--copper); }
-.src-cat.company { border-color: var(--green); color: var(--green); }
+.src-cat.broker { border-color: var(--copper); color: #8a5f0b; }   /* 文字需 AA：5.64:1；边框保留系列色 */
+.src-cat.company { border-color: var(--green); color: #00654f; }   /* 文字需 AA：7.06:1；边框保留系列色 */
 .src-cat.industry { border-color: var(--blue); color: var(--blue); }
 
 /* data tables (lineage, comparisons) */
@@ -372,6 +354,7 @@ table.dt tr.hl td { background: rgba(34,81,255,.05); }
   padding: 6px 26px 14px;
   cursor: default; outline: none;
 }
+.term-mag .term:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
 .term-mag .term + .term { border-left: 1px solid var(--line-lo); }
 .term-mag .term:first-child { padding-left: 2px; }
 .term-mag .t-abbr {
@@ -427,28 +410,8 @@ table.dt tr.hl td { background: rgba(34,81,255,.05); }
   .step { min-height: 0; }
 }
 
-/* ── Narrative column yields to right rail ── */
-main, footer#sec-sources { margin-right: var(--railw); }
-#cover { margin-right: 0; }
-.cover-inner { max-width: 1180px; margin: 0 auto; }
-#era-rail { right: var(--railw); }
-
-/* ── Persistent dashboard rail · borderless, part of the page surface ── */
-#dash-rail {
-  position: fixed; top: 0; right: 0; bottom: 0; width: var(--railw);
-  border: 0;
-  background: transparent;
-  z-index: 60;
-  /* fully hidden on the cover; slides in after the reader enters the chapters */
-  opacity: 0; visibility: hidden; transform: translateX(24px);
-  transition: opacity .55s ease, transform .55s ease, visibility 0s linear .55s;
-}
-#dash-rail.on { opacity: 1; visibility: visible; transform: none; transition: opacity .55s ease, transform .55s ease; }
-#dash-rail canvas { width: 100%; height: 100%; display: block; cursor: crosshair; }
-#dash-rail #dash-canvas {
-  max-height: none; border: 0; border-radius: 0; box-shadow: none;
-  background: transparent;
-}
+/* ── Centered single column（无右栏，全宽居中） ── */
+#era-rail { right: 0; }
 
 /* ── dek · italic serif deck, no border chrome ── */
 .dek {
@@ -462,11 +425,6 @@ main, footer#sec-sources { margin-right: var(--railw); }
 /* chronicle single-column */
 .chron-text { max-width: 760px; margin: 0 auto; padding: 40px 24px; }
 .step { min-height: 78vh; }
-
-@media (max-width: 1180px) {
-  body { --railw: 0px; }
-  #dash-rail { display: none; }
-}
 
 /* section hairline */
 hr.sep { border: 0; height: 1px; background: var(--line); margin: 0 auto; max-width: 860px; }
