@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>衣佳 YIJIA · 电子衣橱服饰社区 App 设计案例 | 宋鑫蕊</title>
+    
+    <meta name="description" content="衣佳 App 设计案例：以电子衣橱为中枢，连接买、秀、养、循环四个场景的服饰社区。含结构分析、低保真原型，高保真视觉持续更新。">
+    <meta property="og:title" content="衣佳 YIJIA · 电子衣橱服饰社区 App 设计案例 | 宋鑫蕊">
+    <meta property="og:description" content="衣佳 App 设计案例：以电子衣橱为中枢，连接买、秀、养、循环四个场景的服饰社区。含结构分析、低保真原型，高保真视觉持续更新。">
+    <script type="module" crossorigin src="./assets/index-BOsasF1w.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DREvGIb0.css">
+  <!-- 返回作品集悬浮按钮：左上方 · 无操作 2s 浮现 · 有操作即隐藏 -->
+<style id="back-portfolio-style">
+#back-portfolio{position:fixed;top:16px;left:16px;z-index:2147483000;display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:13px;font-weight:500;line-height:1;text-decoration:none;color:#1E2430;background:rgba(255,255,255,.92);border:1px solid rgba(30,36,48,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,.16);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .3s ease,visibility .3s;pointer-events:none}
+#back-portfolio.bp-show{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+#back-portfolio:hover{opacity:.92}
+#back-portfolio svg{width:14px;height:14px}
+@media (prefers-reduced-motion:reduce){#back-portfolio{transition:none}}
+</style>
+</head>
+  <body>
+    
+    <div id="root"></div>
+    
+  <a id="back-portfolio" href="../../index.html" aria-label="返回作品集"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>返回作品集</a>
+<script id="back-portfolio-js">
+/* 左上方悬浮 · 无操作 2s 浮现 · 有操作即隐藏（指针落在按钮矩形内时保持可见，保证可点击） */
+(function(){
+  var bp=document.getElementById('back-portfolio');if(!bp)return;
+  var timer=null,IDLE=2000;
+  function show(){bp.classList.add('bp-show')}
+  function hide(){bp.classList.remove('bp-show')}
+  function poke(e){if(overBp(e)){if(timer){clearTimeout(timer);timer=null}show();return}hide();if(timer)clearTimeout(timer);timer=setTimeout(show,IDLE)}
+  function overBp(e){if(!e)return false;var c=e.touches&&e.touches[0]?e.touches[0]:e;if(c.clientX==null)return false;var r=bp.getBoundingClientRect();return c.clientX>=r.left&&c.clientX<=r.right&&c.clientY>=r.top&&c.clientY<=r.bottom}
+  ['mousemove','mousedown','wheel','scroll','keydown','touchstart','touchmove','pointerdown'].forEach(function(t){window.addEventListener(t,poke,{passive:true})});
+  poke();
+})();
+</script>
+</body>
+</html>
