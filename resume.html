@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>宋鑫蕊 · 简历 | 产品交互设计</title>
+<title>宋鑫蕊 · 简历 | 产品交互与体验设计</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&display=swap">
@@ -14,7 +14,6 @@
     --inkdeep: #14181F;
     --muted: #646C85;
     --accent: #3F5FD6;
-    --accentsoft: #E8EEFC;
     --accentlight: #8FA8F5;
     --line: #E4E8F2;
   }
@@ -33,7 +32,7 @@
     width: 210mm; height: 297mm;
     margin: 24px auto;
     background: var(--paper);
-    padding: 28px 44px 0;
+    padding: 34px 48px 0;
     display: flex; flex-direction: column;
     box-shadow: 0 18px 50px rgba(30,36,48,.18);
     overflow: hidden;
@@ -44,106 +43,84 @@
   }
 
   .serif { font-family: "Noto Serif SC", "Songti SC", SimSun, serif; }
-  .kicker {
-    font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
-    color: var(--muted); font-weight: 500;
-  }
-  .kicker .no { color: var(--accent); font-weight: 700; margin-right: .55em; }
   .rule { height: 1px; background: var(--line); }
 
   /* ── 头部 ── */
-  header { display: flex; justify-content: space-between; align-items: flex-start; gap: 28px; }
-  .head-left { flex: 1; min-width: 0; }
-  .head-left h1 { font-size: 40px; font-weight: 900; line-height: 1.15; margin-top: 8px; }
-  .head-left h1 .en {
-    display: block; font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-    font-size: 12px; font-weight: 500; letter-spacing: .34em; color: var(--muted); margin-top: 6px;
-  }
-  .head-title { margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--accent); letter-spacing: .04em; }
-  .head-quote { margin-top: 8px; font-size: 11.5px; line-height: 1.7; color: var(--muted); max-width: 400px; }
+  header { display: flex; justify-content: space-between; align-items: center; gap: 32px; }
+  .head-left h1 { font-size: 42px; font-weight: 900; letter-spacing: .06em; }
+  .head-sub { margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--accent); letter-spacing: .1em; }
 
-  .photo-frame { position: relative; flex-shrink: 0; }
-  .photo-frame::before {
-    content: ""; position: absolute; inset: 8px -8px -8px 8px; border-radius: 20px;
-    border: 1.5px solid rgba(74,109,229,.35);
-  }
   .photo-frame img {
-    width: 118px; height: 177px; object-fit: cover; border-radius: 18px; display: block;
-    box-shadow: 0 16px 40px rgba(30,36,48,.14);
+    width: 112px; height: 168px; object-fit: cover; border-radius: 16px; display: block;
   }
 
-  /* ── 联系条（卡背同款信息行） ── */
+  /* ── 联系条 ── */
   .contact-band {
-    margin-top: 16px;
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin-top: 22px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    border-top: 2px solid var(--ink);
+    padding-top: 10px;
   }
-  .contact-band .item { border-top: 2px solid var(--ink); padding-top: 6px; }
-  .contact-band .k { font-size: 9.5px; letter-spacing: .2em; color: var(--accent); font-weight: 600; }
-  .contact-band .v { font-size: 11.5px; color: var(--ink); margin-top: 3px; font-weight: 500; }
+  .contact-band .k { font-size: 10px; letter-spacing: .24em; color: var(--muted); }
+  .contact-band .v { font-size: 12px; color: var(--ink); margin-top: 4px; font-weight: 600; }
 
-  /* ── 区块 ── */
-  section { margin-top: 15px; }
-  section .sec-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
-  section h2 { font-size: 17px; font-weight: 900; }
-  section .sec-note { font-size: 10px; color: var(--muted); letter-spacing: .1em; }
+  /* ── 区块：标题说话，不加序号与英文 ── */
+  section { margin-top: 30px; }
+  section h2 { font-size: 17px; font-weight: 900; letter-spacing: .04em; }
+  section .rule { margin-top: 8px; margin-bottom: 12px; }
 
-  .edu-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-  .edu-row .school { font-size: 13.5px; font-weight: 700; }
-  .edu-row .school .major { font-weight: 500; color: var(--ink); }
-  .edu-row .date { font-size: 11px; color: var(--muted); flex-shrink: 0; }
-  .edu-sub { margin-top: 5px; font-size: 11.5px; color: var(--muted); line-height: 1.7; }
-  .edu-sub strong { color: var(--accent); }
+  .metric { font-family: "Noto Serif SC", serif; font-weight: 900; color: var(--accent); font-size: 1.35em; line-height: 1; padding: 0 .12em; }
+
+  .row-between { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .date { font-size: 11px; color: var(--muted); flex-shrink: 0; letter-spacing: .02em; }
+
+  /* 教育 */
+  .edu-school { font-size: 14px; font-weight: 700; }
+  .edu-school .major { font-weight: 500; }
+  .edu-sub { margin-top: 6px; font-size: 12px; color: var(--muted); line-height: 1.7; }
+  .edu-sub strong { font-family: "Noto Serif SC", serif; font-weight: 900; color: var(--accent); font-size: 1.2em; padding: 0 .08em; }
 
   /* 实习 */
-  .exp-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-  .exp-head .company { font-size: 13.5px; font-weight: 700; }
-  .exp-head .date { font-size: 11px; color: var(--muted); flex-shrink: 0; }
-  .exp-role { margin-top: 3px; font-size: 11.5px; font-weight: 600; color: var(--accent); }
-  .exp-tags { margin-top: 7px; display: flex; gap: 6px; flex-wrap: wrap; }
-  .exp-tags span {
-    border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px;
-    font-size: 10px; color: var(--muted); background: #fff;
-  }
-  .exp-list { margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
-  .exp-list li { list-style: none; display: flex; gap: 9px; font-size: 11.5px; line-height: 1.6; color: rgba(30,36,48,.88); }
+  .exp-company { font-size: 14px; font-weight: 700; }
+  .exp-role { margin-top: 4px; font-size: 12px; font-weight: 600; color: var(--accent); }
+  .exp-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .exp-list li { list-style: none; display: flex; gap: 10px; font-size: 12px; line-height: 1.75; color: rgba(30,36,48,.88); }
   .exp-list li::before { content: "—"; color: var(--accent); font-family: "Noto Serif SC", serif; font-weight: 900; flex-shrink: 0; }
-  .metric { font-family: "Noto Serif SC", serif; font-weight: 900; color: var(--accent); padding: 0 .1em; }
 
-  /* 作品 */
-  .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 16px; }
-  .work-item { border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; background: #fff; }
-  .work-item .tag { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-  .work-item .name { font-size: 12.5px; font-weight: 700; margin-top: 3px; font-family: "Noto Serif SC", serif; }
-  .work-item .desc { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+  /* 作品：无卡片，名称+一行说明 */
+  .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; }
+  .work-item .name { font-size: 13.5px; font-weight: 900; font-family: "Noto Serif SC", serif; }
+  .work-item .name .cat { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 10px; font-weight: 500; color: var(--muted); letter-spacing: .12em; margin-left: 8px; }
+  .work-item .desc { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.6; }
 
   /* 获奖 */
   .award-list { display: flex; flex-direction: column; }
   .award-list .row {
     display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
-    padding: 4px 0; border-bottom: 1px solid rgba(228,232,242,.7);
-    font-size: 11.5px; color: rgba(30,36,48,.85);
+    padding: 6px 0; border-bottom: 1px solid rgba(228,232,242,.7);
+    font-size: 12px; color: rgba(30,36,48,.88);
   }
   .award-list .row:last-child { border-bottom: none; }
-  .award-list .row .lv { font-size: 11px; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+  .award-list .row .lv { font-family: "Noto Serif SC", serif; font-size: 12.5px; color: var(--accent); font-weight: 900; flex-shrink: 0; }
 
   /* 技能 */
-  .skill-group { display: flex; gap: 14px; padding: 4px 0; align-items: baseline; }
-  .skill-group .g { font-size: 10px; letter-spacing: .18em; color: var(--muted); flex-shrink: 0; width: 64px; }
-  .skill-group .items { font-size: 12px; line-height: 1.9; color: rgba(30,36,48,.88); }
-  .skill-group .items b { color: var(--accent); }
+  .skill-group { display: flex; gap: 16px; padding: 5px 0; align-items: baseline; }
+  .skill-group .g { font-size: 10px; letter-spacing: .2em; color: var(--muted); flex-shrink: 0; width: 60px; }
+  .skill-group .items { font-size: 12.5px; line-height: 1.9; color: rgba(30,36,48,.88); }
+  .skill-group .items b { font-family: "Noto Serif SC", serif; font-weight: 900; color: var(--accent); }
 
-  /* ── 底部深色条（呼应主站联系区） ── */
+  /* ── 底部深色条 ── */
   footer {
     margin-top: auto;
     background: var(--inkdeep); color: var(--paper);
-    margin-left: -44px; margin-right: -44px;
-    padding: 18px 44px 20px;
+    margin-left: -48px; margin-right: -48px;
+    padding: 20px 48px 22px;
     display: flex; align-items: center; justify-content: space-between; gap: 20px;
   }
-  footer .slogan { font-family: "Noto Serif SC", serif; font-size: 14.5px; font-weight: 900; line-height: 1.5; }
+  footer .slogan { font-family: "Noto Serif SC", serif; font-size: 15px; font-weight: 900; line-height: 1.55; letter-spacing: .03em; }
   footer .slogan em { font-style: normal; color: var(--accentlight); }
-  footer .meta { text-align: right; font-size: 10.5px; color: rgba(245,246,250,.6); line-height: 1.9; flex-shrink: 0; }
-  footer .meta b { color: var(--paper); font-weight: 500; }
+  footer .meta { text-align: right; font-size: 10.5px; color: rgba(245,246,250,.55); line-height: 2; flex-shrink: 0; }
+  footer .meta b { color: var(--paper); font-weight: 500; font-size: 11.5px; }
 </style>
 </head>
 <body>
@@ -151,8 +128,8 @@
 
   <header>
     <div class="head-left">
-      <p class="kicker">RESUME · 2027 届 · 产品交互与体验设计</p>
-      <h1 class="serif">宋鑫蕊<span class="en">SONG XINRUI</span></h1>
+      <h1 class="serif">宋鑫蕊</h1>
+      <p class="head-sub">产品交互与体验设计 · 2027 届本科</p>
     </div>
     <div class="photo-frame">
       <img src="photo.jpg" alt="宋鑫蕊个人照片">
@@ -167,75 +144,56 @@
   </div>
 
   <section>
-    <div class="sec-head">
-      <h2 class="serif"><span class="kicker"><span class="no">01</span></span>教育背景</h2>
-      <span class="sec-note">EDUCATION</span>
-    </div>
-    <div class="rule" style="margin-bottom:10px"></div>
-    <div class="edu-row">
-      <div class="school">西安明德理工学院　<span class="major">产品交互与体验设计 · 本科</span></div>
+    <h2 class="serif">教育背景</h2>
+    <div class="rule"></div>
+    <div class="row-between">
+      <div class="edu-school">西安明德理工学院　<span class="major">产品交互与体验设计 · 本科</span></div>
       <div class="date">2023.09 — 2027.06（预计）</div>
     </div>
     <p class="edu-sub">专业成绩年级<strong>前 1%</strong>　·　教育部「双千计划」人工智能辅助设计开发结业，评定<strong>前 3%</strong></p>
   </section>
 
   <section>
-    <div class="sec-head">
-      <h2 class="serif"><span class="kicker"><span class="no">02</span></span>实习经历</h2>
-      <span class="sec-note">EXPERIENCE</span>
-    </div>
-    <div class="rule" style="margin-bottom:10px"></div>
-    <div class="exp-head">
-      <div class="company">西安爱克斯未来文化科技有限公司</div>
+    <h2 class="serif">实习经历</h2>
+    <div class="rule"></div>
+    <div class="row-between">
+      <div class="exp-company">西安爱克斯未来文化科技有限公司</div>
       <div class="date">2026.07 — 2026.10</div>
     </div>
     <p class="exp-role">UI 设计实习生（XR 方向）</p>
-    <div class="exp-tags">
-      <span>Figma</span><span>XR 界面</span><span>AIGC 工作流</span>
-    </div>
     <ul class="exp-list">
-      <li>深度参与 XR 产品界面设计，完成需求梳理、竞品分析到高保真原型交付全流程，累计输出界面方案 <span class="metric">30+</span> 页，覆盖主流程与核心交互状态。</li>
-      <li>运用 Kimi、ChatGPT 搭建团队共享知识库与标准化文档模板，带动团队整体效率提升 <span class="metric">+25%</span>，获主管书面好评。</li>
-      <li>使用 Figma + AI 插件批量生成漫剧分镜与宣传海报 <span class="metric">40+</span> 张，视觉产出周期缩短约一半；沉淀的模板被采纳为团队日常设计规范。</li>
+      <li>深度参与 XR 产品界面设计，完成需求梳理、竞品分析到高保真原型交付全流程，累计输出界面方案 <span class="metric">30+</span> 页。</li>
+      <li>运用 Kimi、ChatGPT 搭建团队共享知识库与标准化文档模板，带动团队整体效率提升 <span class="metric">+25%</span>。</li>
+      <li>批量生成漫剧分镜与宣传海报 <span class="metric">40+</span> 张，视觉产出周期缩短约一半；沉淀的模板被采纳为团队日常设计规范。</li>
     </ul>
   </section>
 
   <section>
-    <div class="sec-head">
-      <h2 class="serif"><span class="kicker"><span class="no">03</span></span>项目作品</h2>
-      <span class="sec-note">SELECTED WORKS</span>
-    </div>
-    <div class="rule" style="margin-bottom:10px"></div>
+    <h2 class="serif">项目作品</h2>
+    <div class="rule"></div>
     <div class="works-grid">
       <div class="work-item">
-        <div class="tag">APP UI · 主作品</div>
-        <div class="name">App 界面设计</div>
+        <div class="name">App 界面设计<span class="cat">主作品</span></div>
         <div class="desc">Figma 高保真项目，完整案例见作品集站点</div>
       </div>
       <div class="work-item">
-        <div class="tag">数据研究 · 交互报告</div>
-        <div class="name">电商竞品研究报告</div>
+        <div class="name">电商竞品研究报告<span class="cat">数据研究</span></div>
         <div class="desc">七大平台，一个存量战场</div>
       </div>
       <div class="work-item">
-        <div class="tag">工具产品 · 交互教学</div>
-        <div class="name">CS2 游戏道具学习站</div>
-        <div class="desc">Utility Lab · 交互地图点位教学</div>
+        <div class="name">CS2 游戏道具学习站<span class="cat">工具产品</span></div>
+        <div class="desc">交互地图点位教学</div>
       </div>
       <div class="work-item">
-        <div class="tag">B端系统 · 全栈演示</div>
-        <div class="name">手作工坊</div>
+        <div class="name">手作工坊<span class="cat">B 端系统</span></div>
         <div class="desc">拼豆体验店经营系统</div>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head">
-      <h2 class="serif"><span class="kicker"><span class="no">04</span></span>获奖与认证</h2>
-      <span class="sec-note">AWARDS</span>
-    </div>
-    <div class="rule" style="margin-bottom:4px"></div>
+    <h2 class="serif">获奖与认证</h2>
+    <div class="rule"></div>
     <div class="award-list">
       <div class="row"><span>绚丽年华第十八届全国高校摄影</span><span class="lv">一等奖</span></div>
       <div class="row"><span>香港青年设计师奖</span><span class="lv">三等奖</span></div>
@@ -245,14 +203,11 @@
   </section>
 
   <section>
-    <div class="sec-head">
-      <h2 class="serif"><span class="kicker"><span class="no">05</span></span>技能与工具</h2>
-      <span class="sec-note">SKILLS</span>
-    </div>
-    <div class="rule" style="margin-bottom:6px"></div>
+    <h2 class="serif">技能与工具</h2>
+    <div class="rule"></div>
     <div class="skill-group">
       <div class="g">设计工具</div>
-      <div class="items"><b>Figma ★ 最擅长</b>　·　即时设计　·　Photoshop　·　Illustrator　·　SAI2　·　Rhino　·　Creo</div>
+      <div class="items"><b>Figma ★</b>　·　即时设计　·　Photoshop　·　Illustrator　·　SAI2　·　Rhino　·　Creo</div>
     </div>
     <div class="skill-group">
       <div class="g">AI 工作流</div>
@@ -264,8 +219,7 @@
     <p class="slogan">期待与你的团队一起，<br>让产品<em>更好看、更好用</em>。</p>
     <div class="meta">
       <b>131 8608 7587　·　s-xxx-rrr@qq.com</b><br>
-      西安 / 北京 / 杭州 · 也可远程协作<br>
-      © 2026 SONG XINRUI
+      西安 / 北京 / 杭州 · 也可远程协作
     </div>
   </footer>
 
