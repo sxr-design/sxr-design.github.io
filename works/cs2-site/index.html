@@ -30,7 +30,7 @@
         var timer=null,IDLE=2000;
         function show(){bp.classList.add('bp-show')}
         function hide(){bp.classList.remove('bp-show')}
-        function poke(e){if(e&&e.type==='mousemove'&&overBp(e)){if(timer){clearTimeout(timer);timer=null}show();return}hide();if(timer)clearTimeout(timer);timer=setTimeout(show,IDLE)}function overBp(e){if(!e||e.clientX==null)return false;var r=bp.getBoundingClientRect();return e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom}
+        function poke(e){if(overBp(e)){if(timer){clearTimeout(timer);timer=null}show();return}hide();if(timer)clearTimeout(timer);timer=setTimeout(show,IDLE)}function overBp(e){if(!e)return false;var c=e.touches&&e.touches[0]?e.touches[0]:e;if(c.clientX==null)return false;var r=bp.getBoundingClientRect();return c.clientX>=r.left&&c.clientX<=r.right&&c.clientY>=r.top&&c.clientY<=r.bottom}
         ['mousemove','mousedown','wheel','scroll','keydown','touchstart','touchmove','pointerdown'].forEach(function(t){window.addEventListener(t,poke,{passive:true})});
         poke();
       })();
