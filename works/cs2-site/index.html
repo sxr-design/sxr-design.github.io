@@ -9,12 +9,32 @@
     <meta name="description" content="Utility Lab：CS2 战术道具交互学习站——内置 Mirage 等六张地图的交互点位标注、投掷物分步教学与难度分级，面向进阶玩家的道具速查工具。">
     <meta property="og:title" content="Utility Lab · CS2 战术道具学习站">
     <meta property="og:description" content="六张地图交互点位标注 · 投掷物分步教学 · 难度分级速查">
-    <script type="module" crossorigin src="./assets/index-DRr_T8gY.js?v=20261018"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BgCmeJIq.css?v=20261018">
+    <script type="module" crossorigin src="./assets/index-DRr_T8gY.js?v=20261021"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BgCmeJIq.css?v=20261021">
+    <style id="back-portfolio-style">
+      #back-portfolio{position:fixed;top:16px;left:16px;z-index:2147483000;display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:13px;font-weight:500;line-height:1;text-decoration:none;color:#1E2430;background:rgba(255,255,255,.92);border:1px solid rgba(30,36,48,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,.28);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .3s ease,visibility .3s;pointer-events:none}
+      #back-portfolio.bp-show{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+      #back-portfolio:hover{opacity:.92}
+      #back-portfolio svg{width:14px;height:14px}
+      @media (prefers-reduced-motion:reduce){#back-portfolio{transition:none}}
+    </style>
   </head>
   <body>
     
     <div id="root"></div>
+    <a id="back-portfolio" href="../../index.html" aria-label="返回作品集"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>返回作品集</a>
+    <script id="back-portfolio-js">
+      /* 左上方悬浮 · 无操作 2s 浮现 · 有操作即隐藏（悬停在按钮上时不隐藏，保证可点击） */
+      (function(){
+        var bp=document.getElementById('back-portfolio');if(!bp)return;
+        var timer=null,IDLE=2000;
+        function show(){bp.classList.add('bp-show')}
+        function hide(){bp.classList.remove('bp-show')}
+        function poke(e){if(e&&e.type==='mousemove'&&overBp(e)){if(timer){clearTimeout(timer);timer=null}show();return}hide();if(timer)clearTimeout(timer);timer=setTimeout(show,IDLE)}function overBp(e){if(!e||e.clientX==null)return false;var r=bp.getBoundingClientRect();return e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom}
+        ['mousemove','mousedown','wheel','scroll','keydown','touchstart','touchmove','pointerdown'].forEach(function(t){window.addEventListener(t,poke,{passive:true})});
+        poke();
+      })();
+    </script>
     
   </body>
 </html>

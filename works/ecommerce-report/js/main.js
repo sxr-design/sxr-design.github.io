@@ -50,8 +50,6 @@
       ticking = false;
       const past = scrollY > cover.offsetHeight * 0.72;
       rail.classList.toggle("on", past);
-      const bh = document.querySelector(".back-home");
-      if (bh) bh.classList.toggle("bh-hide", past);
       // 当前章节
       const y = scrollY + innerHeight * 0.4;
       let cur = segs[0];

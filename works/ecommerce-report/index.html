@@ -267,11 +267,24 @@
 <script src="js/chart-verdict.js"></script>
 <script src="js/main.js"></script>
 <style id="back-home-style">
-.back-home{position:fixed;left:18px;bottom:18px;z-index:2147483000;display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:13px;font-weight:500;line-height:1;text-decoration:none;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .18s ease,opacity .18s ease;box-shadow:0 6px 20px rgba(0,0,0,.18)}
-.back-home:hover{transform:translateY(-2px);opacity:.92}
-.back-home.bh-hide{opacity:0;pointer-events:none;transform:translateY(8px)}
+.back-home{position:fixed;top:18px;left:18px;z-index:2147483000;display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:13px;font-weight:500;line-height:1;text-decoration:none;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:opacity .3s ease,visibility .3s;box-shadow:0 6px 20px rgba(0,0,0,.18);opacity:0;visibility:hidden;transform:translateY(-8px);pointer-events:none}
+.back-home.bh-show{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+.back-home:hover{opacity:.92}
 .back-home svg{width:14px;height:14px}
-@media (max-width:767px){.back-home{display:none}}
+@media (prefers-reduced-motion:reduce){.back-home{transition:none}}
 </style><a class="back-home" href="../../index.html" style="background:rgba(255,255,255,.9);color:#051c2c;border:1px solid #d8d2c4;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>返回作品集</a>
+<script id="back-home-js">
+/* 左上方悬浮 · 无操作 2s 浮现 · 有操作即隐藏（悬停在按钮上时不隐藏，保证可点击） */
+(function(){
+  var bh=document.querySelector('.back-home');if(!bh)return;
+  var rail=document.getElementById('era-rail');
+  var timer=null,IDLE=2000;
+  function show(){if(rail)bh.style.top=rail.classList.contains('on')?'70px':'18px';bh.classList.add('bh-show')}
+  function hide(){bh.classList.remove('bh-show')}
+  function poke(e){if(e&&e.type==='mousemove'&&overBh(e)){if(timer){clearTimeout(timer);timer=null}show();return}hide();if(timer)clearTimeout(timer);timer=setTimeout(show,IDLE)}function overBh(e){if(!e||e.clientX==null)return false;var r=bh.getBoundingClientRect();return e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom}
+  ['mousemove','mousedown','wheel','scroll','keydown','touchstart','touchmove','pointerdown'].forEach(function(t){window.addEventListener(t,poke,{passive:true})});
+  poke();
+})();
+</script>
 </body>
 </html>
