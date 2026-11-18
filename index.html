@@ -142,24 +142,29 @@
   .skill-txt { transition: color .2s ease; cursor: default; }
   .skill-txt:hover { color: #3F5FD6; }
 
-  /* ── 作品集新版 · 卡片 ── */
-  .work-card { display: block; width: 100%; background: #fff; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; cursor: pointer; padding: 0; font: inherit; color: inherit; text-align: left; transition: transform .3s ease, box-shadow .3s ease; }
-  button.work-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(30,36,48,.12); }
-  .work-cover { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #EEF1F8; }
-  .work-cover img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform .5s ease; }
-  button.work-card:hover .work-cover img { transform: scale(1.03); }
+  /* ── 作品集新版 · 横排卡片 ── */
+  .work-row { display: flex; width: 100%; background: #fff; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; cursor: pointer; padding: 0; font: inherit; color: inherit; text-align: left; transition: transform .3s ease, box-shadow .3s ease; }
+  button.work-row:hover { transform: translateY(-3px); box-shadow: 0 20px 44px rgba(30,36,48,.12); }
+  .work-row-cover { position: relative; flex-shrink: 0; width: 38%; max-width: 400px; min-height: 230px; overflow: hidden; background: #EEF1F8; }
+  .work-row-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform .5s ease; }
+  button.work-row:hover .work-row-cover img { transform: scale(1.03); }
   .work-badge { position: absolute; top: 12px; left: 12px; font-size: 10.5px; letter-spacing: .16em; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.88); border: 1px solid rgba(20,24,31,.08); color: var(--accent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-  .work-ph-inner { position: absolute; inset: 12px; border: 1.5px dashed #D5DAE8; border-radius: 14px; background: #F7F8FC; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #9AA1B5; }
-  .work-ph-inner b { font-size: 13px; color: #7A8199; font-weight: 600; }
-  .work-ph-inner span { font-size: 11px; letter-spacing: .12em; }
-  .work-info { padding: 16px 18px 18px; }
+  .work-row-info { flex: 1; min-width: 0; padding: 30px 34px; display: flex; flex-direction: column; justify-content: center; gap: 7px; }
   .work-cat { font-size: 10.5px; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
-  .work-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; }
-  .work-title { font-family: "Noto Serif SC", serif; font-size: 18px; font-weight: 900; }
-  .work-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.6; }
-  .work-go { flex-shrink: 0; height: 32px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); font-size: 11.5px; color: var(--accent); display: flex; align-items: center; gap: 6px; transition: background .25s ease, border-color .25s ease, color .25s ease; }
+  .work-title { font-family: "Noto Serif SC", serif; font-size: 22px; font-weight: 900; margin-top: 2px; }
+  .work-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .work-actions { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+  .work-go { height: 34px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 12px; color: var(--accent); display: flex; align-items: center; gap: 7px; transition: background .25s ease, border-color .25s ease, color .25s ease; }
   .work-go i { font-size: 10px; }
-  button.work-card:hover .work-go { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button.work-row:hover .work-go { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .work-site { height: 34px; padding: 0 16px; border-radius: 999px; background: var(--inkdeep); color: #F5F6FA; font-size: 12px; text-decoration: none; display: flex; align-items: center; gap: 7px; transition: background .2s ease; }
+  .work-site i { font-size: 10px; }
+  .work-site:hover { background: var(--accent); }
+  @media (max-width: 640px) {
+    .work-row { flex-direction: column; }
+    .work-row-cover { width: 100%; max-width: none; min-height: 0; aspect-ratio: 16/10; }
+    .work-row-info { padding: 20px 22px 24px; }
+  }
 
   /* ── 作品弹窗（点击卡片） ── */
   #work-modal { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; background: rgba(20,24,31,.5); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity .3s ease; }
@@ -361,95 +366,72 @@
     </div>
 
     <!-- C 端产品设计 -->
-    <div class="grid grid-cols-1 lg:grid-cols-[210px_minmax(0,1fr)] gap-8 mb-16">
-      <div>
+    <div class="mb-12">
+      <div class="mb-5">
         <p class="kicker" style="font-style:italic;text-transform:none">toC Works</p>
-        <h3 class="font-serif text-xl font-black mt-3">C 端产品设计</h3>
-        <p class="text-muted text-sm mt-2 leading-relaxed">完整的 C 端项目设计 / 改版说明与展示</p>
+        <h3 class="font-serif text-[22px] font-black mt-2">C 端产品设计</h3>
+        <p class="text-muted text-sm mt-1.5">完整的 C 端项目设计 / 改版说明与展示</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <button type="button" class="work-card" data-work="yijia">
-          <div class="work-cover">
-            <img src="works/yijia/p01.jpg" alt="衣佳移动端应用封面" loading="lazy" decoding="async">
-            <span class="work-badge">主作品</span>
-          </div>
-          <div class="work-info">
-            <div class="work-cat">APP UI · 主作品 · 2026</div>
-            <div class="work-row">
-              <div>
-                <div class="work-title">衣佳移动端应用</div>
-                <div class="work-desc">电子衣橱中枢的服饰社区 · 购衣卖衣租衣一站式</div>
-              </div>
-              <span class="work-go">查看<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
-            </div>
-          </div>
-        </button>
-        <div class="work-card is-placeholder" aria-hidden="true">
-          <div class="work-cover"><div class="work-ph-inner"><b>第二件 C 端作品</b><span>设计中 · 敬请期待</span></div></div>
-          <div class="work-info">
-            <div class="work-cat">APP UI · 2026</div>
-            <div class="work-row">
-              <div>
-                <div class="work-title" style="color:#9AA1B5">设计中</div>
-                <div class="work-desc">完成后将同步展示</div>
-              </div>
-            </div>
+      <button type="button" class="work-row" data-work="yijia">
+        <div class="work-row-cover">
+          <img src="works/yijia/p01.jpg" alt="衣佳移动端应用封面" loading="lazy" decoding="async">
+          <span class="work-badge">主作品</span>
+        </div>
+        <div class="work-row-info">
+          <div class="work-cat">APP UI · 主作品 · 2026</div>
+          <div class="work-title">衣佳移动端应用</div>
+          <div class="work-desc">电子衣橱中枢的服饰社区 · 购衣卖衣租衣一站式</div>
+          <div class="work-actions">
+            <span class="work-go">查看完整案例<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
           </div>
         </div>
-      </div>
+      </button>
     </div>
 
     <!-- 体验分析 -->
-    <div class="grid grid-cols-1 lg:grid-cols-[210px_minmax(0,1fr)] gap-8">
-      <div>
+    <div class="mb-12">
+      <div class="mb-5">
         <p class="kicker" style="font-style:italic;text-transform:none">Review</p>
-        <h3 class="font-serif text-xl font-black mt-3">体验分析</h3>
-        <p class="text-muted text-sm mt-2 leading-relaxed">独立页面体验交互优化改版方案</p>
+        <h3 class="font-serif text-[22px] font-black mt-2">体验分析</h3>
+        <p class="text-muted text-sm mt-1.5">独立页面体验交互优化改版方案</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <button type="button" class="work-card" data-work="steam">
-          <div class="work-cover">
-            <img src="works/steam/s01.jpg" alt="Steam 首页体验改版封面" loading="lazy" decoding="async">
+      <button type="button" class="work-row" data-work="steam">
+        <div class="work-row-cover">
+          <img src="works/steam/s01.jpg" alt="Steam 首页体验改版封面" loading="lazy" decoding="async">
+        </div>
+        <div class="work-row-info">
+          <div class="work-cat">体验分析改版 · 2026</div>
+          <div class="work-title">Steam 首页体验改版</div>
+          <div class="work-desc">首页浏览体验的交互优化改版方案</div>
+          <div class="work-actions">
+            <span class="work-go">查看完整案例<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
           </div>
-          <div class="work-info">
-            <div class="work-cat">体验分析改版 · 2026</div>
-            <div class="work-row">
-              <div>
-                <div class="work-title">Steam 首页体验改版</div>
-                <div class="work-desc">首页浏览体验的交互优化改版方案</div>
-              </div>
-              <span class="work-go">查看<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
-            </div>
-          </div>
-        </button>
-      </div>
+        </div>
+      </button>
     </div>
 
     <!-- 工具产品 -->
-    <div class="grid grid-cols-1 lg:grid-cols-[210px_minmax(0,1fr)] gap-8 mt-16">
-      <div>
+    <div>
+      <div class="mb-5">
         <p class="kicker" style="font-style:italic;text-transform:none">Tools</p>
-        <h3 class="font-serif text-xl font-black mt-3">工具产品</h3>
-        <p class="text-muted text-sm mt-2 leading-relaxed">游戏工具与教学产品 · 附在线站点</p>
+        <h3 class="font-serif text-[22px] font-black mt-2">工具产品</h3>
+        <p class="text-muted text-sm mt-1.5">游戏工具与教学产品 · 附在线站点</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <button type="button" class="work-card" data-work="cs2">
-          <div class="work-cover">
-            <img src="works/cs2/c01.jpg" alt="PropExplore CS2 道具图鉴封面" loading="lazy" decoding="async">
-            <span class="work-badge">可交互站点</span>
+      <button type="button" class="work-row" data-work="cs2">
+        <div class="work-row-cover">
+          <img src="works/cs2/cover.jpg" alt="PropExplore CS2 道具图鉴站点登录页" loading="lazy" decoding="async">
+          <span class="work-badge">可交互站点</span>
+        </div>
+        <div class="work-row-info">
+          <div class="work-cat">工具产品 · 交互教学 · 2026</div>
+          <div class="work-title">PropExplore · CS2 道具图鉴</div>
+          <div class="work-desc">CS2 战术道具交互图鉴 · 双主题数据查询</div>
+          <div class="work-actions">
+            <span class="work-go">查看完整案例<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+            <a class="work-site" href="works/prop-explore/" target="_blank" rel="noopener" onclick="event.stopPropagation()">访问在线站点<i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
           </div>
-          <div class="work-info">
-            <div class="work-cat">工具产品 · 交互教学 · 2026</div>
-            <div class="work-row">
-              <div>
-                <div class="work-title">PropExplore · CS2 道具图鉴</div>
-                <div class="work-desc">CS2 战术道具交互图鉴 · 双主题数据查询</div>
-              </div>
-              <span class="work-go">查看<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
-            </div>
-          </div>
-        </button>
-      </div>
+        </div>
+      </button>
     </div>
   </section>
 
