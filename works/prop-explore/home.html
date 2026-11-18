@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prop Explore · 道具学习图鉴</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-home">
+<div class="stage home-stage" id="stage">
+
+  <!-- 顶部导航 -->
+  <header class="topbar">
+    <div class="logo">Prop <span class="accent">Explore</span></div>
+    <div class="brand-divider"></div>
+    <div class="brand-en">COUNTER-STRIKE 2</div>
+    <div class="brand-cn">道具学习图鉴</div>
+
+    <button class="nav-btn filter-btn" id="filterBtn" aria-label="展开筛选面板">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.5 5h15M2.5 10h15M2.5 15h15"/>
+        <circle cx="13" cy="5" r="2" fill="var(--card)" stroke="currentColor"/>
+        <circle cx="6" cy="10" r="2" fill="var(--card)" stroke="currentColor"/>
+        <circle cx="14" cy="15" r="2" fill="var(--card)" stroke="currentColor"/>
+      </svg>
+    </button>
+
+    <button class="nav-btn theme-btn" id="themeBtn" aria-label="切换至浅色主题">
+      <!-- 太阳图标（暗色态显示，点击切换浅色） -->
+      <svg id="iconSun" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+        <circle cx="11" cy="11" r="3.67"/>
+        <path d="M16.6 11H20.2M11 16.6V20.2M5.4 11H1.8M11 5.4V1.8M14.96 14.96 17.51 17.51M14.96 7.04 17.51 4.49M7.04 14.96 4.49 17.51M7.04 7.04 4.49 4.49"/>
+      </svg>
+      <!-- 月亮图标（亮色态显示，点击切换暗色） -->
+      <svg id="iconMoon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <path d="M18.3 13.5A7.3 7.3 0 0 1 8.5 3.7 7.3 7.3 0 1 0 18.3 13.5Z"/>
+      </svg>
+    </button>
+
+    <button class="nav-btn logout-btn" id="logoutBtn" aria-label="退出登录">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3H5.5A1.5 1.5 0 0 0 4 4.5v13A1.5 1.5 0 0 0 5.5 19H12"/>
+        <path d="M14.5 7.5 18 11l-3.5 3.5"/>
+        <path d="M9 11h9"/>
+      </svg>
+    </button>
+
+    <div class="nav-line"></div>
+  </header>
+
+  <!-- 选择地图 -->
+  <div class="section-head">
+    <span class="accent-bar"></span>
+    <span class="section-title">选择地图</span>
+  </div>
+
+  <div class="map-strip">
+    <div class="map-track" id="mapTrack"></div>
+    <div class="strip-fade left"></div>
+    <div class="strip-fade right"></div>
+    <button class="slide-hint" id="slideHint" aria-label="滑动查看更多">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6.5 4.5 11 9l-4.5 4.5"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- 内容区 -->
+  <main class="content">
+
+    <!-- 左：雷达图 + 道具效果图 -->
+    <div class="radar-col">
+      <button class="radar-toggle" id="radarToggle" type="button" aria-expanded="true">
+        <span class="radar-toggle-text">地图点位图</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3.5 10 8 5.5l4.5 4.5"/>
+        </svg>
+      </button>
+      <div class="radar-box">
+        <img src="assets/radar.png" alt="荒漠迷城 俯视雷达图">
+      </div>
+      <div class="effect-box">
+        <img class="effect-img" id="effectImg" alt="道具效果图">
+        <span class="ph1">道具效果图</span>
+        <span class="ph2">图片占位</span>
+      </div>
+    </div>
+
+    <!-- 中：双图预览 -->
+    <div class="preview-col">
+      <div class="spot-card card-a">
+        <div class="thumb" role="img" aria-label="点位场景图 1"></div>
+        <div class="caption"><span>W+跳跃投掷</span></div>
+      </div>
+      <div class="spot-card card-b">
+        <div class="thumb" role="img" aria-label="点位场景图 2"></div>
+        <div class="caption"><span>W+跳跃投掷</span></div>
+      </div>
+
+      <button class="page-btn prev" disabled aria-label="上一张">
+        <svg width="8" height="16" viewBox="0 0 8 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 1 1 8l6 7"/>
+        </svg>
+      </button>
+      <button class="page-btn next" disabled aria-label="下一张">
+        <svg width="8" height="16" viewBox="0 0 8 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 1l6 7-6 7"/>
+        </svg>
+      </button>
+      <div class="page-counter">
+        <span class="cur">1</span><span class="total">/ 1</span>
+      </div>
+    </div>
+
+    <!-- 右：筛选面板 -->
+    <aside class="filter-panel">
+      <span class="filter-head-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2.5 5h15M2.5 10h15M2.5 15h15"/>
+          <circle cx="13" cy="5" r="2" fill="var(--card)" stroke="currentColor"/>
+          <circle cx="6" cy="10" r="2" fill="var(--card)" stroke="currentColor"/>
+          <circle cx="14" cy="15" r="2" fill="var(--card)" stroke="currentColor"/>
+        </svg>
+      </span>
+
+      <span class="filter-label faction">阵营</span>
+      <div class="faction-seg" id="factionSeg" data-active="t">
+        <span class="seg-thumb"></span>
+        <button class="seg-item" data-side="ct" type="button">CT</button>
+        <button class="seg-item" data-side="t" type="button">T</button>
+      </div>
+
+      <div class="filter-divider d1"></div>
+
+      <div class="search-box">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <circle cx="9" cy="9" r="5.4"/>
+          <path d="M13.2 13.2 17 17"/>
+        </svg>
+        <input type="text" placeholder="搜索点位…">
+      </div>
+
+      <span class="filter-label prop">道具</span>
+      <div class="prop-chips" id="propChips">
+        <button class="chip active" type="button" data-prop="smoke">烟雾弹</button>
+        <button class="chip" type="button" data-prop="flash">闪光弹</button>
+        <button class="chip" type="button" data-prop="molotov">燃烧瓶</button>
+        <button class="chip" type="button" data-prop="he">高爆手雷</button>
+      </div>
+
+      <div class="filter-divider d2"></div>
+
+      <span class="filter-label region">区域</span>
+      <div class="region-grid" id="regionGrid"></div>
+    </aside>
+  </main>
+
+  <!-- 轻提示（道具未上新等） -->
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- 地图未上线 · 提示弹窗 -->
+  <div class="modal-mask" id="modalMask">
+    <div class="modal" role="dialog" aria-modal="true">
+      <span class="modal-msg">暂未上线，敬请期待。</span>
+      <button class="modal-btn" id="modalOk" type="button">知道了</button>
+    </div>
+  </div>
+
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>
