@@ -229,6 +229,12 @@
     .dc__arrow, .dc__dot { transition: none; }
   }
 
+  /* ── 微信二维码放大 ── */
+  #qr-zoom { position: fixed; inset: 0; z-index: 96; display: flex; align-items: center; justify-content: center; background: rgba(20,24,31,.62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity .3s ease; cursor: zoom-out; }
+  #qr-zoom.open { opacity: 1; pointer-events: auto; }
+  #qr-zoom img { width: min(400px, 80vw); border-radius: 18px; background: #fff; padding: 16px; box-shadow: 0 40px 100px rgba(0,0,0,.45); transform: scale(.9); transition: transform .35s cubic-bezier(.22,1,.36,1); }
+  #qr-zoom.open img { transform: none; }
+
   /* ── 音乐：入口弹窗 ── */
   #music-modal { position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center; background: rgba(20,24,31,.45); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity .35s ease; }
   #music-modal.show { opacity: 1; pointer-events: auto; }
@@ -373,7 +379,6 @@
       <button type="button" class="w3-card" data-work="yijia" style="--wa:#2E7D4F">
         <div class="w3-cover">
           <img src="works/yijia/p01.jpg" alt="衣佳移动端应用封面" loading="lazy" decoding="async">
-          <span class="w3-badge">主作品</span>
         </div>
         <div class="w3-info">
           <div class="w3-cat">C 端产品设计 · APP UI · 2026</div>
@@ -502,26 +507,24 @@
       </h2>
       <p class="text-white/55 text-sm mt-6">产品交互设计方向 · 西安 / 北京 / 杭州 · 也可远程协作</p>
 
-      <div class="flex flex-wrap justify-center gap-3.5 mt-10">
-        <button type="button" data-copy="131 8608 7587" class="copy-btn btn-solid h-12 px-7 rounded-full bg-accent text-white flex items-center gap-2.5 text-sm font-medium shadow-[0_10px_28px_rgba(63,95,214,.4)] hover:-translate-y-0.5 transition-all">
-          <i class="fas fa-phone text-xs"></i><span>131 8608 7587</span>
-        </button>
-        <button type="button" data-copy="s-xxx-rrr@qq.com" class="copy-btn dark-copy h-12 px-7 rounded-full flex items-center gap-2.5 text-sm">
-          <i class="fas fa-envelope text-xs"></i><span>s-xxx-rrr@qq.com</span>
-        </button>
-        <a href="https://github.com/sxr-design" target="_blank" rel="noopener" class="dark-copy h-12 px-7 rounded-full flex items-center gap-2.5 text-sm">
-          <i class="fab fa-github"></i><span>GitHub</span>
-        </a>
-      </div>
-
-      <div class="mt-9 inline-flex items-center gap-4 bg-white rounded-2xl p-4 pr-7 text-left" style="box-shadow:0 16px 40px rgba(0,0,0,.25)">
-        <img src="qr-wechat.jpg" alt="微信二维码" class="w-[88px] h-[88px] rounded-xl object-cover" style="object-position:center 62%">
-        <div>
-          <div class="text-[14px] font-bold" style="color:#14181F">微信联系我</div>
-          <div class="text-xs mt-1.5" style="color:#646C85">微信号 Sxxxrrr111 · 扫码添加</div>
+      <div class="mt-10 flex flex-col items-center gap-6">
+        <div class="flex flex-wrap justify-center gap-3.5">
+          <button type="button" data-copy="131 8608 7587" class="copy-btn btn-solid h-12 px-7 rounded-full bg-accent text-white flex items-center gap-2.5 text-sm font-medium shadow-[0_10px_28px_rgba(63,95,214,.4)] hover:-translate-y-0.5 transition-all">
+            <i class="fas fa-phone text-xs"></i><span>131 8608 7587</span>
+          </button>
+          <button type="button" data-copy="s-xxx-rrr@qq.com" class="copy-btn dark-copy h-12 px-7 rounded-full flex items-center gap-2.5 text-sm">
+            <i class="fas fa-envelope text-xs"></i><span>s-xxx-rrr@qq.com</span>
+          </button>
+          <a href="https://github.com/sxr-design" target="_blank" rel="noopener" class="dark-copy h-12 px-7 rounded-full flex items-center gap-2.5 text-sm">
+            <i class="fab fa-github"></i><span>GitHub</span>
+          </a>
         </div>
+
+        <button id="wechat-qr" type="button" class="flex flex-col items-center gap-3 bg-white rounded-2xl p-5 cursor-pointer transition-transform hover:-translate-y-0.5" style="box-shadow:0 16px 40px rgba(0,0,0,.25)" aria-label="放大微信二维码">
+          <img src="qr-wechat.jpg" alt="微信二维码" class="w-[110px] h-[110px] rounded-xl object-cover" style="object-position:center 62%">
+          <span class="text-xs" style="color:#646C85">微信 Sxxxrrr111 · 点击放大扫码</span>
+        </button>
       </div>
-    </div>
   </div>
 </section>
 
@@ -555,6 +558,10 @@
 </div>
 
 <button id="music-reopen" type="button" aria-label="打开音乐"><i class="fas fa-compact-disc"></i></button>
+
+<div id="qr-zoom" role="dialog" aria-modal="true" aria-label="微信二维码放大">
+  <img src="qr-wechat.jpg" alt="微信二维码（点击关闭）">
+</div>
 
 <!-- 作品弹窗 + 整页视图 -->
 <div id="work-modal" role="dialog" aria-modal="true" aria-label="作品详情">
@@ -590,6 +597,29 @@
     </div>
   </div>
 </div>
+
+<script>
+// ── 微信二维码点击放大 ──
+(function () {
+  var zoom = document.getElementById('qr-zoom');
+  var qrBtn = document.getElementById('wechat-qr');
+  if (!zoom || !qrBtn) return;
+  qrBtn.addEventListener('click', function () {
+    zoom.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+  zoom.addEventListener('click', function () {
+    zoom.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && zoom.classList.contains('open')) {
+      zoom.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+})();
+</script>
 
 <script>
 // ── 作品详情：弹窗 + 整页视图 ──
