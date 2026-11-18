@@ -142,28 +142,31 @@
   .skill-txt { transition: color .2s ease; cursor: default; }
   .skill-txt:hover { color: #3F5FD6; }
 
-  /* ── 作品集新版 · 横排卡片 ── */
-  .work-row { display: flex; width: 100%; background: #fff; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; cursor: pointer; padding: 0; font: inherit; color: inherit; text-align: left; transition: transform .3s ease, box-shadow .3s ease; }
-  button.work-row:hover { transform: translateY(-3px); box-shadow: 0 20px 44px rgba(30,36,48,.12); }
-  .work-row-cover { position: relative; flex-shrink: 0; width: 38%; max-width: 400px; min-height: 230px; overflow: hidden; background: #EEF1F8; }
-  .work-row-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform .5s ease; }
-  button.work-row:hover .work-row-cover img { transform: scale(1.03); }
-  .work-badge { position: absolute; top: 12px; left: 12px; font-size: 10.5px; letter-spacing: .16em; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.88); border: 1px solid rgba(20,24,31,.08); color: var(--accent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-  .work-row-info { flex: 1; min-width: 0; padding: 30px 34px; display: flex; flex-direction: column; justify-content: center; gap: 7px; }
-  .work-cat { font-size: 10.5px; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
-  .work-title { font-family: "Noto Serif SC", serif; font-size: 22px; font-weight: 900; margin-top: 2px; }
-  .work-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
-  .work-actions { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
-  .work-go { height: 34px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 12px; color: var(--accent); display: flex; align-items: center; gap: 7px; transition: background .25s ease, border-color .25s ease, color .25s ease; }
-  .work-go i { font-size: 10px; }
-  button.work-row:hover .work-go { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .work-site { height: 34px; padding: 0 16px; border-radius: 999px; background: var(--inkdeep); color: #F5F6FA; font-size: 12px; text-decoration: none; display: flex; align-items: center; gap: 7px; transition: background .2s ease; }
-  .work-site i { font-size: 10px; }
-  .work-site:hover { background: var(--accent); }
-  @media (max-width: 640px) {
-    .work-row { flex-direction: column; }
-    .work-row-cover { width: 100%; max-width: none; min-height: 0; aspect-ratio: 16/10; }
-    .work-row-info { padding: 20px 22px 24px; }
+  /* ── 作品集 · 三卡片悬停浮起 ── */
+  .works-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .w3-card { --wa: var(--accent); position: relative; display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; cursor: pointer; padding: 0; font: inherit; color: inherit; text-align: left; transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s ease, opacity .35s ease, filter .35s ease; }
+  .w3-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--wa); z-index: 3; }
+  .w3-card:hover { transform: translateY(-10px) scale(1.025); box-shadow: 0 30px 60px -18px rgba(30,36,48,.22); z-index: 5; }
+  @media (hover: hover) {
+    .works-3:has(.w3-card:hover) .w3-card:not(:hover) { opacity: .38; filter: saturate(.45); transform: scale(.96); }
+  }
+  .w3-cover { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #EEF1F8; }
+  .w3-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform .5s ease; }
+  .w3-card:hover .w3-cover img { transform: scale(1.04); }
+  .w3-badge { position: absolute; top: 12px; left: 12px; font-size: 10.5px; letter-spacing: .16em; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.9); border: 1px solid rgba(20,24,31,.08); color: var(--wa); font-weight: 700; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  .w3-info { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .w3-cat { font-size: 10.5px; letter-spacing: .12em; color: var(--wa); font-weight: 700; }
+  .w3-title { font-family: "Noto Serif SC", serif; font-size: 20px; font-weight: 900; margin-top: 2px; }
+  .w3-desc { font-size: 12.5px; color: var(--muted); line-height: 1.7; flex: 1; }
+  .w3-actions { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .w3-go { height: 32px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); font-size: 11.5px; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; transition: background .25s ease, border-color .25s ease, color .25s ease; }
+  .w3-go i { font-size: 10px; }
+  .w3-card:hover .w3-go { background: var(--wa); border-color: var(--wa); color: #fff; }
+  .w3-site { height: 32px; padding: 0 14px; border-radius: 999px; background: var(--inkdeep); color: #F5F6FA; font-size: 11.5px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background .2s ease; }
+  .w3-site i { font-size: 10px; }
+  .w3-site:hover { background: var(--wa); }
+  @media (max-width: 900px) {
+    .works-3 { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
   }
 
   /* ── 作品弹窗（点击卡片） ── */
@@ -365,70 +368,49 @@
       <span class="text-muted text-xs pb-1">点击卡片查看完整案例</span>
     </div>
 
-    <!-- C 端产品设计 -->
-    <div class="mb-12">
-      <div class="mb-5">
-        <p class="kicker" style="font-style:italic;text-transform:none">toC Works</p>
-        <h3 class="font-serif text-[22px] font-black mt-2">C 端产品设计</h3>
-        <p class="text-muted text-sm mt-1.5">完整的 C 端项目设计 / 改版说明与展示</p>
-      </div>
-      <button type="button" class="work-row" data-work="yijia">
-        <div class="work-row-cover">
+    <!-- 三个作品 · 悬停浮起卡片 -->
+    <div class="works-3 stagger">
+      <button type="button" class="w3-card" data-work="yijia" style="--wa:#2E7D4F">
+        <div class="w3-cover">
           <img src="works/yijia/p01.jpg" alt="衣佳移动端应用封面" loading="lazy" decoding="async">
-          <span class="work-badge">主作品</span>
+          <span class="w3-badge">主作品</span>
         </div>
-        <div class="work-row-info">
-          <div class="work-cat">APP UI · 主作品 · 2026</div>
-          <div class="work-title">衣佳移动端应用</div>
-          <div class="work-desc">电子衣橱中枢的服饰社区 · 购衣卖衣租衣一站式</div>
-          <div class="work-actions">
-            <span class="work-go">查看完整案例<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+        <div class="w3-info">
+          <div class="w3-cat">C 端产品设计 · APP UI · 2026</div>
+          <div class="w3-title">衣佳移动端应用</div>
+          <div class="w3-desc">电子衣橱中枢的服饰社区 · 购衣卖衣租衣一站式</div>
+          <div class="w3-actions">
+            <span class="w3-go">查看完整案例<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
           </div>
         </div>
       </button>
-    </div>
 
-    <!-- 体验分析 -->
-    <div class="mb-12">
-      <div class="mb-5">
-        <p class="kicker" style="font-style:italic;text-transform:none">Review</p>
-        <h3 class="font-serif text-[22px] font-black mt-2">体验分析</h3>
-        <p class="text-muted text-sm mt-1.5">独立页面体验交互优化改版方案</p>
-      </div>
-      <button type="button" class="work-row" data-work="steam">
-        <div class="work-row-cover">
+      <button type="button" class="w3-card" data-work="steam" style="--wa:#3D6E9E">
+        <div class="w3-cover">
           <img src="works/steam/s01.jpg" alt="Steam 首页体验改版封面" loading="lazy" decoding="async">
         </div>
-        <div class="work-row-info">
-          <div class="work-cat">体验分析改版 · 2026</div>
-          <div class="work-title">Steam 首页体验改版</div>
-          <div class="work-desc">首页浏览体验的交互优化改版方案</div>
-          <div class="work-actions">
-            <span class="work-go">查看完整案例<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+        <div class="w3-info">
+          <div class="w3-cat">体验分析改版 · 2026</div>
+          <div class="w3-title">Steam 首页体验改版</div>
+          <div class="w3-desc">首页浏览体验的交互优化改版方案</div>
+          <div class="w3-actions">
+            <span class="w3-go">查看完整案例<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
           </div>
         </div>
       </button>
-    </div>
 
-    <!-- 工具产品 -->
-    <div>
-      <div class="mb-5">
-        <p class="kicker" style="font-style:italic;text-transform:none">Tools</p>
-        <h3 class="font-serif text-[22px] font-black mt-2">工具产品</h3>
-        <p class="text-muted text-sm mt-1.5">游戏工具与教学产品 · 附在线站点</p>
-      </div>
-      <button type="button" class="work-row" data-work="cs2">
-        <div class="work-row-cover">
+      <button type="button" class="w3-card" data-work="cs2" style="--wa:#C68A21">
+        <div class="w3-cover">
           <img src="works/cs2/cover.jpg" alt="PropExplore CS2 道具图鉴站点登录页" loading="lazy" decoding="async">
-          <span class="work-badge">可交互站点</span>
+          <span class="w3-badge">可交互站点</span>
         </div>
-        <div class="work-row-info">
-          <div class="work-cat">工具产品 · 交互教学 · 2026</div>
-          <div class="work-title">PropExplore · CS2 道具图鉴</div>
-          <div class="work-desc">CS2 战术道具交互图鉴 · 双主题数据查询</div>
-          <div class="work-actions">
-            <span class="work-go">查看完整案例<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
-            <a class="work-site" href="works/prop-explore/" target="_blank" rel="noopener" onclick="event.stopPropagation()">访问在线站点<i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        <div class="w3-info">
+          <div class="w3-cat">工具产品 · 交互教学 · 2026</div>
+          <div class="w3-title">PropExplore · CS2 道具图鉴</div>
+          <div class="w3-desc">CS2 战术道具交互图鉴 · 双主题数据查询</div>
+          <div class="w3-actions">
+            <span class="w3-go">查看完整案例<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+            <a class="w3-site" href="works/prop-explore/" target="_blank" rel="noopener" onclick="event.stopPropagation()">访问在线站点<i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
           </div>
         </div>
       </button>
