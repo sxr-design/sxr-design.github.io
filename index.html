@@ -184,14 +184,15 @@
   .wm-pill { font-size: 11px; color: var(--accent); background: #E8EEFC; border-radius: 8px; padding: 3px 10px; }
   .wm-pill.wm-site, .wf-pill.wf-site { background: var(--inkdeep); color: #F5F6FA; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background .2s ease; }
   .wm-pill.wm-site:hover, .wf-pill.wf-site:hover { background: var(--accent); }
+  .wm-start { margin-top: 18px; }
   .wm-rule { height: 1px; background: var(--line); margin-top: 22px; }
   .wm-imgs { max-width: 880px; margin: 0 auto; padding: 24px 40px 0; }
   .wm-imgs img { width: 100%; display: block; }
   .wm-end { max-width: 880px; margin: 0 auto; padding: 30px 40px 6px; }
   .wf-end { margin-top: 42px; text-align: center; }
-  .case-site-btn { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 26px; border-radius: 999px; background: var(--inkdeep); color: #F5F6FA; font-size: 13.5px; font-weight: 600; text-decoration: none; transition: background .2s ease; }
+  .case-site-btn { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 26px; border-radius: 999px; background: #14181F; color: #F5F6FA; font-size: 13.5px; font-weight: 600; text-decoration: none; transition: background .2s ease; }
   .case-site-btn i { font-size: 11px; }
-  .case-site-btn:hover { background: var(--accent); }
+  .case-site-btn:hover { background: #3F5FD6; }
 
   /* ── 作品整页视图（弹窗左上角放大） ── */
   #work-full { position: fixed; inset: 0; z-index: 95; background: #fff; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
@@ -578,7 +579,10 @@
     <div class="wm-body">
       <div class="wm-head">
         <h2 id="wm-title"></h2>
-        <div class="wm-meta">标签 <span class="wm-pill" id="wm-tag"></span><a class="wm-pill wm-site" id="wm-site" href="#" target="_blank" rel="noopener" style="display:none">访问在线站点 <i class="fas fa-arrow-up-right-from-square" style="font-size:9px"></i></a></div>
+        <div class="wm-meta">标签 <span class="wm-pill" id="wm-tag"></span></div>
+        <div class="wm-start" id="wm-start" style="display:none">
+          <a class="case-site-btn" id="wm-site" href="#" target="_blank" rel="noopener">访问在线站点<i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        </div>
         <div class="wm-rule"></div>
       </div>
       <div class="wm-imgs" id="wm-imgs"></div>
@@ -665,6 +669,7 @@
   var current = null;
   var locked = false;
   var wmSite = document.getElementById('wm-site');
+  var wmStart = document.getElementById('wm-start');
   var wfSite = document.getElementById('wf-site');
   var wmEnd = document.getElementById('wm-end-link');
   var wfEnd = document.getElementById('wf-end-link');
@@ -690,7 +695,7 @@
     current = key;
     wmTitle.textContent = w.title;
     wmTag.textContent = w.tag;
-    if (w.site) { wmSite.href = w.site; wmSite.style.display = ''; } else { wmSite.style.display = 'none'; }
+    if (w.site) { wmStart.style.display = ''; wmSite.href = w.site; } else { wmStart.style.display = 'none'; }
     if (w.site) { wmEnd.href = w.site; wmEnd.style.display = ''; } else { wmEnd.style.display = 'none'; }
     buildImgs(wmImgs, w.images, w.title);
     modal.classList.add('open');
