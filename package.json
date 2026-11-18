@@ -1,9 +1,0 @@
-{
-  "name": "songxinrui-resume",
-  "version": "1.0.0",
-  "private": true,
-  "description": "宋鑫蕊 · UI设计师个人简历网站",
-  "scripts": {
-    "dev": "node server.js"
-  }
-}

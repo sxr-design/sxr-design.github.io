@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>宋鑫蕊 · UI设计师 | 个人作品集</title>
+<title>宋鑫蕊 · UI/UX 设计师 | 个人作品集</title>
 <meta name="description" content="宋鑫蕊 - 产品设计专业 产品交互设计方向，2027 届毕业生，AIGC 辅助设计实践者。">
-<meta property="og:title" content="宋鑫蕊 · UI设计师 | 个人作品集">
+<meta property="og:title" content="宋鑫蕊 · UI/UX 设计师 | 个人作品集">
 <meta property="og:description" content="产品设计 2027 届 · 产品交互设计方向 · AI × 设计复合实践者 · 点击查看看板级作品集">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://sxr-design.github.io/photo.jpg">
@@ -142,6 +142,123 @@
   .skill-txt { transition: color .2s ease; cursor: default; }
   .skill-txt:hover { color: #3F5FD6; }
 
+  /* ── 作品集新版 · 卡片 ── */
+  .work-card { display: block; width: 100%; background: #fff; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; cursor: pointer; padding: 0; font: inherit; color: inherit; text-align: left; transition: transform .3s ease, box-shadow .3s ease; }
+  button.work-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(30,36,48,.12); }
+  .work-cover { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #EEF1F8; }
+  .work-cover img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform .5s ease; }
+  button.work-card:hover .work-cover img { transform: scale(1.03); }
+  .work-badge { position: absolute; top: 12px; left: 12px; font-size: 10.5px; letter-spacing: .16em; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.88); border: 1px solid rgba(20,24,31,.08); color: var(--accent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  .work-ph-inner { position: absolute; inset: 12px; border: 1.5px dashed #D5DAE8; border-radius: 14px; background: #F7F8FC; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #9AA1B5; }
+  .work-ph-inner b { font-size: 13px; color: #7A8199; font-weight: 600; }
+  .work-ph-inner span { font-size: 11px; letter-spacing: .12em; }
+  .work-info { padding: 16px 18px 18px; }
+  .work-cat { font-size: 10.5px; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+  .work-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; }
+  .work-title { font-family: "Noto Serif SC", serif; font-size: 18px; font-weight: 900; }
+  .work-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.6; }
+  .work-go { flex-shrink: 0; height: 32px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); font-size: 11.5px; color: var(--accent); display: flex; align-items: center; gap: 6px; transition: background .25s ease, border-color .25s ease, color .25s ease; }
+  .work-go i { font-size: 10px; }
+  button.work-card:hover .work-go { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* ── 作品弹窗（点击卡片） ── */
+  #work-modal { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; background: rgba(20,24,31,.5); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+  #work-modal.open { opacity: 1; pointer-events: auto; }
+  .wm-card { position: relative; width: min(1080px, 94vw); height: min(88vh, 920px); background: #fff; border-radius: 18px; box-shadow: 0 40px 100px rgba(10,14,22,.4); overflow: hidden; display: flex; flex-direction: column; transform: translateY(16px) scale(.985); transition: transform .35s cubic-bezier(.22,1,.36,1); }
+  #work-modal.open .wm-card { transform: none; }
+  .wm-iconbar { position: absolute; top: 0; left: 0; right: 0; z-index: 6; display: flex; justify-content: space-between; padding: 12px 14px; background: linear-gradient(to bottom, rgba(255,255,255,.94), rgba(255,255,255,0)); pointer-events: none; }
+  .wm-iconbar button { pointer-events: auto; width: 34px; height: 34px; border-radius: 10px; border: 1px solid rgba(228,232,242,.95); background: rgba(255,255,255,.92); color: var(--ink); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s ease, color .2s ease, border-color .2s ease; box-shadow: 0 4px 12px rgba(30,36,48,.08); }
+  .wm-iconbar button:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .wm-body { overflow-y: auto; flex: 1; padding-bottom: 48px; }
+  .wm-head { max-width: 880px; margin: 0 auto; padding: 46px 40px 0; }
+  .wm-head h2 { font-size: 30px; font-weight: 900; letter-spacing: .01em; }
+  .wm-meta { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 12.5px; color: var(--muted); }
+  .wm-pill { font-size: 11px; color: var(--accent); background: #E8EEFC; border-radius: 8px; padding: 3px 10px; }
+  .wm-rule { height: 1px; background: var(--line); margin-top: 22px; }
+  .wm-imgs { max-width: 880px; margin: 0 auto; padding: 24px 40px 0; }
+  .wm-imgs img { width: 100%; display: block; }
+
+  /* ── 作品整页视图（弹窗左上角放大） ── */
+  #work-full { position: fixed; inset: 0; z-index: 95; background: #fff; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+  #work-full.open { opacity: 1; pointer-events: auto; }
+  .wf-bar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px 24px; background: rgba(255,255,255,.9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid #EEF1F7; }
+  .wf-crumb { font-size: 12.5px; color: var(--muted); }
+  .wf-crumb b { color: var(--ink); font-weight: 600; }
+  .wf-crumb span { margin: 0 7px; color: #C6CCDD; }
+  .wf-bar button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+  .wf-bar button:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .wf-body { max-width: 980px; margin: 0 auto; padding: 40px 28px 90px; }
+  .wf-body h1 { font-size: 34px; font-weight: 900; letter-spacing: .01em; }
+  .wf-meta { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-size: 13px; color: var(--muted); }
+  .wf-pill { font-size: 11px; color: var(--accent); background: #E8EEFC; border-radius: 8px; padding: 3px 10px; }
+  .wf-rule { height: 1px; background: var(--line); margin-top: 24px; }
+  .wf-imgs { margin-top: 28px; }
+  .wf-imgs img { width: 100%; display: block; }
+  .wf-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px; }
+  .wf-nav button { height: 42px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-size: 13px; color: var(--ink); cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+  .wf-nav button:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* ── 实习产出 · 深度卡片轮播（DepthCarousel 原生移植：React+GSAP → 零依赖） ── */
+  .dc { position: relative; width: 100%; height: 100%; min-height: 320px; display: flex; align-items: center; justify-content: center; perspective: 1400px; touch-action: pan-y; outline: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+  .dc:active { cursor: grabbing; }
+  .dc:focus-visible { outline: 2px solid rgba(63,95,214,.5); outline-offset: 4px; border-radius: 12px; }
+  .dc__stage { position: absolute; inset: 0; transform-style: preserve-3d; }
+  .dc__card { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); transform-origin: center; overflow: hidden; background: #14181F; border: 1px solid rgba(228,232,242,.6); box-shadow: 0 24px 50px -20px rgba(30,36,48,.35), 0 8px 20px -10px rgba(30,36,48,.2); will-change: transform, opacity, filter; cursor: pointer; }
+  .dc__img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; }
+  .dc__tint { position: absolute; inset: 0; opacity: 0; pointer-events: none; mix-blend-mode: multiply; }
+  .dc__arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3000; width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid rgba(228,232,242,.9); border-radius: 999px; background: rgba(255,255,255,.85); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: #1E2430; cursor: pointer; transition: background .2s ease, border-color .2s ease, color .2s ease; }
+  .dc__arrow:hover { background: #3F5FD6; border-color: #3F5FD6; color: #fff; }
+  .dc__arrow:active { transform: translateY(-50%) scale(.94); }
+  .dc__arrow--prev { left: 12px; }
+  .dc__arrow--next { right: 12px; }
+  .dc__dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 3000; display: flex; gap: 8px; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,.72); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border: 1px solid rgba(228,232,242,.8); }
+  .dc__dot { width: 7px; height: 7px; padding: 0; border: none; border-radius: 999px; background: rgba(100,108,133,.4); cursor: pointer; transition: width .25s ease, background .25s ease; }
+  .dc__dot.is-active { width: 20px; background: #3F5FD6; }
+  @media (prefers-reduced-motion: reduce) {
+    .dc__card { will-change: auto; }
+    .dc__arrow, .dc__dot { transition: none; }
+  }
+
+  /* ── 音乐：入口弹窗 ── */
+  #music-modal { position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center; background: rgba(20,24,31,.45); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity .35s ease; }
+  #music-modal.show { opacity: 1; pointer-events: auto; }
+  .music-card { width: 330px; max-width: calc(100vw - 48px); background: #F5F6FA; border-radius: 20px; padding: 32px 34px 28px; text-align: center; box-shadow: 0 30px 80px rgba(30,36,48,.35); transform: translateY(14px) scale(.97); transition: transform .45s cubic-bezier(.22,1,.36,1); }
+  #music-modal.show .music-card { transform: none; }
+  .music-card h2 { font-size: 23px; font-weight: 900; letter-spacing: .04em; }
+  .music-card p { margin-top: 10px; font-size: 12.5px; line-height: 1.9; color: #646C85; }
+  .music-card .acts { display: flex; gap: 10px; margin-top: 22px; }
+  .music-card .btn-on { flex: 1; height: 44px; border-radius: 999px; background: #3F5FD6; color: #fff; font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+  .music-card .btn-on:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(63,95,214,.35); }
+  .music-card .btn-off { flex: 1; height: 44px; border-radius: 999px; background: transparent; color: #646C85; font-size: 14px; border: 1px solid #E4E8F2; cursor: pointer; transition: all .2s ease; }
+  .music-card .btn-off:hover { color: #3F5FD6; border-color: #3F5FD6; }
+
+  /* ── 音乐：迷你播放器（乐盘 + 声波） ── */
+  #music-player { position: fixed; right: 20px; bottom: 20px; z-index: 70; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.88); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border: 1px solid rgba(228,232,242,.9); border-radius: 999px; padding: 7px 14px 11px 7px; box-shadow: 0 14px 40px rgba(30,36,48,.16); opacity: 0; transform: translateY(90px); transition: opacity .4s ease, transform .5s cubic-bezier(.22,1,.36,1); pointer-events: none; }
+  #music-player.show { opacity: 1; transform: none; pointer-events: auto; }
+  .mp-disc { width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; background: repeating-radial-gradient(circle, #2A3245 0 2px, #232A3D 2px 4px); position: relative; animation: mp-spin 3.4s linear infinite; animation-play-state: paused; }
+  .mp-disc::before { content: ""; position: absolute; inset: 11px; border-radius: 50%; background: #3F5FD6; }
+  .mp-disc::after { content: ""; position: absolute; left: 50%; top: 50%; width: 4px; height: 4px; margin: -2px 0 0 -2px; border-radius: 50%; background: #F5F6FA; }
+  #music-player.playing .mp-disc { animation-play-state: running; }
+  .mp-mid { min-width: 0; }
+  .mp-title { font-size: 11.5px; font-weight: 700; white-space: nowrap; }
+  .mp-sub { font-size: 9.5px; color: #646C85; margin-top: 1px; font-variant-numeric: tabular-nums; }
+  .mp-bars { display: flex; align-items: flex-end; gap: 2.5px; height: 15px; flex-shrink: 0; }
+  .mp-bars span { width: 3px; border-radius: 2px; background: #3F5FD6; height: 30%; animation: mp-eq 1s ease-in-out infinite; animation-play-state: paused; }
+  #music-player.playing .mp-bars span { animation-play-state: running; }
+  .mp-bars span:nth-child(1) { animation-delay: 0s; }
+  .mp-bars span:nth-child(2) { animation-delay: .22s; }
+  .mp-bars span:nth-child(3) { animation-delay: .45s; }
+  .mp-bars span:nth-child(4) { animation-delay: .1s; }
+  @keyframes mp-eq { 0%,100% { height: 28%; } 50% { height: 100%; } }
+  @keyframes mp-spin { to { transform: rotate(360deg); } }
+  #music-player button { width: 26px; height: 26px; border-radius: 50%; border: none; background: transparent; color: #1E2430; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s ease, color .2s ease; flex-shrink: 0; }
+  #music-player button:hover { background: #E8EEFC; color: #3F5FD6; }
+  .mp-prog { position: absolute; left: 20px; right: 20px; bottom: 4px; height: 2px; border-radius: 2px; background: rgba(228,232,242,.9); overflow: hidden; }
+  .mp-prog i { display: block; height: 100%; width: 0; background: #3F5FD6; transition: width .3s linear; }
+  #music-reopen { position: fixed; right: 20px; bottom: 20px; z-index: 70; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(228,232,242,.9); background: rgba(255,255,255,.88); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #3F5FD6; box-shadow: 0 12px 32px rgba(30,36,48,.14); cursor: pointer; opacity: 0; transform: translateY(70px); transition: opacity .35s ease, transform .45s cubic-bezier(.22,1,.36,1), background .2s ease, color .2s ease; pointer-events: none; }
+  #music-reopen.show { opacity: 1; transform: none; pointer-events: auto; }
+  #music-reopen:hover { background: #3F5FD6; color: #fff; }
+
   @media (prefers-reduced-motion: reduce) {
     .reveal, .reveal.visible .stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
     html { scroll-behavior: auto; }
@@ -195,7 +312,7 @@
           UI/UX 设计师 ·<br><span class="text-accent">AI 工作流深度用户</span>
         </h1>
         <p class="mt-6 text-muted leading-loose text-[15px] max-w-md">
-          宋鑫蕊，西安明德理工学院产品设计（产品交互设计方向），专业成绩年级前 1%。日常用 AI 辅助完成从竞品分析到高保真交付的全流程。
+          宋鑫蕊，西安明德理工学院产品交互与体验设计专业。日常用 AI 辅助完成从竞品分析到高保真交付的全流程。
         </p>
         <div class="mt-9 flex flex-wrap items-center gap-4">
           <a href="#works" class="btn-ink h-11 px-7 rounded-full bg-ink text-paper text-sm font-medium flex items-center gap-2">
@@ -211,7 +328,7 @@
             <span class="py-2 border-b border-line/70">绚丽年华第十八届全国高校摄影 · 一等奖</span>
             <span class="py-2 border-b border-line/70">全国计算机等级考试二级（MS Office）</span>
             <span class="py-2 border-b border-line/70">香港青年设计师奖 · 三等奖</span>
-            <span class="py-2">教育部「双千计划」人工智能辅助设计开发 · 结业评定前 3%</span>
+            <span class="py-2">教育部「双千计划」人工智能辅助设计开发 · 结业</span>
           </div>
         </div>
       </div>
@@ -233,100 +350,77 @@
 
   <!-- ══════════ 01 作品集 ══════════ -->
   <section id="works" class="reveal py-16 md:py-20">
-    <div class="flex items-end justify-between mb-10">
+    <div class="flex items-end justify-between mb-12">
       <div>
         <p class="kicker mb-3"><span class="no">01</span>SELECTED WORKS</p>
         <h2 class="font-serif text-3xl font-black">作品集</h2>
       </div>
-      <span class="text-muted text-xs pb-1">第一版均已上线 · 第二版迭代中</span>
+      <span class="text-muted text-xs pb-1">点击卡片查看完整案例</span>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 stagger">
-
-      <!-- 作品卡：衣佳（App 主作品 · 电子衣橱服饰社区） -->
-      <div class="work-ph lg:col-span-7 relative rounded-3xl overflow-hidden border border-[#B9C7F2] bg-gradient-to-br from-[#E9EFFC] via-[#F3F0FB] to-[#E4EBFA]">
-        <a href="works/yijia/" class="absolute inset-0 z-10 rounded-3xl" aria-label="查看衣佳移动端应用设计案例"></a>
-        <div class="h-64 md:h-80 relative">
-          <img src="cover-yijia.png" alt="衣佳移动端应用设计案例封面" class="w-full h-full object-cover" loading="lazy" decoding="async">
-          <span class="absolute top-4 left-4 text-[11px] tracking-[.2em] px-3 py-1 rounded-full bg-white/85 border border-black/10 text-[#3E5CA9] backdrop-blur-sm">主作品 · 持续完善中</span>
-        </div>
-        <div class="p-6 bg-white/50 backdrop-blur-sm">
-          <div class="tag mb-1.5">APP UI · 主作品 · 2026</div>
-          <div class="flex items-center justify-between gap-4">
-            <div>
-              <div class="font-serif text-xl font-bold">衣佳移动端应用</div>
-              <div class="text-muted text-xs mt-1">电子衣橱中枢的服饰社区 · 购衣卖衣租衣一站式</div>
+    <!-- C 端产品设计 -->
+    <div class="grid grid-cols-1 lg:grid-cols-[210px_minmax(0,1fr)] gap-8 mb-16">
+      <div>
+        <p class="kicker" style="font-style:italic;text-transform:none">toC Works</p>
+        <h3 class="font-serif text-xl font-black mt-3">C 端产品设计</h3>
+        <p class="text-muted text-sm mt-2 leading-relaxed">完整的 C 端项目设计 / 改版说明与展示</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <button type="button" class="work-card" data-work="yijia">
+          <div class="work-cover">
+            <img src="works/yijia/p01.jpg" alt="衣佳移动端应用封面" loading="lazy" decoding="async">
+            <span class="work-badge">主作品</span>
+          </div>
+          <div class="work-info">
+            <div class="work-cat">APP UI · 主作品 · 2026</div>
+            <div class="work-row">
+              <div>
+                <div class="work-title">衣佳移动端应用</div>
+                <div class="work-desc">电子衣橱中枢的服饰社区 · 购衣卖衣租衣一站式</div>
+              </div>
+              <span class="work-go">查看<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
             </div>
-            <span class="shrink-0 h-9 px-4 rounded-full border border-[#B9C7F2] bg-white/70 text-xs text-[#3E5CA9] flex items-center gap-2">
-              <span>查看作品</span><i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i>
-            </span>
+          </div>
+        </button>
+        <div class="work-card is-placeholder" aria-hidden="true">
+          <div class="work-cover"><div class="work-ph-inner"><b>第二件 C 端作品</b><span>设计中 · 敬请期待</span></div></div>
+          <div class="work-info">
+            <div class="work-cat">APP UI · 2026</div>
+            <div class="work-row">
+              <div>
+                <div class="work-title" style="color:#9AA1B5">设计中</div>
+                <div class="work-desc">完成后将同步展示</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- 作品卡：电商报告（衣佳主项目的前期调研） -->
-      <div class="work-ph lg:col-span-5 relative rounded-3xl overflow-hidden border border-[#D9C9A8] bg-gradient-to-br from-[#FBF5E8] via-[#F7F0E0] to-[#F3EAD6]">
-        <a href="works/ecommerce-report/" class="absolute inset-0 z-10 rounded-3xl" aria-label="查看电商竞品研究报告"></a>
-        <div class="h-64 md:h-80 relative">
-          <img src="cover-ecommerce.png" alt="电商竞品研究报告封面" class="w-full h-full object-cover" loading="lazy" decoding="async">
-          <span class="absolute top-4 left-4 text-[11px] tracking-[.2em] px-3 py-1 rounded-full bg-white/85 border border-black/10 text-[#8A6D2F] backdrop-blur-sm">已上线</span>
-        </div>
-        <div class="p-6 bg-white/50 backdrop-blur-sm">
-          <div class="tag mb-1.5" style="color:#8A6D2F">数据研究 · 主项目调研 · 2026</div>
-          <div class="flex items-center justify-between gap-4">
-            <div>
-              <div class="font-serif text-xl font-bold">电商竞品研究报告</div>
-              <div class="text-xs mt-1" style="color:#7A6A42">衣佳 App 的前期竞品调研</div>
-            </div>
-            <span class="shrink-0 h-9 px-4 rounded-full border border-[#D9C9A8] bg-white/70 text-xs text-[#8A6D2F] flex items-center gap-2">
-              <span>查看作品</span><i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i>
-            </span>
-          </div>
-        </div>
+    <!-- 体验分析 -->
+    <div class="grid grid-cols-1 lg:grid-cols-[210px_minmax(0,1fr)] gap-8">
+      <div>
+        <p class="kicker" style="font-style:italic;text-transform:none">Review</p>
+        <h3 class="font-serif text-xl font-black mt-3">体验分析</h3>
+        <p class="text-muted text-sm mt-2 leading-relaxed">独立页面体验交互优化改版方案</p>
       </div>
-
-      <!-- 作品卡：CS2（暗色电竞调 · 工具产品） -->
-      <div class="work-ph lg:col-span-6 relative rounded-3xl overflow-hidden border border-[#3A4356] bg-gradient-to-br from-[#171B24] via-[#1D2330] to-[#171B24]">
-        <a href="works/cs2-site/" class="absolute inset-0 z-10 rounded-3xl" aria-label="查看 CS2 游戏道具学习站"></a>
-        <div class="h-52 md:h-60 relative">
-          <img src="cover-cs2.jpg" alt="CS2 游戏道具学习站封面" class="w-full h-full object-cover object-[50%_25%]" loading="lazy" decoding="async">
-          <span class="absolute top-4 left-4 text-[11px] tracking-[.2em] px-3 py-1 rounded-full bg-black/50 border border-white/20 text-white/85 backdrop-blur-sm">第二版开发中</span>
-        </div>
-        <div class="p-6 bg-black/30">
-          <div class="tag mb-1.5" style="color:#B8C0D0">工具产品 · 交互教学 · 2026</div>
-          <div class="flex items-center justify-between gap-4">
-            <div>
-              <div class="font-serif text-xl font-bold text-white/90">CS2 游戏道具学习站</div>
-              <div class="text-xs mt-1 text-white/50">Utility Lab · 第一版已上线</div>
-            </div>
-            <span class="shrink-0 h-9 px-4 rounded-full border border-[#3A4356] bg-white/10 text-xs text-[#F5B82E] flex items-center gap-2">
-              <span>预览第一版</span><i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i>
-            </span>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <button type="button" class="work-card" data-work="steam">
+          <div class="work-cover">
+            <img src="works/steam/s01.jpg" alt="Steam 首页体验改版封面" loading="lazy" decoding="async">
           </div>
-        </div>
-      </div>
-
-      <!-- 作品卡：手作工坊（手作绿调 · B端系统） -->
-      <div class="work-ph lg:col-span-6 relative rounded-3xl overflow-hidden border border-[#B7DCC3] bg-gradient-to-br from-[#EFF8F1] to-[#E4F1E8]">
-        <a href="works/shouzuogongfang/" class="absolute inset-0 z-10 rounded-3xl" aria-label="查看手作工坊拼豆体验店经营系统"></a>
-        <div class="h-52 md:h-60 relative">
-          <img src="cover-shouzuo.jpg" alt="手作工坊拼豆体验店经营系统封面" class="w-full h-full object-cover" loading="lazy" decoding="async">
-          <span class="absolute top-4 left-4 text-[11px] tracking-[.2em] px-3 py-1 rounded-full bg-white/85 border border-black/10 text-[#2E7D4F] backdrop-blur-sm">第二版开发中</span>
-        </div>
-        <div class="p-6 bg-white/50 backdrop-blur-sm">
-          <div class="tag mb-1.5" style="color:#3F7A58">B端系统 · 全栈演示 · 2026</div>
-          <div class="flex items-center justify-between gap-4">
-            <div>
-              <div class="font-serif text-xl font-bold">手作工坊</div>
-              <div class="text-xs mt-1" style="color:#4E7A60">拼豆体验店经营系统 · 第一版已上线</div>
+          <div class="work-info">
+            <div class="work-cat">体验分析改版 · 2026</div>
+            <div class="work-row">
+              <div>
+                <div class="work-title">Steam 首页体验改版</div>
+                <div class="work-desc">首页浏览体验的交互优化改版方案</div>
+              </div>
+              <span class="work-go">查看<i class="fas fa-arrow-right" aria-hidden="true"></i></span>
             </div>
-            <span class="shrink-0 h-9 px-4 rounded-full border border-[#B7DCC3] bg-white/70 text-xs text-[#2E7D4F] flex items-center gap-2">
-              <span>预览第一版</span><i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i>
-            </span>
           </div>
-        </div>
+        </button>
       </div>
-
     </div>
   </section>
 
@@ -337,32 +431,34 @@
     <p class="kicker mb-3"><span class="no">02</span>EXPERIENCE</p>
     <h2 class="font-serif text-3xl font-black mb-10">实习经历</h2>
 
-    <div class="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-10">
-      <div>
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_460px] gap-12 items-start">
+      <div class="min-w-0">
         <h3 class="font-bold text-lg leading-snug">西安爱克斯未来文化科技有限公司</h3>
-        <p class="text-accent text-sm font-medium mt-1.5">UI 设计实习生（XR 方向）</p>
+        <p class="text-accent text-sm font-medium mt-1.5">3D建模实习生</p>
         <p class="text-muted text-sm mt-3">2026.07 — 2026.10</p>
         <div class="flex flex-wrap gap-2 mt-5">
-          <span class="border border-line rounded-full px-3 py-1 text-xs text-muted">Figma</span>
-          <span class="border border-line rounded-full px-3 py-1 text-xs text-muted">XR 界面</span>
-          <span class="border border-line rounded-full px-3 py-1 text-xs text-muted">AIGC 工作流</span>
+          <span class="border border-line rounded-full px-3 py-1 text-xs text-muted">Maya</span>
+          <span class="border border-line rounded-full px-3 py-1 text-xs text-muted">Substance Painter</span>
+          <span class="border border-line rounded-full px-3 py-1 text-xs text-muted">ChatGPT / Kimi</span>
+          <span class="border border-line rounded-full px-3 py-1 text-xs text-muted">Stable Diffusion</span>
         </div>
+
+        <ul class="flex flex-col gap-7 text-[15px] text-ink/85 leading-relaxed mt-10">
+          <li class="flex gap-4">
+            <span class="text-accent font-serif font-black mt-0.5 shrink-0">—</span>
+            <span>独立完成「小白龙」角色的 <strong>3D 建模与渲染</strong>全流程：使用 <strong>Maya</strong> 完成角色造型与拓扑布线，在 <strong>Substance Painter</strong> 中绘制材质贴图并完成质感渲染，产出可直接投入漫剧生产的角色资产。</span>
+          </li>
+          <li class="flex gap-4">
+            <span class="text-accent font-serif font-black mt-0.5 shrink-0">—</span>
+            <span>以该角色为核心延展<strong>漫剧海报设计</strong>：结合 <strong>ChatGPT / Kimi</strong> 与 <strong>Stable Diffusion</strong> 等 AI 工具完成角色宣传海报，打通从三维资产到平面视觉的高效产出流程。</span>
+          </li>
+        </ul>
       </div>
 
-      <ul class="flex flex-col gap-7 text-[15px] text-ink/85 leading-relaxed">
-        <li class="flex gap-4">
-          <span class="text-accent font-serif font-black mt-0.5 shrink-0">—</span>
-          <span>深度参与 <strong>XR 产品界面设计</strong>，完成需求梳理、竞品分析到高保真原型交付全流程，累计输出界面方案 <span class="metric">30+</span> 页，覆盖主流程与核心交互状态。</span>
-        </li>
-        <li class="flex gap-4">
-          <span class="text-accent font-serif font-black mt-0.5 shrink-0">—</span>
-          <span>运用 Kimi、ChatGPT 搭建团队共享知识库与标准化文档模板，带动团队整体效率提升 <span class="metric">+25%</span>，获主管书面好评。</span>
-        </li>
-        <li class="flex gap-4">
-          <span class="text-accent font-serif font-black mt-0.5 shrink-0">—</span>
-          <span>使用 Figma + AI 插件批量生成漫剧分镜与宣传海报 <span class="metric">40+</span> 张，视觉产出周期缩短约一半；沉淀的模板被采纳为团队日常设计规范。</span>
-        </li>
-      </ul>
+      <div class="min-w-0">
+        <div id="intern-carousel" style="height: 520px" role="group" aria-label="实习产出作品轮播" tabindex="0"></div>
+        <p class="text-center text-muted text-xs mt-3" style="letter-spacing:.14em">实习产出 ·「小白龙」角色</p>
+      </div>
     </div>
   </section>
 
@@ -375,13 +471,25 @@
 
     <div class="flex flex-col gap-5 max-w-2xl">
         <div>
-          <p class="tag mb-2">设计工具</p>
+          <p class="tag mb-2">高保真界面设计</p>
           <p class="text-[15px] leading-[2] text-ink/85">
-            <span class="skill-txt font-bold text-accent">Figma ★ 最擅长</span>　<span class="skill-txt">即时设计</span>　<span class="skill-txt">Photoshop</span>　<span class="skill-txt">Illustrator</span>　<span class="skill-txt">SAI2</span>　<span class="skill-txt">Rhino</span>　<span class="skill-txt">Creo</span>
+            <span class="skill-txt font-bold text-accent">Figma ★</span>　<span class="skill-txt">即时设计</span>
           </p>
         </div>
         <div>
-          <p class="tag mb-2" style="color:#3F5FD6">AI 工作流</p>
+          <p class="tag mb-2">视觉与插画</p>
+          <p class="text-[15px] leading-[2] text-ink/85">
+            <span class="skill-txt">Photoshop</span>　<span class="skill-txt">Illustrator</span>　<span class="skill-txt">SAI2</span>
+          </p>
+        </div>
+        <div>
+          <p class="tag mb-2">3D 建模与渲染</p>
+          <p class="text-[15px] leading-[2] text-ink/85">
+            <span class="skill-txt">Maya</span>　<span class="skill-txt">Substance Painter</span>　<span class="skill-txt">Rhino</span>　<span class="skill-txt">Creo</span>
+          </p>
+        </div>
+        <div>
+          <p class="tag mb-2" style="color:#3F5FD6">AIGC</p>
           <p class="text-[15px] leading-[2] text-ink/85">
             <span class="skill-txt font-bold text-accent">ComfyUI 节点工作流 ★</span>　<span class="skill-txt">Stable Diffusion</span>　<span class="skill-txt">LoRA 训练</span>　<span class="skill-txt">ChatGPT / Kimi（提示词工程）</span>
           </p>
@@ -412,9 +520,525 @@
           <i class="fab fa-github"></i><span>GitHub</span>
         </a>
       </div>
+
+      <div class="mt-9 inline-flex items-center gap-4 bg-white rounded-2xl p-4 pr-7 text-left" style="box-shadow:0 16px 40px rgba(0,0,0,.25)">
+        <img src="qr-wechat.jpg" alt="微信二维码" class="w-[88px] h-[88px] rounded-xl object-cover" style="object-position:center 62%">
+        <div>
+          <div class="text-[14px] font-bold" style="color:#14181F">微信联系我</div>
+          <div class="text-xs mt-1.5" style="color:#646C85">微信号 Sxxxrrr111 · 扫码添加</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<audio id="bgm" preload="none">
+  <source src="bgm.mp3" type="audio/mpeg">
+  <source src="bgm.flac" type="audio/flac">
+  <source src="bgm.wav" type="audio/wav">
+</audio>
+
+<div id="music-modal" role="dialog" aria-modal="true" aria-label="播放音乐提示">
+  <div class="music-card">
+    <h2 class="serif">要放首音乐吗？</h2>
+    <p>一首轻松的纯音乐<br>看完作品，歌也刚好放完</p>
+    <div class="acts">
+      <button id="music-yes" type="button" class="btn-on">播放音乐</button>
+      <button id="music-no" type="button" class="btn-off">先不用</button>
+    </div>
+  </div>
+</div>
+
+<div id="music-player" aria-label="背景音乐播放器">
+  <div class="mp-disc" aria-hidden="true"></div>
+  <div class="mp-mid">
+    <div class="mp-title" id="mp-title">发如雪 · 钢琴版</div>
+    <div class="mp-sub"><span id="mp-time">0:00 / 0:00</span></div>
+  </div>
+  <div class="mp-bars" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <button id="mp-toggle" type="button" aria-label="暂停或继续"><i class="fas fa-play text-xs"></i></button>
+  <button id="mp-close" type="button" aria-label="关闭音乐"><i class="fas fa-xmark text-xs"></i></button>
+  <div class="mp-prog"><i id="mp-prog-fill"></i></div>
+</div>
+
+<button id="music-reopen" type="button" aria-label="打开音乐"><i class="fas fa-compact-disc"></i></button>
+
+<!-- 作品弹窗 + 整页视图 -->
+<div id="work-modal" role="dialog" aria-modal="true" aria-label="作品详情">
+  <div class="wm-card">
+    <div class="wm-iconbar">
+      <button id="wm-expand" type="button" aria-label="放大为整页查看"><i class="fas fa-up-right-and-down-left-from-center text-xs"></i></button>
+      <button id="wm-close" type="button" aria-label="关闭"><i class="fas fa-xmark text-sm"></i></button>
+    </div>
+    <div class="wm-body">
+      <div class="wm-head">
+        <h2 id="wm-title"></h2>
+        <div class="wm-meta">标签 <span class="wm-pill" id="wm-tag"></span></div>
+        <div class="wm-rule"></div>
+      </div>
+      <div class="wm-imgs" id="wm-imgs"></div>
+    </div>
+  </div>
+</div>
+
+<div id="work-full" role="dialog" aria-modal="true" aria-label="作品整页视图">
+  <div class="wf-bar">
+    <div class="wf-crumb">作品集 <span>/</span> <b id="wf-cat"></b> <span>/</span> <b id="wf-title-crumb"></b></div>
+    <button id="wf-close" type="button" aria-label="关闭"><i class="fas fa-xmark text-sm"></i></button>
+  </div>
+  <div class="wf-body">
+    <h1 id="wf-title"></h1>
+    <div class="wf-meta">标签 <span class="wf-pill" id="wf-tag"></span></div>
+    <div class="wf-rule"></div>
+    <div class="wf-imgs" id="wf-imgs"></div>
+    <div class="wf-nav">
+      <button id="wf-prev" type="button"><i class="fas fa-arrow-left text-xs"></i> 上一个作品</button>
+      <button id="wf-next" type="button">下一个作品 <i class="fas fa-arrow-right text-xs"></i></button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── 作品详情：弹窗 + 整页视图 ──
+(function () {
+  var WORKS = {
+    yijia: {
+      title: '衣佳移动端应用', cat: 'C 端产品设计', tag: 'C 端项目',
+      images: ['p01','p02','p03','p04','p05','p06','p07','p08','p09','p10','p11','p12','p13','p14','p15','p16','p17']
+        .map(function (n) { return 'works/yijia/' + n + '.jpg'; })
+    },
+    steam: {
+      title: 'Steam 首页体验改版', cat: '体验分析', tag: '体验分析改版',
+      images: ['s01','s02','s03'].map(function (n) { return 'works/steam/' + n + '.jpg'; })
+    }
+  };
+
+  var modal = document.getElementById('work-modal');
+  var full = document.getElementById('work-full');
+  var wmTitle = document.getElementById('wm-title');
+  var wmTag = document.getElementById('wm-tag');
+  var wmImgs = document.getElementById('wm-imgs');
+  var wfTitle = document.getElementById('wf-title');
+  var wfTitleCrumb = document.getElementById('wf-title-crumb');
+  var wfCat = document.getElementById('wf-cat');
+  var wfTag = document.getElementById('wf-tag');
+  var wfImgs = document.getElementById('wf-imgs');
+  var current = null;
+  var locked = false;
+
+  function lockScroll() { if (!locked) { locked = true; document.body.style.overflow = 'hidden'; } }
+  function unlockScroll() { if (locked) { locked = false; document.body.style.overflow = ''; } }
+
+  function buildImgs(container, list, alt) {
+    container.innerHTML = '';
+    list.forEach(function (src, i) {
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = alt + ' 第 ' + (i + 1) + ' 页';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      container.appendChild(img);
+    });
+  }
+
+  function openModal(key) {
+    var w = WORKS[key];
+    if (!w) return;
+    current = key;
+    wmTitle.textContent = w.title;
+    wmTag.textContent = w.tag;
+    buildImgs(wmImgs, w.images, w.title);
+    modal.classList.add('open');
+    modal.querySelector('.wm-body').scrollTop = 0;
+    lockScroll();
+  }
+  function closeModal() {
+    if (!modal.classList.contains('open')) return;
+    modal.classList.remove('open');
+    if (!full.classList.contains('open')) { current = null; unlockScroll(); }
+  }
+  function openFull(key) {
+    var useKey = key || current;
+    var w = WORKS[useKey];
+    if (!w) return;
+    current = useKey;
+    wfTitle.textContent = w.title;
+    wfTitleCrumb.textContent = w.title;
+    wfCat.textContent = w.cat;
+    wfTag.textContent = w.tag;
+    buildImgs(wfImgs, w.images, w.title);
+    modal.classList.remove('open');
+    full.classList.add('open');
+    full.scrollTop = 0;
+  }
+  function closeFull() {
+    if (!full.classList.contains('open')) return;
+    full.classList.remove('open');
+    current = null;
+    unlockScroll();
+  }
+
+  document.querySelectorAll('[data-work]').forEach(function (btn) {
+    btn.addEventListener('click', function () { openModal(btn.getAttribute('data-work')); });
+  });
+  document.getElementById('wm-close').addEventListener('click', closeModal);
+  document.getElementById('wm-expand').addEventListener('click', function () { openFull(); });
+  document.getElementById('wf-close').addEventListener('click', closeFull);
+  var ORDER = ['yijia', 'steam'];
+  function stepWork(dir) {
+    var i = ORDER.indexOf(current);
+    if (i < 0) return;
+    openFull(ORDER[(i + dir + ORDER.length) % ORDER.length]);
+  }
+  document.getElementById('wf-prev').addEventListener('click', function () { stepWork(-1); });
+  document.getElementById('wf-next').addEventListener('click', function () { stepWork(1); });
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (full.classList.contains('open')) closeFull();
+    else if (modal.classList.contains('open')) closeModal();
+  });
+})();
+</script>
+
+<script>
+// ── 背景音乐：弹窗询问 + 乐盘播放器 ──
+(function () {
+  var audio = document.getElementById('bgm');
+  var modal = document.getElementById('music-modal');
+  var player = document.getElementById('music-player');
+  var reopen = document.getElementById('music-reopen');
+  var btnYes = document.getElementById('music-yes');
+  var btnNo = document.getElementById('music-no');
+  var btnToggle = document.getElementById('mp-toggle');
+  var btnClose = document.getElementById('mp-close');
+  var timeEl = document.getElementById('mp-time');
+  var fillEl = document.getElementById('mp-prog-fill');
+
+  function fmt(s) { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+  function setIcon() { btnToggle.querySelector('i').className = audio.paused ? 'fas fa-play text-xs' : 'fas fa-pause text-xs'; }
+  function showPlayer() { player.classList.add('show'); reopen.classList.remove('show'); }
+  function hidePlayer() { player.classList.remove('show'); reopen.classList.add('show'); }
+  function syncState() {
+    player.classList.toggle('playing', !audio.paused && !audio.ended);
+    setIcon();
+    if (audio.duration) {
+      timeEl.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+      fillEl.style.width = (audio.currentTime / audio.duration * 100) + '%';
+    } else {
+      timeEl.textContent = '0:00 / 0:00';
+    }
+  }
+  function tryPlay() {
+    var r = audio.play();
+    if (r && r.then) {
+      r.then(function () { localStorage.setItem('sxr-music', 'on'); }).catch(function () {});
+    }
+    syncState();
+  }
+
+  btnYes.addEventListener('click', function () {
+    sessionStorage.setItem('sxr-music-asked', '1');
+    modal.classList.remove('show');
+    audio.currentTime = 0;
+    showPlayer();
+    tryPlay();
+  });
+  btnNo.addEventListener('click', function () {
+    sessionStorage.setItem('sxr-music-asked', '1');
+    localStorage.setItem('sxr-music', 'off');
+    modal.classList.remove('show');
+    hidePlayer();
+  });
+  btnToggle.addEventListener('click', function () {
+    if (audio.paused) {
+      if (audio.ended) audio.currentTime = 0;
+      audio.play();
+      localStorage.setItem('sxr-music', 'on');
+    } else {
+      audio.pause();
+    }
+    syncState();
+  });
+  btnClose.addEventListener('click', function () {
+    audio.pause();
+    localStorage.setItem('sxr-music', 'off');
+    hidePlayer();
+    syncState();
+  });
+  reopen.addEventListener('click', function () {
+    showPlayer();
+    if (audio.paused || audio.ended) {
+      if (audio.ended) audio.currentTime = 0;
+      tryPlay();
+    }
+  });
+  ['timeupdate', 'loadedmetadata', 'play', 'pause', 'ended'].forEach(function (ev) {
+    audio.addEventListener(ev, syncState);
+  });
+
+  window.addEventListener('DOMContentLoaded', function () {
+    var asked = false, pref = 'off';
+    try { asked = sessionStorage.getItem('sxr-music-asked') === '1'; } catch (e) {}
+    try { pref = localStorage.getItem('sxr-music') || 'off'; } catch (e) {}
+    if (pref === 'on') {
+      showPlayer();
+      var r = audio.play();
+      if (r && r.then) { r.then(syncState).catch(syncState); } else { syncState(); }
+    } else if (asked) {
+      hidePlayer();
+    }
+    if (!asked) setTimeout(function () { modal.classList.add('show'); }, 1100);
+  });
+})();
+</script>
+
+<script>
+// ── 实习产出 · 深度卡片轮播（DepthCarousel 原生移植，零依赖） ──
+(function () {
+  function initDepthCarousel(mount, items, opts) {
+    var cfg = Object.assign({
+      cardWidth: 320, cardHeight: 420, radius: 16, tint: '#14181F',
+      depth: 220, spread: 90, tilt: 22, tiltDirection: 'right',
+      perspective: 1400, visibleCards: 4, falloff: 0.2, blur: 6,
+      duration: 700, autoplay: true, autoplayDelay: 3200, loop: true
+    }, opts || {});
+    var reduced = false;
+    try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    var n = items.length;
+    if (!n) return;
+
+    function clampNum(v, a, b) { return Math.min(Math.max(v, a), b); }
+
+    mount.classList.add('dc');
+    mount.setAttribute('role', 'group');
+    mount.setAttribute('aria-roledescription', 'carousel');
+
+    var stage = document.createElement('div');
+    stage.className = 'dc__stage';
+    mount.appendChild(stage);
+
+    var cardEls = [], tintEls = [];
+    items.forEach(function (it, i) {
+      var card = document.createElement('div');
+      card.className = 'dc__card';
+      card.style.width = cfg.cardWidth + 'px';
+      card.style.height = cfg.cardHeight + 'px';
+      card.style.borderRadius = cfg.radius + 'px';
+      card.setAttribute('aria-roledescription', 'slide');
+      card.setAttribute('aria-label', (i + 1) + ' / ' + n);
+      var img = document.createElement('img');
+      img.className = 'dc__img';
+      img.src = it.image;
+      img.alt = it.alt || '';
+      img.draggable = false;
+      var tintEl = document.createElement('span');
+      tintEl.className = 'dc__tint';
+      tintEl.style.background = cfg.tint;
+      card.appendChild(img);
+      card.appendChild(tintEl);
+      stage.appendChild(card);
+      cardEls.push(card);
+      tintEls.push(tintEl);
+    });
+
+    var active = 0, dots = [], dotBtns = [];
+    function setDots() {
+      dotBtns.forEach(function (dt, i) {
+        dt.classList.toggle('is-active', i === active);
+        dt.setAttribute('aria-selected', i === active ? 'true' : 'false');
+      });
+      cardEls.forEach(function (el, i) { el.setAttribute('aria-hidden', i === active ? 'false' : 'true'); });
+    }
+
+    if (n > 1) {
+      [['prev', -1, 'M15 5l-7 7 7 7'], ['next', 1, 'M9 5l7 7-7 7']].forEach(function (def) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'dc__arrow dc__arrow--' + def[0];
+        btn.setAttribute('aria-label', def[0] === 'prev' ? '上一张' : '下一张');
+        btn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="' + def[2] + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        btn.addEventListener('click', function () { navBy(def[1]); });
+        mount.appendChild(btn);
+      });
+      var dotsWrap = document.createElement('div');
+      dotsWrap.className = 'dc__dots';
+      dotsWrap.setAttribute('role', 'tablist');
+      dotsWrap.setAttribute('aria-label', '作品列表');
+      items.forEach(function (_, i) {
+        var dt = document.createElement('button');
+        dt.type = 'button';
+        dt.className = 'dc__dot';
+        dt.setAttribute('role', 'tab');
+        dt.setAttribute('aria-label', '第 ' + (i + 1) + ' 张');
+        dt.addEventListener('click', function () { setFocus(i, true); });
+        dotsWrap.appendChild(dt);
+        dotBtns.push(dt);
+      });
+      mount.appendChild(dotsWrap);
+    }
+
+    var pos = 0, scale = 1, raf = null;
+
+    function layout(p) {
+      var dir = cfg.tiltDirection === 'left' ? -1 : 1;
+      for (var i = 0; i < n; i++) {
+        var el = cardEls[i];
+        var d = i - p;
+        if (cfg.loop && n > 1) { d = ((d % n) + n) % n; if (d > n / 2) d -= n; }
+        var back = Math.max(0, d);
+        var az = Math.abs(d);
+        var shown = az <= cfg.visibleCards + 0.5;
+        var tz = -cfg.depth * d;
+        var tx = dir * cfg.spread * d;
+        var ry = dir * cfg.tilt * clampNum(d, 0, 1);
+        var opacity = d < 0 ? Math.max(0, 1 + d) : 1;
+        if (!shown) opacity = 0;
+        var brightness = Math.max(0.15, 1 - back * cfg.falloff);
+        var blurPx = cfg.blur > 0 ? Math.min(cfg.blur, (back / Math.max(1, cfg.visibleCards)) * cfg.blur) : 0;
+        el.style.transform = 'translate(-50%,-50%) scale(' + scale + ') translateX(' + tx.toFixed(2) + 'px) translateZ(' + tz.toFixed(2) + 'px) rotateY(' + ry.toFixed(3) + 'deg)';
+        el.style.opacity = opacity.toFixed(3);
+        el.style.filter = 'brightness(' + brightness.toFixed(3) + ') blur(' + blurPx.toFixed(2) + 'px)';
+        el.style.zIndex = String(Math.round(2000 - d * 20));
+        el.style.pointerEvents = shown && opacity > 0.05 ? 'auto' : 'none';
+        tintEls[i].style.opacity = clampNum(back * cfg.falloff * 1.25, 0, 0.86).toFixed(3);
+      }
+    }
+
+    function tweenTo(target, animate) {
+      if (raf) cancelAnimationFrame(raf);
+      var from = pos, to = target;
+      if (!animate || reduced || from === to) { pos = to; layout(pos); return; }
+      var t0 = performance.now();
+      function frame(now) {
+        var t = clampNum((now - t0) / cfg.duration, 0, 1);
+        var e = 1 - Math.pow(1 - t, 3);
+        pos = from + (to - from) * e;
+        layout(pos);
+        if (t < 1) raf = requestAnimationFrame(frame);
+        else { pos = ((pos % n) + n) % n; layout(pos); }
+      }
+      raf = requestAnimationFrame(frame);
+    }
+
+    function setFocus(raw, animate) {
+      var idx = cfg.loop ? ((raw % n) + n) % n : clampNum(raw, 0, n - 1);
+      var delta = idx - pos;
+      if (cfg.loop && n > 1) { delta = ((delta % n) + n) % n; if (delta > n / 2) delta -= n; }
+      tweenTo(pos + delta, animate);
+      if (idx !== active) { active = idx; setDots(); }
+    }
+    function navBy(step) { setFocus(active + step, true); }
+
+    // 卡片点击切到该张
+    cardEls.forEach(function (el, i) {
+      el.addEventListener('click', function () { if (!dragMoved) setFocus(i, true); });
+    });
+
+    // 键盘
+    mount.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); navBy(-1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); navBy(1); }
+    });
+
+    // 滚轮
+    var wheelTimer = null;
+    mount.addEventListener('wheel', function (e) {
+      if (n < 2) return;
+      e.preventDefault();
+      if (raf) cancelAnimationFrame(raf);
+      var raw = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      var delta = e.deltaMode === 1 ? raw * 24 : raw;
+      var step = clampNum(delta / (cfg.cardWidth * 0.9), -0.6, 0.6);
+      pos += step;
+      layout(pos);
+      if (wheelTimer) clearTimeout(wheelTimer);
+      wheelTimer = setTimeout(function () { setFocus(Math.round(pos), true); }, 130);
+    }, { passive: false });
+
+    // 拖拽
+    var drag = null, dragMoved = false, lastV = 0;
+    mount.addEventListener('pointerdown', function (e) {
+      if (n < 2) return;
+      if (raf) cancelAnimationFrame(raf);
+      drag = { x: e.clientX, startPos: pos, lastX: e.clientX, lastT: performance.now(), v: 0, moved: false, id: e.pointerId };
+      dragMoved = false;
+      lastV = 0;
+    });
+    mount.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      var stepPx = Math.max(cfg.cardWidth * 0.55 * scale, 40);
+      var dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) > 4) {
+        drag.moved = true;
+        dragMoved = true;
+        try { mount.setPointerCapture(drag.id); } catch (err) {}
+      }
+      if (!drag.moved) return;
+      var now = performance.now();
+      var dt = Math.max(now - drag.lastT, 1);
+      lastV = (e.clientX - drag.lastX) / dt;
+      drag.lastX = e.clientX;
+      drag.lastT = now;
+      pos = drag.startPos - dx / stepPx;
+      layout(pos);
+    });
+    function dragEnd() {
+      if (!drag) return;
+      var wasMoved = drag.moved;
+      drag = null;
+      if (!wasMoved) return;
+      var stepPx = Math.max(cfg.cardWidth * 0.55 * scale, 40);
+      var projected = pos - (lastV * 180) / stepPx;
+      setFocus(Math.round(projected), true);
+    }
+    mount.addEventListener('pointerup', function () { dragEnd(); });
+    mount.addEventListener('pointercancel', function () { dragEnd(); });
+
+    // 自适应缩放
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(function (entries) {
+        var w = entries[0].contentRect.width;
+        var needed = cfg.cardWidth + Math.abs(cfg.spread) * 2 + 120;
+        scale = clampNum(w / needed, 0.4, 1);
+        layout(pos);
+      });
+      ro.observe(mount);
+    }
+
+    // 自动播放
+    var autoTimer = null, hovered = false, focused = false;
+    function stopAuto() { if (autoTimer) clearInterval(autoTimer); autoTimer = null; }
+    function startAuto() {
+      stopAuto();
+      if (reduced || n < 2 || !cfg.autoplay) return;
+      autoTimer = setInterval(function () {
+        if (!hovered && !focused) navBy(1);
+      }, Math.max(cfg.autoplayDelay, 600));
+    }
+    mount.addEventListener('mouseenter', function () { hovered = true; });
+    mount.addEventListener('mouseleave', function () { hovered = false; });
+    mount.addEventListener('focusin', function () { focused = true; });
+    mount.addEventListener('focusout', function () { focused = false; });
+    startAuto();
+
+    layout(0);
+    setDots();
+  }
+
+  window.addEventListener('DOMContentLoaded', function () {
+    var mount = document.getElementById('intern-carousel');
+    if (!mount) return;
+    initDepthCarousel(mount, [
+      { image: 'intern/model.jpg', alt: '小白龙 3D 建模效果图' },
+      { image: 'intern/poster-1.jpg', alt: '小白龙漫剧海报 1' },
+      { image: 'intern/poster-2.jpg', alt: '小白龙漫剧海报 2' },
+      { image: 'intern/poster-3.jpg', alt: '小白龙漫剧海报 3' },
+      { image: 'intern/poster-4.jpg', alt: '小白龙漫剧海报 4' }
+    ], {});
+  });
+})();
+</script>
 
 <script>
   // 入场动画
