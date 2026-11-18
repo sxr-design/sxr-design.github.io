@@ -162,9 +162,9 @@
   .w3-go { height: 32px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); font-size: 11.5px; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; transition: background .25s ease, border-color .25s ease, color .25s ease; }
   .w3-go i { font-size: 10px; }
   .w3-card:hover .w3-go { background: var(--wa); border-color: var(--wa); color: #fff; }
-  .w3-site { height: 32px; padding: 0 14px; border-radius: 999px; background: var(--inkdeep); color: #F5F6FA; font-size: 11.5px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background .2s ease; }
+  .w3-site { height: 32px; padding: 0 14px; border-radius: 999px; background: var(--wa); color: #fff; font-size: 11.5px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: filter .2s ease; }
   .w3-site i { font-size: 10px; }
-  .w3-site:hover { background: var(--wa); }
+  .w3-site:hover { filter: brightness(.85); }
   @media (max-width: 900px) {
     .works-3 { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
   }
@@ -187,6 +187,11 @@
   .wm-rule { height: 1px; background: var(--line); margin-top: 22px; }
   .wm-imgs { max-width: 880px; margin: 0 auto; padding: 24px 40px 0; }
   .wm-imgs img { width: 100%; display: block; }
+  .wm-end { max-width: 880px; margin: 0 auto; padding: 30px 40px 6px; }
+  .wf-end { margin-top: 42px; text-align: center; }
+  .case-site-btn { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 26px; border-radius: 999px; background: var(--inkdeep); color: #F5F6FA; font-size: 13.5px; font-weight: 600; text-decoration: none; transition: background .2s ease; }
+  .case-site-btn i { font-size: 11px; }
+  .case-site-btn:hover { background: var(--accent); }
 
   /* ── 作品整页视图（弹窗左上角放大） ── */
   #work-full { position: fixed; inset: 0; z-index: 95; background: #fff; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
@@ -404,7 +409,7 @@
         </div>
       </button>
 
-      <button type="button" class="w3-card" data-work="cs2" style="--wa:#C68A21">
+      <div class="w3-card" data-work="cs2" style="--wa:#C68A21; cursor:pointer">
         <div class="w3-cover">
           <img src="works/cs2/cover.jpg" alt="PropExplore CS2 道具图鉴站点登录页" loading="lazy" decoding="async">
           <span class="w3-badge">可交互站点</span>
@@ -418,7 +423,7 @@
             <a class="w3-site" href="works/prop-explore/" target="_blank" rel="noopener" onclick="event.stopPropagation()">访问在线站点<i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
           </div>
         </div>
-      </button>
+      </div>
     </div>
   </section>
 
@@ -577,6 +582,9 @@
         <div class="wm-rule"></div>
       </div>
       <div class="wm-imgs" id="wm-imgs"></div>
+      <div class="wm-end" id="wm-end" style="display:none">
+        <a class="case-site-btn" id="wm-end-link" href="#" target="_blank" rel="noopener">访问在线站点<i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+      </div>
     </div>
   </div>
 </div>
@@ -591,6 +599,9 @@
     <div class="wf-meta">标签 <span class="wf-pill" id="wf-tag"></span><a class="wf-pill wf-site" id="wf-site" href="#" target="_blank" rel="noopener" style="display:none">访问在线站点 <i class="fas fa-arrow-up-right-from-square" style="font-size:9px"></i></a></div>
     <div class="wf-rule"></div>
     <div class="wf-imgs" id="wf-imgs"></div>
+    <div class="wf-end" id="wf-end" style="display:none">
+      <a class="case-site-btn" id="wf-end-link" href="#" target="_blank" rel="noopener">访问在线站点<i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+    </div>
     <div class="wf-nav">
       <button id="wf-prev" type="button"><i class="fas fa-arrow-left text-xs"></i> 上一个作品</button>
       <button id="wf-next" type="button">下一个作品 <i class="fas fa-arrow-right text-xs"></i></button>
@@ -655,6 +666,8 @@
   var locked = false;
   var wmSite = document.getElementById('wm-site');
   var wfSite = document.getElementById('wf-site');
+  var wmEnd = document.getElementById('wm-end-link');
+  var wfEnd = document.getElementById('wf-end-link');
 
   function lockScroll() { if (!locked) { locked = true; document.body.style.overflow = 'hidden'; } }
   function unlockScroll() { if (locked) { locked = false; document.body.style.overflow = ''; } }
@@ -678,6 +691,7 @@
     wmTitle.textContent = w.title;
     wmTag.textContent = w.tag;
     if (w.site) { wmSite.href = w.site; wmSite.style.display = ''; } else { wmSite.style.display = 'none'; }
+    if (w.site) { wmEnd.href = w.site; wmEnd.style.display = ''; } else { wmEnd.style.display = 'none'; }
     buildImgs(wmImgs, w.images, w.title);
     modal.classList.add('open');
     modal.querySelector('.wm-body').scrollTop = 0;
@@ -698,6 +712,7 @@
     wfCat.textContent = w.cat;
     wfTag.textContent = w.tag;
     if (w.site) { wfSite.href = w.site; wfSite.style.display = ''; } else { wfSite.style.display = 'none'; }
+    if (w.site) { wfEnd.href = w.site; wfEnd.style.display = ''; } else { wfEnd.style.display = 'none'; }
     buildImgs(wfImgs, w.images, w.title);
     modal.classList.remove('open');
     full.classList.add('open');
