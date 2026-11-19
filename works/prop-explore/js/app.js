@@ -67,18 +67,18 @@
 
   /* ---------- 地图数据（与设计稿组件一一对应） ---------- */
   var MAPS = [
-    { cn: '荒漠迷城', en: 'MIRAGE', img: 'assets/map-mirage.png', live: true },
-    { cn: '炙热沙城 II', en: 'DUST II', img: 'assets/map-dust2.png', live: false },
-    { cn: '炼狱小镇', en: 'INFERNO', img: 'assets/map-inferno.png', live: false },
-    { cn: '核子危机', en: 'NUKE', img: 'assets/map-nuke.png', live: false },
-    { cn: '远古遗迹', en: 'ANCIENT', img: 'assets/map-ancient.png', live: false },
-    { cn: '阿努比斯', en: 'ANUBIS', img: 'assets/map-anubis.png', live: false },
-    { cn: '列车停放站', en: 'TRAIN', img: 'assets/map-train.png', live: false },
-    { cn: '死亡游乐园', en: 'OVERPASS', img: 'assets/map-overpass.png', live: false },
-    { cn: '殒命大厦', en: 'VERTIGO', img: 'assets/map-vertigo.png', live: false },
-    { cn: '死城之谜', en: 'CACHE', img: 'assets/map-cache.png', live: false },
-    { cn: '办公室', en: 'OFFICE', img: 'assets/map-office.png', live: false },
-    { cn: '意大利小镇', en: 'ITALY', img: 'assets/map-italy.png', live: false, long: true }
+    { cn: '荒漠迷城', en: 'MIRAGE', img: 'assets/map-mirage.jpg', live: true },
+    { cn: '炙热沙城 II', en: 'DUST II', img: 'assets/map-dust2.jpg', live: false },
+    { cn: '炼狱小镇', en: 'INFERNO', img: 'assets/map-inferno.jpg', live: false },
+    { cn: '核子危机', en: 'NUKE', img: 'assets/map-nuke.jpg', live: false },
+    { cn: '远古遗迹', en: 'ANCIENT', img: 'assets/map-ancient.jpg', live: false },
+    { cn: '阿努比斯', en: 'ANUBIS', img: 'assets/map-anubis.jpg', live: false },
+    { cn: '列车停放站', en: 'TRAIN', img: 'assets/map-train.jpg', live: false },
+    { cn: '死亡游乐园', en: 'OVERPASS', img: 'assets/map-overpass.jpg', live: false },
+    { cn: '殒命大厦', en: 'VERTIGO', img: 'assets/map-vertigo.jpg', live: false },
+    { cn: '死城之谜', en: 'CACHE', img: 'assets/map-cache.jpg', live: false },
+    { cn: '办公室', en: 'OFFICE', img: 'assets/map-office.jpg', live: false },
+    { cn: '意大利小镇', en: 'ITALY', img: 'assets/map-italy.jpg', live: false, long: true }
   ];
 
   var mapTrack = document.getElementById('mapTrack');
@@ -167,85 +167,97 @@
   var PROP_DATA = {
     ct: {
       smoke: [
-        { spot: 'B2', region: 'B点', effect: 'B2烟效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2左键跳投.jpg', note: '左键跳投' },
-          { stand: '2.1站位.jpg', throw: '2.2左键跳投.jpg', note: '左键跳投' }
+        { spot: 'B2', region: 'B点', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-jump.jpg', note: '左键跳投' },
+          { stand: '2.1-stand.jpg', throw: '2.2-throw-jump.jpg', note: '左键跳投' }
         ] }
       ],
       flash: [
         { spot: 'B2', region: 'B点', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2左键跳投.jpg', note: '左键跳投', effect: '1闪光弹效果图.jpg' },
-          { stand: '2.1站位.jpg', throw: '2.2左键投掷.jpg', note: '左键投掷', effect: '2闪光弹效果图.jpg' }
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-jump.jpg', note: '左键跳投', effect: 'effect-1.jpg' },
+          { stand: '2.1-stand.jpg', throw: '2.2-throw.jpg', note: '左键投掷', effect: 'effect-2.jpg' }
         ] },
-        { spot: '超市窗口', region: 'B点', effect: '超市窗口闪光弹效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2双键投掷.jpg', note: '双键投掷' }
+        { spot: '超市窗口', region: 'B点', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-both.jpg', note: '双键投掷' }
         ] }
       ],
       molotov: [
-        { spot: 'B包', region: 'B点', effect: 'B包燃烧瓶效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2左键跑一步投掷.jpg', note: '左键跑一步投掷' }
+        { spot: 'B包', region: 'B点', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-run1.jpg', note: '左键跑一步投掷' }
         ] }
       ]
     },
     t: {
       smoke: [
-        { spot: 'B小', region: 'B小', effect: 'B小烟效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2左键跳投1.jpg', note: '左键跳投' },
-          { stand: '2.1站位.jpg', throw: '2.2左键跳投.jpg', note: '左键跳投' }
+        { spot: 'B小', region: 'B小', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-jump.jpg', note: '左键跳投' },
+          { stand: '2.1-stand.jpg', throw: '2.2-throw-jump.jpg', note: '左键跳投' }
         ] },
-        { spot: 'VIP', region: 'VIP', effect: 'VIP烟效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2双键静走一步跳投.jpg', note: '双键静走一步跳投' },
-          { stand: '2.1站位.jpg', throw: '2.2左键投掷.jpg', note: '左键投掷' }
+        { spot: 'VIP', region: 'VIP', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-both-walk1-jump.jpg', note: '双键静走一步跳投' },
+          { stand: '2.1-stand.jpg', throw: '2.2-throw.jpg', note: '左键投掷' }
         ] },
-        { spot: 'jungle', region: '中路', effect: 'jungle烟效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2蹲左键跳投.jpg', note: '蹲左键跳投' },
-          { stand: '2.1站位.jpg', throw: '2.1左键跳投.jpg', note: '左键跳投' },
-          { stand: '3.1站位.jpg', throw: '3.2左键跳投.jpg', note: '左键跳投' },
-          { stand: '4.1站位.jpg', throw: '4.2左键跳投.jpg', note: '左键跳投' }
+        { spot: 'jungle', region: '中路', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-crouch-jump.jpg', note: '蹲左键跳投' },
+          { stand: '2.1-stand.jpg', throw: '2.1-throw-jump.jpg', note: '左键跳投' },
+          { stand: '3.1-stand.jpg', throw: '3.2-throw-jump.jpg', note: '左键跳投' },
+          { stand: '4.1-stand.jpg', throw: '4.2-throw-jump.jpg', note: '左键跳投' }
         ] },
-        { spot: '匪口', region: '中路', effect: '匪口烟效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2左键蹲投.jpg', note: '左键蹲投' }
+        { spot: '匪口', region: '中路', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-crouch.jpg', note: '左键蹲投' }
         ] },
-        { spot: '拱门', region: '拱门', effect: '拱门烟效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2左键蹲下w+跳投.jpg', note: '左键蹲下W+跳投' },
-          { stand: '2.1站位.jpg', throw: '2.2左键跳投.jpg', note: '左键跳投' },
-          { stand: '3.1站位.jpg', throw: '3.2左键+W+跳投.jpg', note: '左键+W+跳投' },
-          { stand: '4.1站位.jpg', throw: '4.2左键静走两步跳投.jpg', note: '左键静走两步跳投' },
-          { stand: '5.1站位.jpg', throw: '5.2左键跳投.jpg', note: '左键跳投' }
+        { spot: '拱门', region: '拱门', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-crouch-w-jump.jpg', note: '左键蹲下W+跳投' },
+          { stand: '2.1-stand.jpg', throw: '2.2-throw-jump.jpg', note: '左键跳投' },
+          { stand: '3.1-stand.jpg', throw: '3.2-throw-w-jump.jpg', note: '左键+W+跳投' },
+          { stand: '4.1-stand.jpg', throw: '4.2-throw-walk2-jump.jpg', note: '左键静走两步跳投' },
+          { stand: '5.1-stand.jpg', throw: '5.2-throw-jump.jpg', note: '左键跳投' }
         ] },
-        { spot: '拱门内侧', region: '拱门', effect: '拱门内侧烟效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2左键站投.jpg', note: '左键站投' },
-          { stand: '2.1站位.jpg', throw: '2.2左键站投.jpg', note: '左键站投' },
-          { stand: '3.1站位.jpg', throw: '3.2左键站投.jpg', note: '左键站投' },
-          { stand: '4.1站位.jpg', throw: '4.2左键跳投.jpg', note: '左键跳投' }
+        { spot: '拱门内侧', region: '拱门', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-stand.jpg', note: '左键站投' },
+          { stand: '2.1-stand.jpg', throw: '2.2-throw-stand.jpg', note: '左键站投' },
+          { stand: '3.1-stand.jpg', throw: '3.2-throw-stand.jpg', note: '左键站投' },
+          { stand: '4.1-stand.jpg', throw: '4.2-throw-jump.jpg', note: '左键跳投' }
         ] },
-        { spot: '警家', region: 'A点', effect: '警家烟效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2左键W+跳投.jpg', note: '左键W+跳投' }
+        { spot: '警家', region: 'A点', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-w-jump.jpg', note: '左键W+跳投' }
         ] },
-        { spot: '超市窗口', region: 'B点', effect: '超市窗口烟效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2蹲左键跳投.jpg', note: '蹲左键跳投' },
-          { stand: '2.1站位.jpg', throw: '2.1左键跳投.jpg', note: '左键跳投' },
-          { stand: '3.1站位.jpg', throw: '3.2左键跳投.jpg', note: '左键跳投' }
+        { spot: '超市窗口', region: 'B点', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-crouch-jump.jpg', note: '蹲左键跳投' },
+          { stand: '2.1-stand.jpg', throw: '2.1-throw-jump.jpg', note: '左键跳投' },
+          { stand: '3.1-stand.jpg', throw: '3.2-throw-jump.jpg', note: '左键跳投' }
         ] },
-        { spot: '超市门口', region: 'B点', effect: '超市门口烟效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2左键跑一步跳投.jpg', note: '左键跑一步跳投' },
-          { stand: '2.1站位.jpg', throw: '2.2左键W+跳投.jpg', note: '左键W+跳投' },
-          { stand: '3.1站位.jpg', throw: '3.2左键跳投.jpg', note: '左键跳投' }
+        { spot: '超市门口', region: 'B点', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-run1-jump.jpg', note: '左键跑一步跳投' },
+          { stand: '2.1-stand.jpg', throw: '2.2-throw-w-jump.jpg', note: '左键W+跳投' },
+          { stand: '3.1-stand.jpg', throw: '3.2-throw-jump.jpg', note: '左键跳投' }
         ] }
       ],
       molotov: [
-        { spot: 'A二楼下', region: 'A点', effect: 'A二楼下燃烧瓶效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2左键投掷.jpg', note: '左键投掷' },
-          { stand: '2.1站位.jpg', throw: '2.2左键跑四步投掷.jpg', note: '左键跑四步投掷' }
+        { spot: 'A二楼下', region: 'A点', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw.jpg', note: '左键投掷' },
+          { stand: '2.1-stand.jpg', throw: '2.2-throw-run4.jpg', note: '左键跑四步投掷' }
         ] },
-        { spot: 'A短箱外侧', region: 'A点', effect: 'A短箱外侧燃烧瓶效果图.jpg', groups: [
-          { stand: '1.1站位.jpg', throw: '1.2左键跳投.jpg', note: '左键跳投' },
-          { stand: '2.1站位.jpg', throw: '2.2左键跑一步投掷.jpg', note: '左键跑一步投掷' }
+        { spot: 'A短箱外侧', region: 'A点', effect: 'effect.jpg', groups: [
+          { stand: '1.1-stand.jpg', throw: '1.2-throw-jump.jpg', note: '左键跳投' },
+          { stand: '2.1-stand.jpg', throw: '2.2-throw-run1.jpg', note: '左键跑一步投掷' }
         ] }
       ]
     }
   };
   var PROP_BASE = 'assets/props/';
+  var DIR_SLUG = {
+    '超市窗口': 'market-window',
+    '超市门口': 'market-door',
+    'B包': 'bombsite-b',
+    'A二楼下': 'a-second',
+    'A短箱外侧': 'a-short-out',
+    'B小': 'b-tunnel',
+    '匪口': 't-ramp',
+    '拱门内侧': 'arch-inner',
+    '拱门': 'arch',
+    '警家': 'ct-home'
+  };
 
   var state = { faction: 't', prop: 'smoke', page: 0, regions: ['全部'], search: '' };
 
@@ -309,7 +321,7 @@
       return;
     }
     var p = pairs[state.page];
-    var dir = PROP_BASE + state.faction + '/' + state.prop + '/' + p.spot.spot + '/';
+    var dir = PROP_BASE + state.faction + '/' + state.prop + '/' + (DIR_SLUG[p.spot.spot] || p.spot.spot) + '/';
     setThumb(thumbA, dir + p.group.stand);
     setThumb(thumbB, dir + p.group.throw);
     capA.textContent = p.spot.spot + ' · ' + p.group.note;
